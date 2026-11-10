@@ -10,7 +10,7 @@ Generate membership.html and ensemble-lab.html:
      #01 4-on-1 职业乐队实验室 (¥400/30min 或 会员直接划扣1次额度)
      #02 3-7岁 全家庭周末合奏包 (400¥/45min 或 会员直接划扣)
      #03 P&R Studio 24轨现场唱片级录制 (仅耗 1 次课时)
-     #04 城市真实舞台通行证 (香格里拉圣诞专案 · 非内卷选拔 · 自然登台)
+     #04 城市真实舞台通行证 (城市公共音乐专案 · 非内卷选拔 · 自然登台)
      #05 3次 全年家庭音乐成长与教育规划深度诊断 (3小时面对面)
      #06 城市音乐共享空间与琴房 5 折特权 (琴房40/h, 排练100/h, 录音250/h)
      #07 会员专属礼遇：MOMO 纯黑刺绣重磅文化衫 (免费赠送 · 标价¥260)
@@ -414,7 +414,7 @@ def build_membership_page():
                     </div>
                 </div>
 
-                <!-- 04. 城市真实舞台通行证 (香格里拉圣诞/城市音乐节专案) -->
+                <!-- 04. 城市真实舞台通行证 (城市音乐节/城市音乐节专案) -->
                 <div class="brutalist-border bg-[#0b0b0d] flex flex-col justify-between relative group hover:border-[#D4AF37] transition-all">
                     <div class="absolute top-0 right-0 bg-neutral-900 border-l border-b border-neutral-800 text-[#D4AF37] font-mono text-[10px] px-3.5 py-1.5 uppercase tracking-widest z-10">
                         #04 STAGE PASS
@@ -432,10 +432,10 @@ def build_membership_page():
                             城市真实舞台通行证
                         </h3>
                         <p class="text-xs text-neutral-400 mt-2.5 leading-relaxed">
-                            <strong>拒绝功利“选拔”两个字！</strong>演出是一个自然生长的呈现：刚好甲方需要，而你又刚刚准备好。我们在香格里拉大酒店圣诞专案、城市公园音乐节等真实舞台，为会员提供真实登台演练机会。
+                            <strong>拒绝功利“选拔”两个字！</strong>演出是一个自然生长的呈现：刚好甲方需要，而你又刚刚准备好。我们在城市生活舞台专案、城市公园音乐节等真实舞台，为会员提供真实登台演练机会。
                         </p>
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
-                            <div class="text-neutral-300">• 场景：香格里拉圣诞专案 / 自由声波城市开放麦</div>
+                            <div class="text-neutral-300">• 场景：城市公共音乐专案 / 自由声波城市开放麦</div>
                             <div class="text-momo-mint font-bold">• 会员权益：活动规划包含，每年 4 次+舞台优先通告</div>
                             <div class="text-neutral-500 text-[11px]">• 导师登台护航，在真实观众掌声中锻造从容台风</div>
                         </div>

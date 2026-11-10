@@ -298,7 +298,7 @@ new_offerings = f'''
                                 <div class="p-3 border border-neutral-800 bg-black/60 rounded text-xs text-neutral-300 space-y-1">
                                     <div class="flex items-center gap-2">
                                         <span class="text-momo-mint">✦</span>
-                                        <span class="font-bold text-white">城市真实舞台专案（如香格里拉圣诞亮灯）：</span>
+                                        <span class="font-bold text-white">城市真实舞台专案（如城市音乐节亮灯）：</span>
                                     </div>
                                     <p class="text-neutral-400 pl-4">
                                         自然纳入会员活动规划。非选拔，顺势而生——刚好甲方需要，而你又刚好准备好，绝不制造虚妄焦虑。
@@ -773,7 +773,7 @@ comprehensive_level2_modals = f'''
 
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800">
                                 <div class="flex items-center justify-between">
-                                    <span class="font-bold text-white text-base">03. 城市真实舞台流淌（如香格里拉圣诞亮灯）</span>
+                                    <span class="font-bold text-white text-base">03. 城市真实舞台流淌（如城市音乐节亮灯）</span>
                                     <span class="text-xs font-mono text-momo-mint">自然纳入规划</span>
                                 </div>
                                 <p class="text-xs text-neutral-400 mt-1.5 leading-relaxed">
