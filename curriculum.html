@@ -338,7 +338,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 56, 35, 0.08), transparent 45%);
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.08), transparent 45%);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -524,15 +524,15 @@
     </style>
 </head>
 <body class="bg-[#080808] text-neutral-100 antialiased selection:bg-momo-teal selection:text-white">
-    <!-- Apple 极简灵动悬浮导航岛 (Minimalist Signal Red Nav) -->
+    <!-- Apple 极简灵动悬浮导航岛 (Floating Nav Island) -->
     <nav class="sticky top-3.5 z-50 px-4 sm:px-6 pointer-events-none">
-        <div class="max-w-5xl mx-auto floating-nav-island rounded-full px-4 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between pointer-events-auto border border-white/10 bg-[#0a0a0c]/85 backdrop-blur-2xl">
+        <div class="max-w-5xl mx-auto floating-nav-island rounded-full px-4 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between pointer-events-auto">
             <!-- 品牌标识 -->
             <a href="./index.html" class="flex items-center gap-2.5 group focus:outline-none">
-                <span class="w-7 h-7 rounded-full bg-[#FF3823] text-white font-black text-xs flex items-center justify-center shadow-[0_0_12px_rgba(255,56,35,0.4)]">
+                <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-400 to-emerald-300 text-black font-black text-xs flex items-center justify-center shadow-sm">
                     M
                 </span>
-                <span class="text-sm font-extrabold tracking-tight text-white group-hover:text-[#FF3823] transition-colors">
+                <span class="text-sm font-extrabold tracking-tight text-white group-hover:text-cyan-400 transition-colors">
                     MOMO
                 </span>
             </a>
@@ -540,7 +540,7 @@
             <!-- 核心导航链接 (桌面端) -->
             <div class="hidden md:flex items-center gap-6 text-xs font-medium">
                 <a href="./membership.html" class="text-neutral-300 hover:text-white transition-colors">会员 Plus</a>
-                <a href="./curriculum.html" class="text-[#FF3823] font-bold transition-colors">通识与学科</a>
+                <a href="./curriculum.html" class="text-cyan-400 font-semibold transition-colors">通识与学科</a>
                 <a href="./ensemble-lab.html" class="text-neutral-300 hover:text-white transition-colors">乐团合奏</a>
                 <a href="./faculty.html" class="text-neutral-300 hover:text-white transition-colors">导师智库</a>
                 <a href="./study-abroad.html" class="text-neutral-300 hover:text-white transition-colors">名校规划</a>
@@ -549,22 +549,32 @@
                 <a href="./store/index.html" class="text-neutral-300 hover:text-white transition-colors">美学商店</a>
             </div>
 
-            <!-- 右侧微信直连 + 奉献支持 + 预约 + 移动端菜单 -->
+            <!-- 右侧微信直连 + 声场微开关 + 奉献支持 + 预约 + 移动端菜单 -->
             <div class="flex items-center gap-1.5 sm:gap-2">
                 <button
                     type="button"
                     onclick="openTimoModal()"
-                    class="px-2.5 sm:px-3 py-1 rounded-full bg-[#FF3823]/10 hover:bg-[#FF3823]/20 border border-[#FF3823]/30 hover:border-[#FF3823] text-[11px] font-bold text-[#FF3823] hover:text-white transition-all flex items-center gap-1.5 shadow-sm"
+                    class="px-2.5 sm:px-3 py-1 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/50 hover:border-emerald-300 text-[11px] font-bold text-emerald-300 hover:text-white transition-all flex items-center gap-1.5 shadow-[0_0_12px_rgba(16,185,129,0.25)]"
                     title="添加 Timo 创始人个人微信，直接沟通"
                 >
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#FF3823] animate-pulse"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     <span>微信聊聊</span>
                 </button>
                 <button
+                    id="navSoundToggleBtn"
                     type="button"
-                    onclick="openGivingModal('我要支持 MOMO · 声音火种计划')"
-                    class="px-2.5 sm:px-3.5 py-1 rounded-full bg-[#FF3823] hover:bg-[#E02E24] text-[11px] font-bold text-white transition-all flex items-center gap-1.5 shadow-[0_0_16px_rgba(255,56,35,0.35)]"
-                    title="爱心支持 MOMO 教学设备与奖学金"
+                    onclick="toggleNavAmbient()"
+                    class="hidden lg:flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.08] text-[11px] font-mono-code text-cyan-300 transition-all"
+                    title="432Hz 温暖声学正弦波"
+                >
+                    <span id="navSoundDot" class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    <span id="navSoundLabel">A432Hz</span>
+                </button>
+                <button
+                    type="button"
+                    onclick="openGivingModal('我要支持 MOMO · 守护声音火种')"
+                    class="px-2.5 sm:px-3.5 py-1 rounded-full bg-gradient-to-r from-emerald-500/25 via-teal-500/20 to-amber-500/25 border border-emerald-500/40 hover:border-emerald-300 text-[11px] font-bold text-emerald-300 hover:text-white transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
+                    title="爱心奉献支持 MOMO 声音公益与学子扶持"
                 >
                     <span>💖</span>
                     <span class="tracking-tight">支持MOMO</span>
@@ -572,29 +582,28 @@
                 <button
                     type="button"
                     onclick="openBookingModal('导航快捷预约：体验与咨询')"
-                    class="hidden sm:inline-flex px-3.5 py-1 rounded-full border border-white/20 bg-white/5 hover:bg-white/15 text-white font-semibold text-xs transition-all shadow-sm"
+                    class="hidden sm:inline-flex px-3.5 py-1 rounded-full bg-white text-black font-semibold text-xs hover:bg-cyan-300 transition-all shadow-sm"
                 >
-                    预约
+                    预约体验
                 </button>
-                <!-- 移动端汉堡折叠按钮 -->
                 <button
                     type="button"
                     onclick="toggleMobileMenu()"
-                    class="md:hidden p-1.5 rounded-full text-neutral-300 hover:text-white bg-white/[0.06] border border-white/[0.08]"
-                    aria-label="Toggle Menu"
+                    class="md:hidden p-1.5 rounded-full bg-white/10 text-white hover:text-cyan-400 focus:outline-none"
+                    aria-label="Toggle menu"
                 >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- 移动端展开抽屉 -->
-        <div id="appleMobileMenu" class="hidden max-w-5xl mx-auto mt-2 p-4 rounded-3xl floating-nav-island border border-white/10 bg-[#0a0a0c]/95 backdrop-blur-2xl pointer-events-auto">
-            <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+        <!-- 移动端抽屉折叠面板 -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-md mx-auto mt-2 p-4 rounded-2xl bg-[#0b0c10]/95 backdrop-blur-2xl border border-white/10 shadow-2xl pointer-events-auto">
+            <div class="grid grid-cols-2 gap-2 text-xs">
                 <a href="./membership.html" class="p-2.5 rounded-xl text-center text-neutral-300 hover:text-white bg-white/[0.04] transition-colors">会员 Plus</a>
-                <a href="./curriculum.html" class="p-2.5 rounded-xl text-center text-[#FF3823] font-bold bg-[#FF3823]/10 border border-[#FF3823]/30 transition-colors">通识与学科</a>
+                <a href="./curriculum.html" class="p-2.5 rounded-xl text-center text-cyan-400 font-semibold bg-cyan-950/40 border border-cyan-500/20 transition-colors">通识与学科</a>
                 <a href="./ensemble-lab.html" class="p-2.5 rounded-xl text-center text-neutral-300 hover:text-white bg-white/[0.04] transition-colors">乐团合奏</a>
                 <a href="./faculty.html" class="p-2.5 rounded-xl text-center text-neutral-300 hover:text-white bg-white/[0.04] transition-colors">导师智库</a>
                 <a href="./study-abroad.html" class="p-2.5 rounded-xl text-center text-neutral-300 hover:text-white bg-white/[0.04] transition-colors">名校规划</a>
@@ -602,32 +611,30 @@
                 <a href="./charity.html" class="p-2.5 rounded-xl text-center text-neutral-300 hover:text-white bg-white/[0.04] transition-colors">音乐公益</a>
                 <a href="./store/index.html" class="p-2.5 rounded-xl text-center text-neutral-300 hover:text-white bg-white/[0.04] transition-colors">美学商店</a>
             </div>
-            <div class="mt-3 pt-3 border-t border-white/10 grid grid-cols-2 gap-2">
+            <div class="mt-3 pt-3 border-t border-white/10 space-y-2">
                 <button
                     type="button"
                     onclick="openTimoModal(); toggleMobileMenu()"
-                    class="w-full py-2.5 rounded-xl bg-[#FF3823]/15 border border-[#FF3823]/40 text-[#FF3823] font-bold text-xs flex items-center justify-center gap-1.5"
+                    class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-500/30 to-teal-500/30 border border-emerald-400/50 text-emerald-300 font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm"
                 >
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#FF3823]"></span>
-                    <span>加 Timo 微信</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>加 Timo 创始人微信 · 直接沟通</span>
                 </button>
                 <button
                     type="button"
-                    onclick="openGivingModal('我要支持 MOMO · 声音火种计划'); toggleMobileMenu()"
-                    class="w-full py-2.5 rounded-xl bg-[#FF3823] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-[#FF3823]/20"
+                    onclick="openGivingModal('我要支持 MOMO · 守护声音火种'); toggleMobileMenu()"
+                    class="w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500/20 via-teal-500/10 to-amber-500/20 border border-emerald-500/30 text-neutral-300 font-semibold text-xs flex items-center justify-center gap-2"
                 >
-                    <span>💖 支持 MOMO</span>
+                    <span>💖 支持 MOMO / 爱心共建</span>
                 </button>
+                <div class="flex items-center justify-between text-[11px] pt-1">
+                    <span class="text-neutral-400 font-mono-code">成都 · 桐梓林 × 麓湖</span>
+                    <button type="button" onclick="openBookingModal('移动端导航：预约体验'); toggleMobileMenu()" class="px-3.5 py-1 rounded-full bg-white text-black text-xs font-semibold">预约体验</button>
+                </div>
             </div>
         </div>
     </nav>
-    <script>
-        function toggleMobileMenu() {
-            const m = document.getElementById('appleMobileMenu');
-            if (m) m.classList.toggle('hidden');
-        }
-    </script>
-    
+
     <main class="pt-14 bg-black text-white">
         <!-- 课程专页顶部导览横幅 -->
         <section class="py-16 sm:py-20 px-6 md:px-12 bg-gradient-to-b from-[#0d0e14] to-[#08080a] border-b border-neutral-900 text-center">
@@ -1753,9 +1760,9 @@
             </div>
         </div>
 
-<!-- ==================== 全局极简爱心奉献与留言署名互动弹窗 (双轨极简先锋红) ==================== -->
+<!-- ==================== 全局极简爱心奉献与留言署名互动弹窗 (经典高定墨黑深绿质感) ==================== -->
 <div id="giving-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-5 overflow-y-auto" onclick="closeGivingModal(event)">
-    <div class="bg-[#0d0e12] border border-[#FF3823]/30 rounded-3xl max-w-4xl w-full p-5 sm:p-8 relative text-left shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] my-auto max-h-[94vh] flex flex-col justify-between overflow-y-auto" onclick="event.stopPropagation()">
+    <div class="bg-[#0b100d] border border-emerald-500/30 rounded-3xl max-w-4xl w-full p-5 sm:p-8 relative text-left shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] my-auto max-h-[94vh] flex flex-col justify-between overflow-y-auto" onclick="event.stopPropagation()">
         
         <!-- 关闭按钮 -->
         <button type="button" onclick="closeGivingModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors z-20" aria-label="关闭">
@@ -1765,8 +1772,8 @@
         <!-- 弹窗顶栏 -->
         <div class="mb-4 sm:mb-5 pr-8">
             <div class="flex items-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3823]/10 border border-[#FF3823]/30 text-[10px] font-mono-code font-bold text-[#FF3823] uppercase tracking-widest">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#FF3823] animate-pulse"></span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-500/25 text-[10px] font-mono-code font-bold text-emerald-300 uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     MOMO CO-CREATION PATRONAGE
                 </span>
                 <span class="text-[11px] text-neutral-400 font-mono-code hidden sm:inline">做真实的教育 · 100% 定向透明</span>
@@ -1795,7 +1802,7 @@
                             type="button"
                             id="cat-btn-equipment"
                             onclick="selectGivingCategory('equipment')"
-                            class="py-3 px-3 rounded-2xl border border-[#FF3823] bg-[#FF3823]/15 text-[#FF3823] font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
+                            class="py-3 px-3 rounded-2xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
                         >
                             <span>🎸</span>
                             <span>教学设备器材基金</span>
@@ -1818,16 +1825,16 @@
                         ② 奉献支持意向金额
                     </label>
                     <div class="grid grid-cols-4 gap-2 text-xs font-mono-code">
-                        <button type="button" onclick="setGivingAmount(100)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-[#FF3823] transition-all text-center">
+                        <button type="button" onclick="setGivingAmount(100)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center">
                             ¥100
                         </button>
-                        <button type="button" onclick="setGivingAmount(200)" class="giving-amt-btn py-2 rounded-xl border border-[#FF3823] bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all text-center shadow-sm">
+                        <button type="button" onclick="setGivingAmount(200)" class="giving-amt-btn py-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center shadow-sm">
                             ¥200
                         </button>
-                        <button type="button" onclick="setGivingAmount(500)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-[#FF3823] transition-all text-center">
+                        <button type="button" onclick="setGivingAmount(500)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center">
                             ¥500
                         </button>
-                        <button type="button" onclick="setGivingAmount(1000)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-[#FF3823] transition-all text-center">
+                        <button type="button" onclick="setGivingAmount(1000)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center">
                             ¥1,000
                         </button>
                     </div>
@@ -1842,7 +1849,7 @@
                                 min="1"
                                 placeholder="输入任意金额"
                                 oninput="onCustomAmountChange()"
-                                class="w-full pl-7 pr-3 py-1.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs font-mono-code focus:outline-none focus:border-[#FF3823]"
+                                class="w-full pl-7 pr-3 py-1.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs font-mono-code focus:outline-none focus:border-emerald-400"
                             >
                         </div>
                     </div>
@@ -1861,7 +1868,7 @@
                             value="MOMO 同行者"
                             maxlength="20"
                             oninput="updateGivingPlaque()"
-                            class="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-[#FF3823]"
+                            class="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-emerald-400"
                         >
                     </div>
                     <div>
@@ -1875,20 +1882,20 @@
                             value="愿真诚的音乐在更多生命中生根发芽。"
                             maxlength="60"
                             oninput="updateGivingPlaque()"
-                            class="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-[#FF3823]"
+                            class="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-emerald-400"
                         >
                     </div>
                 </div>
 
                 <!-- 实时电子守护纪念铭牌预览 -->
                 <div class="p-3.5 rounded-2xl bg-gradient-to-br from-neutral-900 via-neutral-950 to-black border border-white/15 relative overflow-hidden text-xs">
-                    <div class="flex items-center justify-between text-[10px] font-mono-code text-[#FF3823] font-bold pb-1.5 border-b border-white/10">
+                    <div class="flex items-center justify-between text-[10px] font-mono-code text-emerald-400 font-bold pb-1.5 border-b border-white/10">
                         <span>★ 声音火种守护纪念铭牌 (实时生成)</span>
                         <span id="plaque-cert-id">MOMO-2026-0001</span>
                     </div>
                     <div class="mt-2.5 flex items-baseline justify-between">
                         <span class="text-white font-bold text-sm" id="plaque-donor-name">MOMO 同行者</span>
-                        <span class="text-[#FF3823] font-mono-code font-bold text-base" id="plaque-amount">¥200</span>
+                        <span class="text-emerald-300 font-mono-code font-bold text-base" id="plaque-amount">¥200</span>
                     </div>
                     <div class="text-[11px] text-neutral-300 mt-1" id="plaque-item-title">支持标的：教学设备器材基金</div>
                     <p class="text-[11px] text-neutral-400 italic mt-1.5 leading-relaxed" id="plaque-message">
@@ -1908,7 +1915,7 @@
                             type="button"
                             id="giving-tab-wechat"
                             onclick="switchGivingChannel('wechat')"
-                            class="flex-1 py-1.5 rounded-lg bg-[#FF3823] text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow"
+                            class="flex-1 py-1.5 rounded-lg bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow"
                         >
                             <span>💚 微信支付</span>
                         </button>
@@ -1959,13 +1966,13 @@
 
                 <!-- 转账备注提示 -->
                 <div class="p-3 rounded-xl bg-white/[0.04] border border-white/10 text-[11px] space-y-1">
-                    <div class="text-[#FF3823] font-bold flex items-center gap-1">
+                    <div class="text-emerald-300 font-bold flex items-center gap-1">
                         <span>📝</span>
                         <span>转账推荐备注格式：</span>
                     </div>
                     <div class="font-mono-code text-white bg-black/60 px-2.5 py-1 rounded border border-white/10 flex items-center justify-between" id="giving-recommended-memo">
                         <span>设备基金·MOMO同行者</span>
-                        <button type="button" onclick="copyGivingMemo()" class="text-[#FF3823] hover:underline text-[10px]">复制</button>
+                        <button type="button" onclick="copyGivingMemo()" class="text-emerald-400 hover:underline text-[10px]">复制</button>
                     </div>
                     <div class="text-[10px] text-neutral-400 pt-0.5">
                         款项 100% 透明定向注入，主理人将亲笔登记入账。
@@ -1992,7 +1999,7 @@
 </div>
 
 <script>
-    // 奉献交互状态管理引擎 (双轨极简版)
+    // 奉献交互状态管理引擎 (经典双轨极简版)
     let currentGivingCategory = 'equipment';
     let currentGivingAmount = 200;
 
@@ -2041,12 +2048,12 @@
         const alipayCard = document.getElementById('giving-card-alipay');
 
         if (channel === 'wechat') {
-            if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg bg-[#FF3823] text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
+            if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
             if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5';
             if (wechatCard) wechatCard.classList.remove('hidden');
             if (alipayCard) alipayCard.classList.add('hidden');
         } else {
-            if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg bg-[#FF3823] text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
+            if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg bg-cyan-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
             if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5';
             if (alipayCard) alipayCard.classList.remove('hidden');
             if (wechatCard) wechatCard.classList.add('hidden');
@@ -2059,10 +2066,10 @@
         const scBtn = document.getElementById('cat-btn-scholarship');
 
         if (category === 'equipment') {
-            if (eqBtn) eqBtn.className = 'py-3 px-3 rounded-2xl border border-[#FF3823] bg-[#FF3823]/15 text-[#FF3823] font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
+            if (eqBtn) eqBtn.className = 'py-3 px-3 rounded-2xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
             if (scBtn) scBtn.className = 'py-3 px-3 rounded-2xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2';
         } else {
-            if (scBtn) scBtn.className = 'py-3 px-3 rounded-2xl border border-[#FF3823] bg-[#FF3823]/15 text-[#FF3823] font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
+            if (scBtn) scBtn.className = 'py-3 px-3 rounded-2xl border border-amber-500/50 bg-amber-500/20 text-amber-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
             if (eqBtn) eqBtn.className = 'py-3 px-3 rounded-2xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2';
         }
 
@@ -2077,9 +2084,9 @@
         const amtBtns = document.querySelectorAll('.giving-amt-btn');
         amtBtns.forEach(b => {
             if (b.textContent.trim().replace(/,/g, '') === '¥' + amt) {
-                b.className = 'giving-amt-btn py-2 rounded-xl border border-[#FF3823] bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all text-center shadow-sm';
+                b.className = 'giving-amt-btn py-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center shadow-sm';
             } else {
-                b.className = 'giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-[#FF3823] transition-all text-center';
+                b.className = 'giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center';
             }
         });
 
@@ -2093,9 +2100,9 @@
             const amtBtns = document.querySelectorAll('.giving-amt-btn');
             amtBtns.forEach(b => {
                 if (b.textContent.trim().replace(/,/g, '') === '¥' + currentGivingAmount) {
-                    b.className = 'giving-amt-btn py-2 rounded-xl border border-[#FF3823] bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all text-center shadow-sm';
+                    b.className = 'giving-amt-btn py-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center shadow-sm';
                 } else {
-                    b.className = 'giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-[#FF3823] transition-all text-center';
+                    b.className = 'giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center';
                 }
             });
             updateGivingPlaque();
@@ -2123,7 +2130,7 @@
 
         if (recommendedMemo) {
             const memoStr = memoTag + '·' + donorName;
-            recommendedMemo.innerHTML = '<span>' + memoStr + '</span><button type="button" onclick="copyGivingMemo(\'' + memoStr + '\')" class="text-[#FF3823] hover:underline text-[10px]">复制</button>';
+            recommendedMemo.innerHTML = '<span>' + memoStr + '</span><button type="button" onclick="copyGivingMemo(\'' + memoStr + '\')" class="text-emerald-400 hover:underline text-[10px]">复制</button>';
         }
     }
 
@@ -2235,7 +2242,7 @@
                         <li><a href="./spaces.html" class="hover:text-white transition-colors">桐梓林花园声场</a></li>
                         <li><a href="./spaces.html" class="hover:text-white transition-colors">麓湖湖畔声场</a></li>
                         <li><a href="./charity.html" class="hover:text-white transition-colors">声音火种与大凉山支教</a></li>
-                        <li><a href="javascript:void(0)" onclick="openGivingModal('MOMO 官方爱心奉献窗口')" class="text-[#FF3823] hover:text-white transition-colors font-medium flex items-center gap-1"><span>✦ 官方爱心奉献窗口</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="openGivingModal('MOMO 官方爱心奉献窗口')" class="text-emerald-400 hover:text-white transition-colors font-medium flex items-center gap-1"><span>✦ 官方爱心奉献窗口</span></a></li>
                         <li><a href="./store/index.html" class="hover:text-white transition-colors">Momo 音乐美学商店</a></li>
                     </ul>
                 </div>
@@ -2248,10 +2255,10 @@
                         主理人电邮：tixinzhang@gmail.com
                     </p>
                     <div class="pt-1 flex flex-col gap-2">
-                        <button type="button" onclick="openTimoModal()" class="px-3.5 py-1.5 rounded-full bg-[#FF3823]/20 hover:bg-[#FF3823]/30 border border-[#FF3823]/40 text-[#FF3823] hover:text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all w-fit">
+                        <button type="button" onclick="openTimoModal()" class="px-3.5 py-1.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 hover:text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all w-fit">
                             <span>💬 添加 Timo 创始人微信 (MO 酱~)</span>
                         </button>
-                        <button type="button" onclick="openBookingModal('页脚快速预约到店体验')" class="apple-link text-[#FF3823] hover:text-cyan-300 text-left">
+                        <button type="button" onclick="openBookingModal('页脚快速预约到店体验')" class="apple-link text-cyan-400 hover:text-cyan-300 text-left">
                             <span>预约来空间喝杯咖啡</span><span>&rsaquo;</span>
                         </button>
                     </div>
@@ -2477,12 +2484,12 @@
                 <p class="text-xs text-neutral-400 mt-1">请留下联络信息与学习期望，学术顾问与主理人团队将在 12 小时内与您深度对接。</p>
             </div>
 
-            <div class="mb-4 p-3 rounded-2xl bg-emerald-950/40 border border-[#FF3823]/30 text-xs text-neutral-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+            <div class="mb-4 p-3 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 text-xs text-neutral-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <span class="text-neutral-300">如需爱心奉献支持大山支教与教学基金：</span>
             </div>
-            <button type="button" onclick="closeBookingModal(); openGivingModal('MOMO 官方爱心奉献窗口')" class="px-3 py-1 rounded-full bg-[#FF3823] hover:bg-emerald-400 text-black font-bold text-[11px] transition-all shadow-sm shrink-0">
+            <button type="button" onclick="closeBookingModal(); openGivingModal('MOMO 官方爱心奉献窗口')" class="px-3 py-1 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-[11px] transition-all shadow-sm shrink-0">
                 打开直接收款码 &rsaquo;
             </button>
         </div>
@@ -3758,12 +3765,12 @@
         const alipayCard = document.getElementById('giving-card-alipay');
 
         if (channel === 'wechat') {
-            if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg bg-[#FF3823] text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
+            if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
             if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5';
             if (wechatCard) wechatCard.classList.remove('hidden');
             if (alipayCard) alipayCard.classList.add('hidden');
         } else {
-            if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg bg-[#FF3823] text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
+            if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg bg-cyan-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
             if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5';
             if (alipayCard) alipayCard.classList.remove('hidden');
             if (wechatCard) wechatCard.classList.add('hidden');
@@ -3778,7 +3785,7 @@
         const scSub = document.getElementById('subitems-scholarship');
 
         if (category === 'equipment') {
-            if (eqBtn) eqBtn.className = 'py-2.5 px-3 rounded-xl border border-[#FF3823]/50 bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
+            if (eqBtn) eqBtn.className = 'py-2.5 px-3 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
             if (scBtn) scBtn.className = 'py-2.5 px-3 rounded-xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2';
             if (eqSub) eqSub.classList.remove('hidden');
             if (scSub) scSub.classList.add('hidden');
@@ -3801,7 +3808,7 @@
         const buttons = document.querySelectorAll('.giving-item-btn');
         buttons.forEach(btn => {
             if (btn.textContent.indexOf(itemName.slice(0, 4)) !== -1 || (itemName.indexOf('Nord') !== -1 && btn.textContent.indexOf('Nord') !== -1) || (itemName.indexOf('Genelec') !== -1 && btn.textContent.indexOf('真力') !== -1)) {
-                btn.className = 'giving-item-btn p-2 rounded-xl border border-[#FF3823]/50 bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all text-center leading-tight shadow-sm';
+                btn.className = 'giving-item-btn p-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center leading-tight shadow-sm';
             } else {
                 btn.className = 'giving-item-btn p-2 rounded-xl border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white transition-all text-center leading-tight';
             }
@@ -3824,9 +3831,9 @@
         const amtBtns = document.querySelectorAll('.giving-amt-btn');
         amtBtns.forEach(b => {
             if (b.textContent.trim() === '¥' + amt) {
-                b.className = 'giving-amt-btn py-1.5 rounded-lg border border-[#FF3823]/50 bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all text-center';
+                b.className = 'giving-amt-btn py-1.5 rounded-lg border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center';
             } else {
-                b.className = 'giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white hover:border-[#FF3823] transition-all text-center';
+                b.className = 'giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white hover:border-emerald-400 transition-all text-center';
             }
         });
 
@@ -3845,7 +3852,7 @@
             const amtBtns = document.querySelectorAll('.giving-amt-btn');
             amtBtns.forEach(b => {
                 if (b.textContent.trim() === '¥' + currentGivingAmount) {
-                    b.className = 'giving-amt-btn py-1.5 rounded-lg border border-[#FF3823]/50 bg-[#FF3823]/20 text-[#FF3823] font-bold transition-all text-center';
+                    b.className = 'giving-amt-btn py-1.5 rounded-lg border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center';
                 } else {
                     b.className = 'giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white transition-all text-center';
                 }
@@ -3924,8 +3931,8 @@
         }
         if (btn) {
             btn.innerHTML = '<span>✓ 铭牌已记录在案 · 再次感谢同行</span>';
-            btn.classList.remove('from-[#FF3823]', 'to-teal-500');
-            btn.classList.add('bg-neutral-800', 'text-[#FF3823]');
+            btn.classList.remove('from-emerald-500', 'to-teal-500');
+            btn.classList.add('bg-neutral-800', 'text-emerald-300');
         }
     }
 
