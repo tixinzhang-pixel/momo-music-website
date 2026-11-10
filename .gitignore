@@ -1,0 +1,20 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Large backup & raw archive folders not needed for static hosting
+留学作品集/
+*.mov
+assets/media/phoebe_jingle_bells.mov
+assets/media/hero_stage_stream.mp4
+
+# Python cache & local backups
+__pycache__/
+*.pyc
+*.bak*
+.subpage_backups/

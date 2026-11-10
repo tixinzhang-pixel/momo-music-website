@@ -1,0 +1,64 @@
+<!-- ==================== Timo 创始人微信直连弹窗 (Founder WeChat Contact Modal) ==================== -->
+<div id="timo-contact-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" onclick="closeTimoModal(event)">
+    <div class="bg-[#0c120f] border border-emerald-500/35 rounded-3xl max-w-sm sm:max-w-md w-full p-6 sm:p-8 relative text-center shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] my-auto transition-all" onclick="event.stopPropagation()">
+        
+        <!-- 关闭按钮 -->
+        <button type="button" onclick="closeTimoModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="关闭">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <!-- 顶栏头像与身份徽章 -->
+        <div class="flex flex-col items-center">
+            <div class="relative">
+                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-emerald-400/80 shadow-[0_0_20px_rgba(16,185,129,0.35)]">
+                    <img src="./assets/images/timo_card.jpg" alt="Timo 创始人" class="w-full h-full object-cover">
+                </div>
+                <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-400 border-2 border-black flex items-center justify-center text-[9px] text-black font-black" title="在线">✓</span>
+            </div>
+
+            <div class="mt-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-400/10 border border-emerald-500/25 text-[10px] font-mono-code font-bold text-emerald-300 uppercase tracking-widest">
+                    FOUNDER &amp; MUSIC EDUCATOR
+                </span>
+                <h3 class="text-xl sm:text-2xl font-black text-white mt-1.5 tracking-tight">
+                    张提心 · Timo
+                </h3>
+                <p class="text-xs text-neutral-400 mt-1 max-w-xs leading-relaxed">
+                    MOMO 音乐生活品牌创始人 · 家庭音乐共创发起人
+                </p>
+            </div>
+        </div>
+
+        <!-- 真实微信二维码展示区 -->
+        <div class="my-5 p-4 rounded-2xl bg-[#070b09] border border-white/10 flex flex-col items-center shadow-inner group">
+            <div class="p-2.5 bg-white rounded-2xl shadow-xl inline-block max-w-[200px] sm:max-w-[220px] group-hover:scale-105 transition-transform">
+                <img src="./assets/images/contact/timo_wechat_qr.png" alt="Timo 创始人个人微信二维码" class="w-full h-auto rounded">
+            </div>
+            <div class="mt-3 text-xs text-neutral-300 flex items-center gap-1.5 font-medium">
+                <span class="w-2 h-2 rounded-full bg-[#07C160]"></span>
+                <span>微信扫一扫 · 直接添加 Timo 微信好友</span>
+            </div>
+            <div class="text-[11px] text-neutral-500 font-mono-code mt-0.5">
+                微信号：<strong class="text-emerald-300 font-normal">MO 酱~</strong>
+            </div>
+        </div>
+
+        <!-- 温暖真诚的沟通承诺 -->
+        <div class="space-y-2 text-xs text-neutral-400 text-left bg-black/40 p-3.5 rounded-xl border border-white/5">
+            <div class="flex items-start gap-2">
+                <span class="text-emerald-400 text-sm leading-none mt-0.5">✦</span>
+                <span class="leading-relaxed"><strong>无销售中介与套路</strong>：由 Timo 本人直接倾听，聊聊您或孩子的音乐困惑、启蒙时机与定制学习规划。</span>
+            </div>
+            <div class="flex items-start gap-2">
+                <span class="text-amber-400 text-sm leading-none mt-0.5">✦</span>
+                <span class="leading-relaxed"><strong>到店探访喝杯咖啡</strong>：欢迎预约至桐梓林花园声场或麓湖湖畔声场当面交流。</span>
+            </div>
+        </div>
+
+        <!-- 底部微提示 -->
+        <div class="mt-4 pt-3 border-t border-white/10 text-[11px] text-neutral-500 flex items-center justify-between">
+            <span>成都 · 桐梓林 × 麓湖双空间</span>
+            <span class="font-mono-code text-neutral-400">tixinzhang@gmail.com</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMO 创意动态排版实验室 · 准生产级终极微雕</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+            background-color: #040406;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        .font-mono-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* 灵动悬浮导航岛 */
+        .floating-nav-island {
+            background: rgba(10, 10, 14, 0.75);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* 3D 物理倾斜容器 */
+        .tilt-card-container {
+            perspective: 1400px;
+        }
+
+        .tilt-card {
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        /* 聚光灯流光层 */
+        .spotlight-card {
+            position: relative;
+            background: rgba(14, 14, 18, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 24px 48px -12px rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            overflow: hidden;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 240, 255, 0.13), transparent 45%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 钛金属扫光光芒动画 */
+        @keyframes metallicSheen {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            45%, 100% { transform: translateX(250%) skewX(-20deg); }
+        }
+
+        .metallic-sheen-sweep {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.14) 50%, transparent 100%);
+            pointer-events: none;
+            animation: metallicSheen 6s ease-in-out infinite;
+        }
+
+        /* 黑胶唱片物理旋转 */
+        @keyframes vinylSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .vinyl-disc {
+            background: radial-gradient(circle at center, #111 0%, #050505 28%, #161616 29%, #080808 44%, #181818 45%, #050505 60%, #1a1a1a 61%, #040404 100%);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.9), inset 0 0 0 1.5px rgba(255,255,255,0.08);
+        }
+
+        .vinyl-spinning {
+            animation: vinylSpin 6s linear infinite;
+        }
+
+        /* 黑胶唱片封套滑出视差 */
+        .vinyl-sleeve-jacket {
+            position: relative;
+            overflow: visible;
+        }
+
+        .vinyl-sleeve-disc {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(10%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        .vinyl-sleeve-jacket:hover .vinyl-sleeve-disc {
+            transform: translateY(-50%) translateX(45%) rotate(45deg);
+        }
+
+        /* 双向流体跑马灯 */
+        @keyframes marqueeScrollLeft {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes marqueeScrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+
+        .marquee-track-left {
+            display: flex;
+            width: max-content;
+            animation: marqueeScrollLeft 38s linear infinite;
+        }
+
+        .marquee-track-right {
+            display: flex;
+            width: max-content;
+            animation: marqueeScrollRight 38s linear infinite;
+        }
+
+        .marquee-wrapper:hover .marquee-track-left,
+        .marquee-wrapper:hover .marquee-track-right {
+            animation-play-state: paused;
+        }
+
+        /* 动态多轨均衡器声波 */
+        .eq-bar {
+            width: 3.5px;
+            background: #00E5FF;
+            border-radius: 2px;
+            transition: height 0.1s ease;
+            height: 4px;
+        }
+
+        .eq-active .eq-bar:nth-child(1) { animation: eqPulse 0.5s ease infinite alternate; }
+        .eq-active .eq-bar:nth-child(2) { animation: eqPulse 0.7s ease infinite alternate 0.1s; }
+        .eq-active .eq-bar:nth-child(3) { animation: eqPulse 0.4s ease infinite alternate 0.2s; }
+        .eq-active .eq-bar:nth-child(4) { animation: eqPulse 0.6s ease infinite alternate 0.15s; }
+        .eq-active .eq-bar:nth-child(5) { animation: eqPulse 0.8s ease infinite alternate 0.25s; }
+
+        @keyframes eqPulse {
+            0% { height: 4px; }
+            100% { height: 26px; }
+        }
+
+        /* 打击垫按钮 */
+        .sound-pad-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.15s ease;
+        }
+        .sound-pad-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 240, 255, 0.4);
+        }
+        .sound-pad-btn:active, .sound-pad-btn.pad-active {
+            background: rgba(0, 240, 255, 0.22);
+            border-color: #00E5FF;
+            transform: scale(0.96);
+            box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-32">
+
+    <!-- ==================== 00. 灵动流光悬浮导航岛 (Floating Nav Island) ==================== -->
+    <nav class="sticky top-4 z-50 px-4 sm:px-6 pointer-events-none">
+        <div class="max-w-5xl mx-auto floating-nav-island rounded-full px-5 py-2.5 flex items-center justify-between gap-4 pointer-events-auto">
+            <!-- 品牌标识 -->
+            <a href="./index.html" class="flex items-center gap-2.5 group">
+                <span class="w-7 h-7 rounded-full bg-gradient-to-tr from-cyan-400 to-emerald-300 flex items-center justify-center text-black font-black text-xs shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    M
+                </span>
+                <span class="text-sm font-extrabold tracking-tight text-white group-hover:text-cyan-300 transition-colors">MOMO MUSIC</span>
+            </a>
+
+            <!-- 核心导航链接 (桌面端) -->
+            <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-300">
+                <a href="./membership.html" class="hover:text-white transition-colors">会员 Plus</a>
+                <a href="./curriculum.html" class="hover:text-white transition-colors">通识与学科</a>
+                <a href="./ensemble-lab.html" class="hover:text-white transition-colors">乐团合奏</a>
+                <a href="./faculty.html" class="hover:text-white transition-colors">导师智库</a>
+                <a href="./study-abroad.html" class="hover:text-white transition-colors">名校规划</a>
+                <a href="./spaces.html" class="hover:text-white transition-colors">共享空间</a>
+                <a href="./store/index.html" class="hover:text-white transition-colors">美学商店</a>
+            </div>
+
+            <!-- 右侧声场微开关 -->
+            <div class="flex items-center gap-2.5">
+                <button
+                    id="navSoundToggleBtn"
+                    type="button"
+                    onclick="toggleNavAmbient()"
+                    class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.06] hover:bg-white/15 border border-white/10 text-[11px] font-mono-code text-cyan-300 transition-all cursor-pointer"
+                >
+                    <span id="navSoundDot" class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    <span id="navSoundLabel">A432Hz</span>
+                </button>
+                <a href="./index.html" class="px-3.5 py-1 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-all">
+                    回原版首页
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="max-w-7xl mx-auto px-6 pt-8 space-y-24">
+
+        <!-- ==================== 01. 首屏 4K 巨幕舞台微雕与呼吸状态胶囊 ==================== -->
+        <section class="space-y-6">
+            <div class="flex items-baseline justify-between border-b border-white/[0.08] pb-4">
+                <div>
+                    <span class="text-[10px] font-mono-code uppercase tracking-[0.26em] text-cyan-400 font-bold">// DETAIL 01 · HERO STAGE REFINEMENT</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">4K 巨幕首屏微雕 · 呼吸状态胶囊与自然过渡</h2>
+                </div>
+                <span class="text-xs text-neutral-400 font-mono-code hidden sm:inline">LIVE STAGE PRESENCE</span>
+            </div>
+
+            <div class="spotlight-card rounded-3xl h-[420px] sm:h-[480px] relative overflow-hidden flex flex-col justify-end p-8 sm:p-12">
+                <img src="./assets/images/hero_trumpet.jpg" alt="Hero Trumpet Phoebe" class="absolute inset-0 w-full h-full object-cover object-[62%_center] sm:object-center brightness-[0.88] contrast-[1.04]">
+                
+                <!-- 精准暗角：左下角文字区柔和暗衬，中右侧菲比面部完全明亮通透 -->
+                <div class="absolute inset-0" style="background: radial-gradient(ellipse 65% 75% at 16% 86%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0) 100%);"></div>
+                <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+
+                <!-- 浮动状态胶囊 -->
+                <div class="absolute top-6 left-6 sm:top-8 sm:left-12 z-20">
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[11px] font-mono-code text-neutral-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span class="text-emerald-300 font-semibold">A432Hz ON AIR</span>
+                        <span class="text-neutral-500">|</span>
+                        <span>桐梓林 × 麓湖双空间</span>
+                    </div>
+                </div>
+
+                <div class="relative z-10 max-w-xl">
+                    <p class="text-[11px] font-mono-code uppercase tracking-[0.25em] text-emerald-300 mb-2 font-semibold">
+                        KIND · TRUTH · PASSION
+                    </p>
+                    <h3 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-[1.12] text-white">
+                        让音乐回到真实生活，<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-emerald-300 to-white">让热爱自然发芽。</span>
+                    </h3>
+                    <p class="mt-3.5 text-xs sm:text-sm text-neutral-200/90 font-light tracking-wide max-w-lg leading-relaxed">
+                        现代流行与爵士通识体系 · 家庭音乐教育 · 专业音乐升学规划（留学/国内艺考）
+                    </p>
+
+                    <div class="mt-6 flex flex-wrap items-center gap-4">
+                        <a href="./membership.html" class="px-6 py-2.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-all shadow-lg shadow-white/10">
+                            探索会员 Plus &rsaquo;
+                        </a>
+                        <button onclick="openBookingModal('首页首屏：预约到店体验')" class="px-5 py-2.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white font-medium text-xs hover:bg-white/10 transition-all">
+                            预约到店体验
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 02. 切分音 Bento 微雕：钛金扫光卡 + 四音色琴盒（含 JAM MODE 即兴慢摇） ==================== -->
+        <section class="space-y-6">
+            <div class="flex items-baseline justify-between border-b border-white/[0.08] pb-4">
+                <div>
+                    <span class="text-[10px] font-mono-code uppercase tracking-[0.26em] text-cyan-400 font-bold">// DETAIL 02 · SYNCOPATED BENTO &amp; JAM ENGINE</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">切分音 Bento · 钛金漫反射与即兴 Jam 慢摇琴盒</h2>
+                </div>
+                <span class="text-xs text-neutral-400 font-mono-code hidden sm:inline">CHILL JAZZ GROOVE ON AIR</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                <!-- 左侧 8 列: 会员 Plus 旗舰钛金卡 -->
+                <div class="lg:col-span-8 tilt-card-container">
+                    <div class="tilt-card spotlight-card rounded-3xl p-8 sm:p-10 h-full flex flex-col justify-between relative overflow-hidden group">
+                        <!-- 钛金漫反射光泽层 -->
+                        <div class="metallic-sheen-sweep"></div>
+                        
+                        <div class="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <img src="./assets/images/momo_platinum_card.jpg" alt="MOMO Platinum Card" class="absolute right-0 bottom-0 w-3/5 max-w-sm object-contain opacity-35 group-hover:opacity-75 group-hover:scale-105 transition-all duration-700 pointer-events-none">
+                        
+                        <div class="relative z-10 max-w-lg">
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-[11px] font-mono-code text-cyan-300">
+                                    ★ 2026 PLUS ECOSYSTEM
+                                </span>
+                                <span class="text-[11px] font-mono-code text-neutral-400">#MM-2026-VIP</span>
+                            </div>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                                MOMO 家庭音乐会员<br>
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-emerald-300 to-white">一份年费，激活全家音乐生态。</span>
+                            </h3>
+                            <p class="text-sm text-neutral-300 mt-4 leading-relaxed font-light">
+                                涵盖 12 次 1对1 专属定制指导、3 次家庭成长诊断、4师1生真实乐队伴奏实录数字单曲，杜绝琴房流水线推销。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <span class="text-xs font-mono-code text-neutral-400">ANNUAL FEE</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-extrabold text-white">¥6,000</span>
+                                    <span class="text-xs text-neutral-400">/ 年 (每天约 ¥16.4)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <a href="./membership.html" class="px-6 py-3 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-all shadow-lg shadow-white/10">
+                                    探索完整权益 &rsaquo;
+                                </a>
+                                <button onclick="openBookingModal('预约会员理念面谈')" class="px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-medium transition-all">
+                                    预约理念面谈
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧 4 列: 四音色琴盒 + JAM MODE 自动慢摇 -->
+                <div class="lg:col-span-4 flex flex-col gap-6">
+                    <div class="spotlight-card rounded-3xl p-6 flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+                                <span class="text-[10px] font-mono-code uppercase tracking-[0.22em] text-emerald-400 font-bold">// 4-PAD ACOUSTIC DECK</span>
+                                <!-- 5 轨实时波形柱 -->
+                                <div id="liveEqVisualizer" class="flex items-center gap-1 h-6">
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                    <span class="eq-bar"></span>
+                                </div>
+                            </div>
+
+                            <!-- 黑胶唱盘展示与当前试听状态 -->
+                            <div class="my-5 flex items-center gap-4">
+                                <div id="miniVinylDisc" class="w-16 h-16 rounded-full vinyl-disc flex-shrink-0 flex items-center justify-center relative">
+                                    <div class="w-5 h-5 rounded-full bg-cyan-400/90 border border-black flex items-center justify-center text-[9px] font-bold text-black">
+                                        ♪
+                                    </div>
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="text-[10px] font-mono-code text-neutral-400" id="currentToneLabel">WEB AUDIO SYNTH ENGINE</div>
+                                    <h4 class="text-sm font-bold text-white mt-0.5" id="currentToneName">轻点按键或开启慢摇</h4>
+                                </div>
+                            </div>
+
+                            <!-- 4 颗触控打击垫 -->
+                            <div class="grid grid-cols-2 gap-2.5 mb-3">
+                                <button onclick="playAcousticSample('rhodes')" class="sound-pad-btn p-2.5 rounded-xl text-left">
+                                    <div class="text-[9px] font-mono-code text-cyan-400 font-bold">[01] RHODES</div>
+                                    <div class="text-xs font-semibold text-white mt-0.5">Cmaj9 和弦</div>
+                                </button>
+                                <button onclick="playAcousticSample('bass')" class="sound-pad-btn p-2.5 rounded-xl text-left">
+                                    <div class="text-[9px] font-mono-code text-emerald-400 font-bold">[02] BASS</div>
+                                    <div class="text-xs font-semibold text-white mt-0.5">Walking 走音</div>
+                                </button>
+                                <button onclick="playAcousticSample('guitar')" class="sound-pad-btn p-2.5 rounded-xl text-left">
+                                    <div class="text-[9px] font-mono-code text-amber-400 font-bold">[03] GUITAR</div>
+                                    <div class="text-xs font-semibold text-white mt-0.5">Funk 切分音</div>
+                                </button>
+                                <button onclick="playAcousticSample('vinyl')" class="sound-pad-btn p-2.5 rounded-xl text-left">
+                                    <div class="text-[9px] font-mono-code text-rose-400 font-bold">[04] VINYL</div>
+                                    <div class="text-xs font-semibold text-white mt-0.5">黑胶 A432Hz</div>
+                                </button>
+                            </div>
+
+                            <!-- 新增：JAM MODE 自动即兴慢摇开关 -->
+                            <button
+                                id="jamModeBtn"
+                                type="button"
+                                onclick="toggleJamMode()"
+                                class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-950/40 to-emerald-950/40 border border-cyan-500/30 hover:border-cyan-400/60 text-xs font-mono-code text-cyan-300 flex items-center justify-center gap-2 transition-all shadow-inner"
+                            >
+                                <span id="jamDot" class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                                <span id="jamText">开启 JAM MODE (4小节爵士慢摇即兴)</span>
+                            </button>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono-code text-neutral-400">
+                            <span>TOUCH &amp; HEAR LIVE</span>
+                            <span class="text-cyan-400">REAL INSTRUMENTS &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== 03. 导师长廊微雕：双排反向交错流体声浪带 ==================== -->
+        <section class="space-y-6">
+            <div class="flex items-baseline justify-between border-b border-white/[0.08] pb-4">
+                <div>
+                    <span class="text-[10px] font-mono-code uppercase tracking-[0.26em] text-cyan-400 font-bold">// DETAIL 03 · DUAL-TRACK KINETIC STAGE</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">双排反向交错流体声浪 · 11位中外名师智库</h2>
+                </div>
+                <span class="text-xs text-neutral-400 font-mono-code hidden sm:inline">DUAL COUNTER-FLOW · HOVER TO BREATH</span>
+            </div>
+
+            <div class="marquee-wrapper -mx-6 overflow-hidden py-2 space-y-4">
+                <!-- 第一排：Track A 向左流动 -->
+                <div class="marquee-track-left gap-4 px-6">
+                    <!-- 1. Timo -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/timo_card.jpg" alt="Timo" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">01 · FOUNDER</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">MOMO FOUNDER / BASS &amp; KEYS</span>
+                            <h4 class="text-base font-bold text-white">Timo 主理人</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">音乐通识架构师 · 贝斯与键盘演奏家</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. 高信博士 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/gao_xin_card.jpg" alt="高信博士" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-[#D4AF37] border border-white/10">02 · DOCTORATE</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-[#D4AF37] uppercase">DMA / OVERSEAS CHAIR</span>
+                            <h4 class="text-base font-bold text-white">高信 博士</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">海外名校升学规划领衔评估 · 爵士钢琴与双博士</p>
+                        </div>
+                    </div>
+
+                    <!-- 3. 周思文 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/joe_longardner_card.jpg" alt="周思文" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">03 · SAXOPHONE</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">INDIANA / JAZZ ARTIST</span>
+                            <h4 class="text-base font-bold text-white">周思文 (Joe Longardner)</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">印第安纳大学萨克斯硕士 · 现代大乐队总指挥</p>
+                        </div>
+                    </div>
+
+                    <!-- 4. Carlos -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/carlos_card.jpg" alt="Carlos" class="w-full h-full object-cover object-center group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-emerald-400 border border-white/10">04 · FLAMENCO</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-emerald-400 uppercase">SPAIN / GUITAR MASTER</span>
+                            <h4 class="text-base font-bold text-white">Carlos Heredia</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">西班牙弗拉门戈吉他演奏家 · 国际巡演名师</p>
+                        </div>
+                    </div>
+
+                    <!-- 5. 张茜 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/zhang_qian_card.jpg" alt="张茜" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">05 · PIANO</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">JAZZ &amp; CLASSICAL PIANO</span>
+                            <h4 class="text-base font-bold text-white">张茜</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">川音钢琴专业全国第一名 · 日本田中裕士进修</p>
+                        </div>
+                    </div>
+
+                    <!-- 6. 苟涵凝 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/gou_hanning_card.jpg" alt="苟涵凝" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">06 · VOCAL</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">CONTEMPORARY VOCAL</span>
+                            <h4 class="text-base font-bold text-white">苟涵凝</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">现代流行声乐导师 · 爵士与现代音乐唱法研习</p>
+                        </div>
+                    </div>
+
+                    <!-- 镜像保证无缝滚动 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/timo_card.jpg" alt="Timo" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4"><h4 class="text-base font-bold text-white">Timo 主理人</h4></div>
+                    </div>
+                </div>
+
+                <!-- 第二排：Track B 向右流动 -->
+                <div class="marquee-track-right gap-4 px-6">
+                    <!-- 7. 毛维 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/mao_wei_card.jpg" alt="毛维" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">07 · DRUMS</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">JAZZ &amp; LATIN DRUMS</span>
+                            <h4 class="text-base font-bold text-white">毛维</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">现代打击乐导师 · 律动内核与大乐队鼓手</p>
+                        </div>
+                    </div>
+
+                    <!-- 8. 乔晓记 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/qiao_xiaoji_card.jpg" alt="乔晓记" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">08 · STRINGS</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">CONTEMPORARY VIOLIN</span>
+                            <h4 class="text-base font-bold text-white">乔晓记</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">现代小提琴演奏家 · 先锋即兴弦乐</p>
+                        </div>
+                    </div>
+
+                    <!-- 9. 王崇恩 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/wang_chongen_card.jpg" alt="王崇恩" class="w-full h-full object-cover object-center group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">09 · GUITAR</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">ELECTRIC GUITAR &amp; FX</span>
+                            <h4 class="text-base font-bold text-white">王崇恩</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">电吉他先锋音色塑造 · 单块效果器架构师</p>
+                        </div>
+                    </div>
+
+                    <!-- 10. 祁子垚 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/qi_ziyao_card.jpg" alt="祁子垚" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-cyan-300 border border-white/10">10 · PRODUCER</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-cyan-400 uppercase">LACM / P&amp;R STUDIO</span>
+                            <h4 class="text-base font-bold text-white">祁子垚</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">洛杉矶音乐学院录音制作 · 首席音频工程师</p>
+                        </div>
+                    </div>
+
+                    <!-- 11. 段重生 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/duan_chongsheng_card.jpg" alt="段重生" class="w-full h-full object-cover object-top group-hover/art:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] font-mono-code text-emerald-400 border border-white/10">11 · COMPOSER</div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-[10px] font-mono-code text-emerald-400 uppercase">SOUTHAMPTON MMus [DISTINCTION]</span>
+                            <h4 class="text-base font-bold text-white">段重生 (David Duan)</h4>
+                            <p class="text-xs text-neutral-400 mt-0.5 line-clamp-1">英国南安普顿大学作曲硕士最高荣誉 · 盲人作曲家</p>
+                        </div>
+                    </div>
+
+                    <!-- 镜像保证无缝衔接 -->
+                    <div class="w-64 sm:w-72 aspect-[4/5] rounded-2xl overflow-hidden relative spotlight-card cursor-pointer group/art hover:-translate-y-2 transition-all duration-300">
+                        <img src="./assets/images/mao_wei_card.jpg" alt="毛维" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4"><h4 class="text-base font-bold text-white">毛维</h4></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <a href="./faculty.html" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/10 text-xs text-neutral-300 hover:text-white transition-all">
+                    <span>查阅 11 位导师完整学术履历与合奏排期</span>
+                    <span class="text-cyan-400">&rarr;</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- ==================== 04. 6 大独立专页 Bento 瓷砖创意全景微雕 ==================== -->
+        <section class="space-y-6">
+            <div class="flex items-baseline justify-between border-b border-white/[0.08] pb-4">
+                <div>
+                    <span class="text-[10px] font-mono-code uppercase tracking-[0.26em] text-cyan-400 font-bold">// DETAIL 04 · FULL 6-BENTO PROMO TILES</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mt-1">6大独立专页 Bento 瓷砖 · 专属创意微交互</h2>
+                </div>
+                <span class="text-xs text-neutral-400 font-mono-code hidden sm:inline">APPLE BENTO MATRIX RE-IMAGINED</span>
+            </div>
+            <p class="text-sm text-neutral-400 max-w-2xl leading-relaxed">
+                为全站 6 大核心独立专页入口定制差异化微交互（黑胶出套、双空间声场切换、风格扇形展开、心跳脉冲与文化衫 3D 浮动）。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Tile 01: 青少年大乐队 (铜管声波脉冲) -->
+                <div class="tilt-card-container">
+                    <div class="tilt-card spotlight-card rounded-3xl p-7 h-96 flex flex-col justify-between group">
+                        <img src="./assets/images/real_ensemble_rehearsal.jpg" alt="Big Band" class="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-[10px] font-mono-code text-cyan-300 font-semibold mb-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+                                ENSEMBLE &amp; BIG BAND
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">大乐队与 4师1生实验室</h3>
+                            <p class="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                                17人标准大乐队编制招募中 · 4位职业音乐家围着你真棚合奏。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                            <span class="text-neutral-400 font-mono-code">24CH MULTI-TRACK</span>
+                            <a href="./ensemble-lab.html" class="text-cyan-300 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>进入专页</span><span>&rsaquo;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 02: 海外名校升学 (黑胶出套视差) -->
+                <div class="tilt-card-container">
+                    <div class="tilt-card vinyl-sleeve-jacket spotlight-card rounded-3xl p-7 h-96 flex flex-col justify-between group cursor-pointer">
+                        <div class="vinyl-sleeve-disc w-48 h-48 rounded-full vinyl-disc pointer-events-none hidden sm:flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-700 flex flex-col items-center justify-center text-[7px] font-mono-code text-[#D4AF37] text-center p-1.5">
+                                <span class="font-bold">24-TRACK</span>
+                                <span>CONSERVATORY</span>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-[10px] font-mono-code text-[#D4AF37] font-semibold mb-3">
+                                CONSERVATORY PREP · ¥38,800
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">海外音乐名校升学专案</h3>
+                            <p class="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                                高信博士领衔 1对1 评估 · 24轨真乐队同期作品集实录。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                            <span class="text-neutral-400 font-mono-code">HIGH DISTINCTION</span>
+                            <a href="./study-abroad.html" class="text-[#D4AF37] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>进入专页</span><span>&rsaquo;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 03: 桐梓林 & 麓湖双空间 (空间交互切换) -->
+                <div class="tilt-card-container">
+                    <div class="tilt-card spotlight-card rounded-3xl p-7 h-96 flex flex-col justify-between group">
+                        <img src="./assets/images/momo_spaces_4k.jpg" alt="Spaces" class="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-[10px] font-mono-code text-emerald-300 font-semibold mb-3">
+                                TONGZILIN &amp; LUXELAKES · ¥80/h起
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">隐于成熟小区的私密声场</h3>
+                            <p class="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                                排练、录音、沙龙与 60㎡ 花园 · 场地与顶级乐器开放租用。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                            <span class="text-neutral-400 font-mono-code">2 PHYSICAL HUBS</span>
+                            <a href="./spaces.html" class="text-emerald-300 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>查看空间与价目</span><span>&rsaquo;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 04: 大凉山支教公益 (心跳脉冲与纪实胶片) -->
+                <div class="tilt-card-container">
+                    <div class="tilt-card spotlight-card rounded-3xl p-7 h-96 flex flex-col justify-between group">
+                        <img src="./assets/images/daliangshan_charity_4k.jpg" alt="Charity" class="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-500/15 border border-rose-400/30 text-[10px] font-mono-code text-rose-300 font-semibold mb-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span>
+                                COMMUNITY &amp; GIVING
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">大凉山音乐支教公益</h3>
+                            <p class="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                                带着家人与乐器走进大山 · 3天2晚音乐公益共修营。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                            <span class="text-neutral-400 font-mono-code">3D2N RETREAT</span>
+                            <a href="./charity.html" class="text-rose-300 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>查阅公益纪实</span><span>&rsaquo;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 05: 通识教育与九大学科 (扇形抽卡视差) -->
+                <div class="tilt-card-container">
+                    <div class="tilt-card spotlight-card rounded-3xl p-7 h-96 flex flex-col justify-between group">
+                        <img src="./assets/images/keyboard_synth.jpg" alt="Curriculum" class="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-[10px] font-mono-code text-cyan-300 font-semibold mb-3">
+                                HOLISTIC MUSIC IMMERSION
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">通识学习与九大专业学科</h3>
+                            <p class="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                                先通识，后专业。爵士贝斯、吉他音色、现代提琴、编曲制作全景。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                            <span class="text-neutral-400 font-mono-code">9 MAJORS ROSTER</span>
+                            <a href="./curriculum.html" class="text-cyan-300 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>漫游学科矩阵</span><span>&rsaquo;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 06: MOMO 美学商店周边 -->
+                <div class="tilt-card-container">
+                    <div class="tilt-card spotlight-card rounded-3xl p-7 h-96 flex flex-col justify-between group">
+                        <img src="./assets/images/momo_tshirt_te_style.jpg" alt="Merch Store" class="absolute inset-0 w-full h-full object-cover opacity-70 brightness-[0.98] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                        <div class="relative z-10">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-400/30 text-[10px] font-mono-code text-amber-300 font-semibold mb-3">
+                                ATELIER MERCH STORE
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">MOMO 音乐周边美学商店</h3>
+                            <p class="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                                重磅刺绣文化衫（会员免费赠送）、定制吉他拨片、限定黑胶唱片。
+                            </p>
+                        </div>
+
+                        <div class="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                            <span class="text-neutral-400 font-mono-code">FROM ¥38</span>
+                            <a href="./store/index.html" class="text-amber-300 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                <span>进入商店选购</span><span>&rsaquo;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 交互脚本引擎 -->
+    <script>
+        // 1. 聚光灯流光跟随
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // 2. 3D 物理微倾斜
+        document.querySelectorAll('.tilt-card-container').forEach(container => {
+            const card = container.querySelector('.tilt-card');
+            if (!card) return;
+
+            container.addEventListener('mousemove', e => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = -(y / (rect.height / 2)) * 4.5;
+                const rotateY = (x / (rect.width / 2)) * 4.5;
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+
+        // 3. Web Audio 引擎
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function triggerVisualizer() {
+            const eq = document.getElementById('liveEqVisualizer');
+            const vinyl = document.getElementById('miniVinylDisc');
+            if (eq) {
+                eq.classList.add('eq-active');
+                setTimeout(() => eq.classList.remove('eq-active'), 2200);
+            }
+            if (vinyl) {
+                vinyl.classList.add('vinyl-spinning');
+                setTimeout(() => vinyl.classList.remove('vinyl-spinning'), 2600);
+            }
+        }
+
+        function playAcousticSample(type) {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            triggerVisualizer();
+
+            const lbl = document.getElementById('currentToneLabel');
+            const name = document.getElementById('currentToneName');
+
+            if (type === 'rhodes') {
+                if (lbl) lbl.textContent = 'TONE #01 · FENDER RHODES';
+                if (name) name.textContent = 'Cmaj9 爵士电钢琴和弦';
+                const chord = [164.81, 196.00, 246.94, 293.66, 329.63];
+                chord.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.035);
+
+                    gain.gain.setValueAtTime(0, now + idx * 0.035);
+                    gain.gain.linearRampToValueAtTime(0.14, now + idx * 0.035 + 0.03);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.035 + 2.4);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + idx * 0.035);
+                    osc.stop(now + idx * 0.035 + 2.5);
+                });
+            } else if (type === 'bass') {
+                if (lbl) lbl.textContent = 'TONE #02 · DOUBLE BASS';
+                if (name) name.textContent = 'Walking Bass 爵士低音提琴走音';
+                const notes = [41.20, 55.00];
+                notes.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.4);
+
+                    gain.gain.setValueAtTime(0, now + idx * 0.4);
+                    gain.gain.linearRampToValueAtTime(0.25, now + idx * 0.4 + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.4 + 0.6);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + idx * 0.4);
+                    osc.stop(now + idx * 0.4 + 0.65);
+                });
+            } else if (type === 'guitar') {
+                if (lbl) lbl.textContent = 'TONE #03 · FUNK GUITAR';
+                if (name) name.textContent = 'Funk 16分切分扫弦音色';
+                const freqs = [329.63, 392.00, 493.88];
+                [0, 0.12, 0.22].forEach((offset) => {
+                    freqs.forEach((freq) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(freq, now + offset);
+
+                        gain.gain.setValueAtTime(0, now + offset);
+                        gain.gain.linearRampToValueAtTime(0.08, now + offset + 0.01);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.18);
+
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + offset);
+                        osc.stop(now + offset + 0.2);
+                    });
+                });
+            } else if (type === 'vinyl') {
+                if (lbl) lbl.textContent = 'TONE #04 · VINYL CRACKLE & A432';
+                if (name) name.textContent = 'A432Hz 黑胶温暖正弦声学基频';
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(432.0, now);
+
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.12, now + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 2.1);
+            }
+        }
+
+        // 4. JAM MODE 即兴循环慢摇
+        let jamTimer = null;
+        let isJamming = false;
+        function toggleJamMode() {
+            const btn = document.getElementById('jamModeBtn');
+            const dot = document.getElementById('jamDot');
+            const txt = document.getElementById('jamText');
+
+            if (isJamming) {
+                // 停止 JAM
+                isJamming = false;
+                if (jamTimer) clearInterval(jamTimer);
+                if (dot) dot.classList.remove('animate-ping', 'bg-emerald-400');
+                if (dot) dot.classList.add('bg-cyan-400');
+                if (txt) txt.textContent = '开启 JAM MODE (4小节爵士慢摇即兴)';
+                const lbl = document.getElementById('currentToneLabel');
+                const name = document.getElementById('currentToneName');
+                if (lbl) lbl.textContent = 'JAM PAUSED';
+                if (name) name.textContent = '点击音色按键即兴弹奏';
+            } else {
+                // 开启 JAM
+                isJamming = true;
+                if (dot) dot.classList.add('animate-ping', 'bg-emerald-400');
+                if (txt) txt.textContent = 'JAM PLAYING · 点击停止慢摇即兴';
+                const lbl = document.getElementById('currentToneLabel');
+                const name = document.getElementById('currentToneName');
+                if (lbl) lbl.textContent = 'JAM MODE ACTIVE // 4-BAR CHILL GROOVE';
+                if (name) name.textContent = '正在播放：成都午后 Chill Jazz 即兴循环';
+
+                playAcousticSample('rhodes');
+                setTimeout(() => playAcousticSample('bass'), 800);
+                setTimeout(() => playAcousticSample('guitar'), 1600);
+
+                jamTimer = setInterval(() => {
+                    if (!isJamming) return;
+                    playAcousticSample('rhodes');
+                    setTimeout(() => { if (isJamming) playAcousticSample('bass'); }, 800);
+                    setTimeout(() => { if (isJamming) playAcousticSample('guitar'); }, 1600);
+                }, 3200);
+            }
+        }
+
+        // 5. 顶部灵动导航岛 A432Hz 开关
+        let navAmbientPlaying = false;
+        let navOsc = null;
+        let navGain = null;
+        function toggleNavAmbient() {
+            const dot = document.getElementById('navSoundDot');
+            const lbl = document.getElementById('navSoundLabel');
+            const ctx = getAudioContext();
+
+            if (navAmbientPlaying) {
+                navAmbientPlaying = false;
+                if (navGain) {
+                    navGain.gain.setValueAtTime(navGain.gain.value, ctx.currentTime);
+                    navGain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+                    setTimeout(() => { if (navOsc) navOsc.stop(); }, 450);
+                }
+                if (dot) dot.classList.remove('bg-emerald-400', 'animate-pulse');
+                if (dot) dot.classList.add('bg-cyan-400');
+                if (lbl) lbl.textContent = 'A432Hz';
+            } else {
+                navAmbientPlaying = true;
+                navOsc = ctx.createOscillator();
+                navGain = ctx.createGain();
+                navOsc.type = 'sine';
+                navOsc.frequency.setValueAtTime(432.0, ctx.currentTime);
+
+                navGain.gain.setValueAtTime(0.0001, ctx.currentTime);
+                navGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 1.2);
+
+                navOsc.connect(navGain);
+                navGain.connect(ctx.destination);
+                navOsc.start();
+
+                if (dot) dot.classList.remove('bg-cyan-400');
+                if (dot) dot.classList.add('bg-emerald-400', 'animate-pulse');
+                if (lbl) lbl.textContent = '432Hz PLAYING';
+            }
+        }
+    </script>
+</body>
+</html>

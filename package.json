@@ -1,0 +1,23 @@
+{
+  "name": "momo-family-music-studio",
+  "version": "1.0.0",
+  "description": "Momo Family Music Studio Official Website - Avant-Garde Editorial Neo-Brutalism & Swiss Modern Graphic Design",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "dev": "python3 -m http.server 8080",
+    "serve": "npx serve -l 8080 .",
+    "build": "node build.js"
+  },
+  "keywords": [
+    "music-studio",
+    "jazz",
+    "double-bass",
+    "pedalboard",
+    "avant-garde",
+    "neo-brutalism",
+    "chengdu"
+  ],
+  "author": "Momo Family Music Studio Team",
+  "license": "ISC"
+}

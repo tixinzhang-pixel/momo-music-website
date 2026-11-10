@@ -1,0 +1,308 @@
+<!-- ==================== 全局爱心奉献与留言署名互动弹窗 (双轨共建系统) ==================== -->
+<div id="giving-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-5 overflow-y-auto" onclick="closeGivingModal(event)">
+    <div class="bg-[#0b100d] border border-emerald-500/30 rounded-3xl max-w-4xl w-full p-5 sm:p-8 relative text-left shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] my-auto max-h-[94vh] flex flex-col justify-between overflow-y-auto" onclick="event.stopPropagation()">
+        
+        <!-- 关闭按钮 -->
+        <button type="button" onclick="closeGivingModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors z-20" aria-label="关闭">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <!-- 弹窗顶栏 -->
+        <div class="mb-4 sm:mb-5 pr-8">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-500/25 text-[10px] font-mono-code font-bold text-emerald-300 uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    MOMO CO-CREATION PATRONAGE
+                </span>
+                <span class="text-[11px] text-neutral-400 font-mono-code hidden sm:inline">做真实的教育 · 100% 定向透明</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-black text-white mt-1.5 tracking-tight flex items-center gap-2" id="giving-modal-title">
+                <span>💖 我要支持 MOMO · 声音共建计划</span>
+            </h3>
+            <p class="text-neutral-400 text-xs sm:text-sm mt-1 leading-relaxed">
+                感谢你与我们一起守护真实的音乐教育。请选择奉献板块并留下您的署名与寄语，实时生成您的声音共建者专属电子爱心铭牌。
+            </p>
+        </div>
+
+        <!-- 核心内容网格：左侧互动配置与实时铭牌，右侧收款码与转账引导 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+            
+            <!-- 左侧：表单配置 + 实时电子铭牌生成 (占用 7 列) -->
+            <div class="lg:col-span-7 space-y-4">
+                
+                <!-- 1. 核心两大板块切换 -->
+                <div>
+                    <label class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1.5">
+                        ① 选择奉献共建板块
+                    </label>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                        <button
+                            type="button"
+                            id="cat-btn-equipment"
+                            onclick="selectGivingCategory('equipment')"
+                            class="py-2.5 px-3 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
+                        >
+                            <span>🎸</span>
+                            <span>教学设备与器材共建</span>
+                        </button>
+                        <button
+                            type="button"
+                            id="cat-btn-scholarship"
+                            onclick="selectGivingCategory('scholarship')"
+                            class="py-2.5 px-3 rounded-xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2"
+                        >
+                            <span>🎓</span>
+                            <span>音乐学者奖助学金与公开课</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. 二级具体标的细选 -->
+                <div>
+                    <label class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1.5">
+                        ② 选择具体认领 / 资助项目
+                    </label>
+                    
+                    <!-- 设备板块细分子项 -->
+                    <div id="subitems-equipment" class="grid grid-cols-3 gap-1.5 text-[11px]">
+                        <button type="button" onclick="selectGivingItem('Nord Stage 4 舞台电钢', 9500, '设备·Nord')" class="giving-item-btn p-2 rounded-xl border border-emerald-500/40 bg-emerald-500/15 text-emerald-300 font-bold transition-all text-center leading-tight">
+                            <div class="text-xs">🎹 Nord 电钢</div>
+                            <div class="text-[9px] text-emerald-400/80 font-mono-code mt-0.5">差额 ¥9,500</div>
+                        </button>
+                        <button type="button" onclick="selectGivingItem('Genelec 8030 监听返听箱', 7600, '设备·Genelec')" class="giving-item-btn p-2 rounded-xl border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white transition-all text-center leading-tight">
+                            <div class="text-xs">🎧 真力返听箱</div>
+                            <div class="text-[9px] text-neutral-400 font-mono-code mt-0.5">差额 ¥7,600</div>
+                        </button>
+                        <button type="button" onclick="selectGivingItem('无尘白板笔教学耗材组', 260, '设备·白板笔')" class="giving-item-btn p-2 rounded-xl border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white transition-all text-center leading-tight">
+                            <div class="text-xs">🖊️ 白板笔耗材</div>
+                            <div class="text-[9px] text-neutral-400 font-mono-code mt-0.5">差额 ¥260</div>
+                        </button>
+                    </div>
+
+                    <!-- 奖助学金板块细分子项 -->
+                    <div id="subitems-scholarship" class="hidden grid grid-cols-3 gap-1.5 text-[11px]">
+                        <button type="button" onclick="selectGivingItem('年度声音火种·全额卓越奖学金', 6000, '奖学金·全额')" class="giving-item-btn p-2 rounded-xl border border-amber-500/40 bg-amber-500/15 text-amber-300 font-bold transition-all text-center leading-tight">
+                            <div class="text-xs">🌟 全额奖学金</div>
+                            <div class="text-[9px] text-amber-400/80 font-mono-code mt-0.5">¥6,000 / 年</div>
+                        </button>
+                        <button type="button" onclick="selectGivingItem('家庭音乐伙伴·半额成长助学金', 3000, '助学金·半额')" class="giving-item-btn p-2 rounded-xl border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white transition-all text-center leading-tight">
+                            <div class="text-xs">🤝 半额助学金</div>
+                            <div class="text-[9px] text-neutral-400 font-mono-code mt-0.5">¥3,000 / 半年</div>
+                        </button>
+                        <button type="button" onclick="selectGivingItem('社区公开大师课专项基金', 1000, '公开课·社区')" class="giving-item-btn p-2 rounded-xl border border-white/10 bg-white/[0.03] text-neutral-300 hover:text-white transition-all text-center leading-tight">
+                            <div class="text-xs">🎶 社区公开课</div>
+                            <div class="text-[9px] text-neutral-400 font-mono-code mt-0.5">¥1,000 / 期</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. 奉献金额预设选卡 -->
+                <div>
+                    <div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-400 mb-1.5">
+                        <span class="uppercase tracking-wider">③ 奉献金额</span>
+                        <span class="text-amber-300 font-semibold" id="giving-amount-tip">可小额微粒众筹，亦可认领剩余全额</span>
+                    </div>
+                    <div class="grid grid-cols-5 gap-1.5 text-xs font-semibold">
+                        <button type="button" onclick="setGivingAmount(100)" class="giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white hover:border-emerald-400 transition-all text-center">
+                            ¥100
+                        </button>
+                        <button type="button" onclick="setGivingAmount(200)" class="giving-amt-btn py-1.5 rounded-lg border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center">
+                            ¥200
+                        </button>
+                        <button type="button" onclick="setGivingAmount(500)" class="giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white hover:border-emerald-400 transition-all text-center">
+                            ¥500
+                        </button>
+                        <button type="button" onclick="setGivingAmount(1000)" class="giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white hover:border-emerald-400 transition-all text-center">
+                            ¥1,000
+                        </button>
+                        <button type="button" id="btn-claim-remaining" onclick="claimRemainingDifference()" class="py-1.5 rounded-lg border border-amber-400/40 bg-amber-400/15 text-amber-300 hover:bg-amber-400/25 font-bold transition-all text-center leading-tight">
+                            全额认领
+                        </button>
+                    </div>
+                    <div class="mt-2 flex items-center gap-2">
+                        <span class="text-xs text-neutral-400 font-mono-code shrink-0">自定义金额:</span>
+                        <div class="relative flex-1">
+                            <span class="absolute left-3 top-2 text-xs text-neutral-400 font-mono-code">¥</span>
+                            <input
+                                type="number"
+                                id="giving-custom-amount"
+                                value="200"
+                                min="10"
+                                step="10"
+                                oninput="onCustomAmountChange()"
+                                class="w-full pl-7 pr-3 py-1.5 rounded-xl bg-black/60 border border-white/15 text-white placeholder-neutral-500 text-xs font-mono-code focus:outline-none focus:border-emerald-400 transition-colors"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 署名与心愿寄语输入 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label for="giving-donor-name" class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1">
+                            ④ 你的署名 / 家庭称谓
+                        </label>
+                        <input
+                            type="text"
+                            id="giving-donor-name"
+                            placeholder="如：张先生 & 家人 / 匿名琴友"
+                            value="一位热爱音乐的朋友"
+                            maxlength="20"
+                            oninput="updateGivingPlaque()"
+                            class="w-full px-3.5 py-2 rounded-xl bg-black/60 border border-white/15 text-white placeholder-neutral-500 text-xs focus:outline-none focus:border-emerald-400 transition-colors"
+                        />
+                    </div>
+                    <div>
+                        <label for="giving-donor-memo" class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1">
+                            ⑤ 留给学子与声场的寄语
+                        </label>
+                        <input
+                            type="text"
+                            id="giving-donor-memo"
+                            placeholder="如：愿真实的音乐陪伴孩子一生"
+                            value="做真实的教育，让真诚的音符在每一个心灵自由发芽。"
+                            maxlength="40"
+                            oninput="updateGivingPlaque()"
+                            class="w-full px-3.5 py-2 rounded-xl bg-black/60 border border-white/15 text-white placeholder-neutral-500 text-xs focus:outline-none focus:border-emerald-400 transition-colors"
+                        />
+                    </div>
+                </div>
+
+                <!-- 5. 【实时动态电子爱心铭牌】 (Live Patron Plaque) -->
+                <div>
+                    <div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-400 mb-1.5">
+                        <span class="flex items-center gap-1 text-amber-300">
+                            <span>✦</span> 实时生成：MOMO 声音共建者 · 电子爱心铭牌
+                        </span>
+                        <span class="text-neutral-500 font-mono-code text-[10px]" id="plaque-id-badge">NO. MOMO-2026-PATRON</span>
+                    </div>
+
+                    <div id="giving-plaque-preview" class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#121c17] via-[#0b120f] to-[#070b09] border border-amber-400/30 relative overflow-hidden shadow-xl transition-all group">
+                        <!-- 金色与翡翠流光微晕 -->
+                        <div class="absolute -top-12 -right-12 w-28 h-28 bg-amber-400/10 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="absolute -bottom-12 -left-12 w-28 h-28 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                        <div class="relative z-10 flex flex-col justify-between h-full space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-400 to-emerald-300 text-black font-black text-[10px] flex items-center justify-center">
+                                        M
+                                    </span>
+                                    <span class="text-[11px] font-extrabold tracking-wider text-amber-200 uppercase font-mono-code" id="plaque-honor-title">
+                                        MOMO 声音设备奠基人
+                                    </span>
+                                </div>
+                                <span id="plaque-purpose-tag" class="px-2 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-[10px] text-amber-300 font-medium">
+                                    Nord Stage 4 舞台电钢
+                                </span>
+                            </div>
+
+                            <!-- 署名与心愿大字 -->
+                            <div class="py-1">
+                                <div class="text-[11px] text-neutral-400 flex items-center justify-between">
+                                    <span>致声音守护者：</span>
+                                    <span id="plaque-amount-display" class="font-mono-code text-amber-300 font-bold">共建助力：¥200</span>
+                                </div>
+                                <div id="plaque-donor-display" class="text-base sm:text-lg font-bold text-white tracking-tight mt-0.5">
+                                    一位热爱音乐的朋友
+                                </div>
+                                <div id="plaque-memo-display" class="text-xs text-neutral-300 italic font-light mt-1.5 leading-relaxed bg-black/30 p-2.5 rounded-xl border border-white/5">
+                                    “做真实的教育，让真诚的音符在每一个心灵自由发芽。”
+                                </div>
+                            </div>
+
+                            <!-- 铭牌底栏水印 -->
+                            <div class="flex items-center justify-between pt-2 border-t border-white/10 text-[10px] text-neutral-400 font-mono-code">
+                                <span>成都 · MOMO 家庭音乐共创中心</span>
+                                <span class="text-emerald-400 font-semibold">永久载入年度声场共建录</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 右侧：官方直连收款码与操作引导 (占用 5 列) -->
+            <div class="lg:col-span-5 flex flex-col items-center justify-between bg-black/40 border border-white/10 rounded-2xl p-4 sm:p-5 text-center">
+                
+                <!-- 切换微信/支付宝 Tab -->
+                <div class="w-full">
+                    <div class="inline-flex p-1 rounded-xl bg-black/70 border border-white/10 text-xs font-semibold w-full justify-center">
+                        <button type="button" id="giving-tab-wechat" onclick="switchGivingChannel('wechat')" class="flex-1 py-1.5 rounded-lg bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8.5 3C4.91 3 2 5.46 2 8.5c0 1.74.96 3.28 2.44 4.25-.11.58-.45 1.95-.5 2.19-.08.38.15.38.31.27.13-.09 1.83-1.22 2.57-1.72.54.14 1.1.21 1.68.21.19 0 .37-.01.56-.02C8.71 13.06 8.5 12.3 8.5 11.5 8.5 7.91 11.86 5 16 5c.19 0 .37.01.56.02C15.42 3.82 12.22 3 8.5 3zm-2 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm5.5 2c-3.31 0-6 2.24-6 5 0 1.54.84 2.91 2.14 3.79-.09.52-.39 1.73-.44 1.95-.07.34.13.34.27.24.12-.08 1.63-1.09 2.29-1.53.48.12.98.19 1.5.19 3.31 0 6-2.24 6-5s-2.69-5-6-5zm-2 3c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zm4 0c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75z"/></svg>
+                            <span>微信支付</span>
+                        </button>
+                        <button type="button" id="giving-tab-alipay" onclick="switchGivingChannel('alipay')" class="flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M21.42 13.91c-.81-.33-2.18-.89-3.78-1.56.9-1.74 1.54-3.69 1.83-5.64H15.1c-.24 1.1-.64 2.19-1.18 3.23-2.1-1.02-4.14-2.19-5.94-3.52l-1.39 1.48c1.88 1.37 4.02 2.58 6.22 3.65-.63 1.04-1.39 1.99-2.28 2.85-2.07-.98-3.72-2.31-4.9-3.95L3.8 11.83c1.55 2.15 3.73 3.86 6.45 5.09-1.92 1.05-4.22 1.76-6.75 2.05l.62 1.94c3.27-.37 6.18-1.36 8.57-2.85 2.59 1.25 5.09 2.28 7.39 3.06l1.34-1.89zm-8.85.59c.74-.75 1.38-1.57 1.91-2.45 1.31.55 2.45 1.01 3.27 1.34-1.44.82-3.23 1.42-5.18 1.83v-.72z"/></svg>
+                            <span>支付宝</span>
+                        </button>
+                    </div>
+
+                    <!-- 二维码卡片展示 -->
+                    <div class="mt-3.5">
+                        <!-- 微信收款码 -->
+                        <div id="giving-card-wechat" class="flex flex-col items-center">
+                            <div class="p-2.5 bg-white rounded-2xl shadow-xl inline-block max-w-[190px] group-hover:scale-105 transition-transform">
+                                <img src="./assets/images/payment/wechat_pay_card.png" alt="微信收款码 · MOMO共创中心" class="w-full h-auto rounded">
+                            </div>
+                            <div class="mt-2 text-xs text-neutral-300">
+                                收款主体：<strong class="text-emerald-400 font-semibold">MOMO 共创中心</strong>
+                            </div>
+                            <div class="text-[10px] text-neutral-400">官方经营收款码 · 微信零钱 / 储蓄卡 / 信用卡</div>
+                        </div>
+
+                        <!-- 支付宝收款码 -->
+                        <div id="giving-card-alipay" class="hidden flex flex-col items-center">
+                            <div class="p-2.5 bg-white rounded-2xl shadow-xl inline-block max-w-[190px] group-hover:scale-105 transition-transform">
+                                <img src="./assets/images/payment/alipay_card.png" alt="支付宝收款码 · Momo音乐" class="w-full h-auto rounded">
+                            </div>
+                            <div class="mt-2 text-xs text-neutral-300">
+                                收款主体：<strong class="text-cyan-400 font-semibold">Momo 音乐</strong>
+                            </div>
+                            <div class="text-[10px] text-neutral-400">官方经营收款码 · 支付宝余额 / 银行卡 / 花呗</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 推荐转账备注生成框 -->
+                <div class="w-full mt-3 p-2.5 rounded-xl bg-amber-400/10 border border-amber-400/20 text-left">
+                    <div class="text-[10px] text-neutral-400 font-mono-code flex items-center justify-between">
+                        <span>转账时建议填写的付款备注：</span>
+                        <button type="button" onclick="copyGivingMemo()" class="text-amber-300 hover:text-white font-bold flex items-center gap-0.5 text-[10px]">
+                            <span id="memo-copy-label">复制</span>
+                        </button>
+                    </div>
+                    <div id="giving-suggested-memo" class="text-xs font-mono-code font-bold text-amber-300 mt-1 select-all">
+                        设备·Nord·一位热爱音乐的朋友
+                    </div>
+                </div>
+
+                <!-- 提交登记并确认完成 -->
+                <button
+                    type="button"
+                    onclick="submitGivingPlaque()"
+                    id="giving-submit-btn"
+                    class="w-full mt-3 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-black font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                    <span>✦ 我已转账 · 确认提交心愿铭牌</span>
+                </button>
+                <div id="giving-submit-feedback" class="hidden mt-2 text-[11px] text-emerald-300 font-medium">
+                    ✓ 铭牌已记录！感谢您的爱心与同行。
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 底部透明公示承诺 -->
+        <div class="mt-5 pt-3.5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-neutral-400">
+            <div class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✦</span>
+                <span>奉献完成后亦可联系主理人微信：<strong class="text-neutral-200 font-mono-code">tixinzhang@gmail.com</strong> 获取纸质捐赠纪念册与结业汇演席位</span>
+            </div>
+            <div class="text-[10px] text-neutral-500">
+                做真实的教育 · 每一分款项均直接进入 MOMO 官方账户并专项公示
+            </div>
+        </div>
+
+    </div>
+</div>

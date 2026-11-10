@@ -1,0 +1,175 @@
+<!-- 5. 音乐风格长河与声波抽卡机 (Style Deck & Audio Engine) -->
+    <section class="section style-deck-section" id="style-deck">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag">[ 03 / SONIC ENGINE & STYLE DECK ]</div>
+          <h2 class="section-title">音乐风格长河与<span class="electric-gradient-text">声波抽卡机</span></h2>
+          <p class="section-lead">“学音乐不是学孤立指法，而是进入人类音乐历史的浩瀚风格长河与文化坐标。”</p>
+        </div>
+
+        <!-- 风格卡牌交互展示区 -->
+        <div class="style-deck-wrapper">
+          <div class="deck-controls">
+            <button class="deck-arrow-btn" id="prevCardBtn" aria-label="上一张风格卡片">&larr; PREV STYLE</button>
+            <span class="deck-counter" id="deckCounter">01 / 06</span>
+            <button class="deck-arrow-btn" id="nextCardBtn" aria-label="下一张风格卡片">NEXT STYLE &rarr;</button>
+          </div>
+
+          <div class="deck-carousel" id="deckCarousel">
+            <!-- 卡片 1: Swing Big Band -->
+            <div class="style-card active" data-index="0" data-audio="./assets/audio/swing_demo.wav" data-bpm="136" data-key="Bb Major" data-era="1930s-1940s Harlem, NYC">
+              <div class="style-card-header">
+                <span class="style-era-badge">ERA: 1930s SWING</span>
+                <span class="style-code">STYLE_01</span>
+              </div>
+              <h3 class="style-name">SWING 大乐队</h3>
+              <p class="style-sub">摇摆乐全编制铜管与跳跃行走贝斯</p>
+              <p class="style-desc">
+                发源于纽约哈林区 Savoy Ballroom。强劲的跳音律动，管乐声部与原声大贝斯的严丝合缝，唤醒身体本能舞动的摇摆基因。
+              </p>
+              <div class="style-meta-grid">
+                <div><span class="meta-label">BPM</span><strong>136</strong></div>
+                <div><span class="meta-label">KEY</span><strong>Bb Maj</strong></div>
+                <div><span class="meta-label">CORE BEAT</span><strong>Shuffle 4-on-Floor</strong></div>
+              </div>
+              <button class="card-play-trigger btn btn-outline btn-block">
+                <span class="play-state-icon">&#9658;</span>
+                <span class="play-state-text">试听风格音轨 & 启动声波</span>
+              </button>
+            </div>
+
+            <!-- 卡片 2: Bebop -->
+            <div class="style-card" data-index="1" data-audio="./assets/audio/bebop_demo.wav" data-bpm="240" data-key="F Blues" data-era="1940s 52nd Street, NYC">
+              <div class="style-card-header">
+                <span class="style-era-badge">ERA: 1940s BEBOP</span>
+                <span class="style-code">STYLE_02</span>
+              </div>
+              <h3 class="style-name">BEBOP 先锋爵士</h3>
+              <p class="style-sub">极速和声轮换与高超即兴对话</p>
+              <p class="style-desc">
+                从舞厅走向艺术殿堂的转折点。查理·帕克与迪齐·吉莱斯皮创造的复杂离调、九度十一度延伸音与疾风骤雨般的即兴乐句。
+              </p>
+              <div class="style-meta-grid">
+                <div><span class="meta-label">BPM</span><strong>240</strong></div>
+                <div><span class="meta-label">KEY</span><strong>F Dominant</strong></div>
+                <div><span class="meta-label">CORE BEAT</span><strong>Fast Ride Cymbal</strong></div>
+              </div>
+              <button class="card-play-trigger btn btn-outline btn-block">
+                <span class="play-state-icon">&#9658;</span>
+                <span class="play-state-text">试听风格音轨 & 启动声波</span>
+              </button>
+            </div>
+
+            <!-- 卡片 3: Blues -->
+            <div class="style-card" data-index="2" data-audio="./assets/audio/blues_demo.wav" data-bpm="84" data-key="E Minor/Major" data-era="Delta to Chicago">
+              <div class="style-card-header">
+                <span class="style-era-badge">ERA: DELTA TO CHICAGO</span>
+                <span class="style-code">STYLE_03</span>
+              </div>
+              <h3 class="style-name">BLUES 布鲁斯</h3>
+              <p class="style-sub">十二小节根源灵魂与推弦微音程</p>
+              <p class="style-desc">
+                所有现代流行音乐的基石。平五度（Blue Note）微妙的情感颤动，直抵心底的呼喊与回应（Call & Response）。
+              </p>
+              <div class="style-meta-grid">
+                <div><span class="meta-label">BPM</span><strong>84</strong></div>
+                <div><span class="meta-label">KEY</span><strong>E Blues</strong></div>
+                <div><span class="meta-label">CORE BEAT</span><strong>Slow 12/8 Shuffle</strong></div>
+              </div>
+              <button class="card-play-trigger btn btn-outline btn-block">
+                <span class="play-state-icon">&#9658;</span>
+                <span class="play-state-text">试听风格音轨 & 启动声波</span>
+              </button>
+            </div>
+
+            <!-- 卡片 4: Rock -->
+            <div class="style-card" data-index="3" data-audio="./assets/audio/rock_demo.wav" data-bpm="128" data-key="A Minor" data-era="1970s British & American Rock">
+              <div class="style-card-header">
+                <span class="style-era-badge">ERA: 1970s ROCK</span>
+                <span class="style-code">STYLE_04</span>
+              </div>
+              <h3 class="style-name">CLASSIC & MODERN ROCK</h3>
+              <p class="style-sub">电子管过载轰鸣与重击军鼓后拍</p>
+              <p class="style-desc">
+                反叛与纯粹力量的代表。强力和弦（Power Chords）、重音底鼓与撕裂空气的电吉他独奏，打造无法平息的荷尔蒙声场。
+              </p>
+              <div class="style-meta-grid">
+                <div><span class="meta-label">BPM</span><strong>128</strong></div>
+                <div><span class="meta-label">KEY</span><strong>A Minor</strong></div>
+                <div><span class="meta-label">CORE BEAT</span><strong>Backbeat Snare on 2 & 4</strong></div>
+              </div>
+              <button class="card-play-trigger btn btn-outline btn-block">
+                <span class="play-state-icon">&#9658;</span>
+                <span class="play-state-text">试听风格音轨 & 启动声波</span>
+              </button>
+            </div>
+
+            <!-- 卡片 5: Bossa Nova -->
+            <div class="style-card" data-index="4" data-audio="./assets/audio/bossa_demo.wav" data-bpm="110" data-key="D Major7" data-era="1950s Ipanema, Brazil">
+              <div class="style-card-header">
+                <span class="style-era-badge">ERA: 1950s RIO DE JANEIRO</span>
+                <span class="style-code">STYLE_05</span>
+              </div>
+              <h3 class="style-name">BOSSA NOVA 波萨诺瓦</h3>
+              <p class="style-sub">松弛微醺的桑巴切分与冷峻和声</p>
+              <p class="style-desc">
+                源自巴西伊帕内玛海滩的轻柔海风。古典尼龙吉他的复杂切分指弹、冷爵士（Cool Jazz）和弦与低回呢喃的人声低语。
+              </p>
+              <div class="style-meta-grid">
+                <div><span class="meta-label">BPM</span><strong>110</strong></div>
+                <div><span class="meta-label">KEY</span><strong>D Maj7(9)</strong></div>
+                <div><span class="meta-label">CORE BEAT</span><strong>Syncopated Clave</strong></div>
+              </div>
+              <button class="card-play-trigger btn btn-outline btn-block">
+                <span class="play-state-icon">&#9658;</span>
+                <span class="play-state-text">试听风格音轨 & 启动声波</span>
+              </button>
+            </div>
+
+            <!-- 卡片 6: Pop/Funk Groove -->
+            <div class="style-card" data-index="5" data-audio="./assets/audio/funk_demo.wav" data-bpm="106" data-key="E Minor" data-era="Contemporary Groove">
+              <div class="style-card-header">
+                <span class="style-era-badge">ERA: CONTEMPORARY GROOVE</span>
+                <span class="style-code">STYLE_06</span>
+              </div>
+              <h3 class="style-name">POP / FUNK GROOVE</h3>
+              <p class="style-sub">紧密贴合的十六分音符律动机器</p>
+              <p class="style-desc">
+                聚焦“One”拍的爆发力与十六分休止符构成的深陷律动（The Pocket）。贝斯 Slap、闷音吉他切音与合成器低频的绝妙交织。
+              </p>
+              <div class="style-meta-grid">
+                <div><span class="meta-label">BPM</span><strong>106</strong></div>
+                <div><span class="meta-label">KEY</span><strong>E Minor 7</strong></div>
+                <div><span class="meta-label">CORE BEAT</span><strong>16th Grid Funk Pocket</strong></div>
+              </div>
+              <button class="card-play-trigger btn btn-outline btn-block">
+                <span class="play-state-icon">&#9658;</span>
+                <span class="play-state-text">试听风格音轨 & 启动声波</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部真实联动声波均衡器组件 (Equalizer Wave Bars) -->
+        <div class="audio-equalizer-dashboard border-card">
+          <div class="eq-info-col">
+            <div class="eq-status-indicator"><span class="status-dot"></span> <span id="currentPlayingTitle">STANDBY / 点击上方卡片试听</span></div>
+            <div class="eq-meta-desc" id="currentPlayingMeta">HTML5 Web Audio 实时渲染引擎已就绪</div>
+          </div>
+
+          <!-- 声波跳动条容器 -->
+          <div class="equalizer-bars-group" id="equalizerVisualizer" aria-label="声波均衡器动画">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+          </div>
+
+          <div class="eq-action-col">
+            <button class="btn btn-outline" id="masterAudioStopBtn">停止播放</button>
+          </div>
+        </div>
+      </div>
+    </section>
