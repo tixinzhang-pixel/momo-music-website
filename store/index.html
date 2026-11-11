@@ -753,275 +753,167 @@
     </main>
 
 
-<!-- ==================== 全局极简爱心奉献与留言署名互动弹窗 (经典高定墨黑深绿质感) ==================== -->
-<div id="giving-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-3 sm:p-5 overflow-y-auto" onclick="closeGivingModal(event)">
-    <div class="bg-[#0b100d] border border-emerald-500/30 rounded-3xl max-w-4xl w-full p-5 sm:p-8 relative text-left shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] my-auto max-h-[94vh] flex flex-col justify-between overflow-y-auto" onclick="event.stopPropagation()">
+<!-- ==================== 社区化纯净白底爱心奉献支持弹窗 ==================== -->
+<div id="giving-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto" onclick="closeGivingModal(event)">
+    <div class="bg-white border border-neutral-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 relative text-left shadow-2xl my-auto max-h-[92vh] flex flex-col justify-between overflow-y-auto text-neutral-900" onclick="event.stopPropagation()">
         
         <!-- 关闭按钮 -->
-        <button type="button" onclick="closeGivingModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors z-20" aria-label="关闭">
+        <button type="button" onclick="closeGivingModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-neutral-700 p-1.5 rounded-full hover:bg-neutral-100 transition-colors z-20" aria-label="关闭">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
-        <!-- 弹窗顶栏 -->
-        <div class="mb-4 sm:mb-5 pr-8">
-            <div class="flex items-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-500/25 text-[10px] font-mono-code font-bold text-emerald-300 uppercase tracking-widest">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    MOMO CO-CREATION PATRONAGE
-                </span>
-                <span class="text-[11px] text-neutral-400 font-mono-code hidden sm:inline">做真实的教育 · 100% 定向透明</span>
-            </div>
-            <h3 class="text-xl sm:text-2xl font-black text-white mt-1.5 tracking-tight flex items-center gap-2" id="giving-modal-title">
-                <span>💖 我要支持 MOMO · 声音火种计划</span>
+        <!-- 弹窗顶栏：核心祝福语句置顶 -->
+        <div class="text-center pb-5 border-b border-neutral-100 pr-6 pl-6">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 text-[10px] font-mono-code font-bold text-neutral-600 uppercase tracking-widest">
+                MOMO COMMUNITY GIVING · 爱心支持
+            </span>
+            <h3 class="text-2xl sm:text-[26px] font-black text-black mt-2 tracking-tight">
+                愿上帝祝福你乐意帮助的好行为
             </h3>
-            <p class="text-neutral-400 text-xs sm:text-sm mt-1 leading-relaxed">
-                感谢你与我们一起守护真实的音乐教育。请选择支持板块，并在转账时备注您的署名。
+            <p class="text-xs text-neutral-600 mt-1.5 leading-relaxed">
+                感谢你以实际行动支持 Momo 音乐教育与社群同行。
             </p>
         </div>
 
-        <!-- 核心内容网格：左侧互动配置，右侧收款码与转账引导 -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+        <!-- 核心内容 -->
+        <div class="space-y-4 py-5">
             
-            <!-- 左侧：表单配置 + 实时电子铭牌生成 (占用 7 列) -->
-            <div class="lg:col-span-7 space-y-4">
-                
-                <!-- 1. 核心两大板块切换 -->
-                <div>
-                    <label class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1.5">
-                        ① 选择支持基金板块
-                    </label>
-                    <div class="grid grid-cols-2 gap-2.5 text-xs font-semibold">
-                        <button
-                            type="button"
-                            id="cat-btn-equipment"
-                            onclick="selectGivingCategory('equipment')"
-                            class="py-3 px-3 rounded-2xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm"
-                        >
-                            <span>🎸</span>
-                            <span>教学设备器材基金</span>
-                        </button>
-                        <button
-                            type="button"
-                            id="cat-btn-scholarship"
-                            onclick="selectGivingCategory('scholarship')"
-                            class="py-3 px-3 rounded-2xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2"
-                        >
-                            <span>🎓</span>
-                            <span>音乐学者奖助学金</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 2. 金额设定 -->
-                <div>
-                    <label class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1.5">
-                        ② 奉献支持意向金额
-                    </label>
-                    <div class="grid grid-cols-4 gap-2 text-xs font-mono-code">
-                        <button type="button" onclick="setGivingAmount(100)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center">
-                            ¥100
-                        </button>
-                        <button type="button" onclick="setGivingAmount(200)" class="giving-amt-btn py-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center shadow-sm">
-                            ¥200
-                        </button>
-                        <button type="button" onclick="setGivingAmount(500)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center">
-                            ¥500
-                        </button>
-                        <button type="button" onclick="setGivingAmount(1000)" class="giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center">
-                            ¥1,000
-                        </button>
-                    </div>
-                    <div class="mt-2 flex items-center gap-2 text-xs">
-                        <span class="text-neutral-400 text-[11px]">自定义金额：</span>
-                        <div class="relative flex-1">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 font-mono-code">¥</span>
-                            <input
-                                type="number"
-                                id="giving-custom-amount"
-                                value="200"
-                                min="1"
-                                placeholder="输入任意金额"
-                                oninput="onCustomAmountChange()"
-                                class="w-full pl-7 pr-3 py-1.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs font-mono-code focus:outline-none focus:border-emerald-400"
-                            >
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 署名与寄语 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1">
-                            ③ 您的署名 / 芳名
-                        </label>
-                        <input
-                            type="text"
-                            id="giving-donor-name"
-                            placeholder="如：林先生 / 匿名爱乐人"
-                            value="MOMO 同行者"
-                            maxlength="20"
-                            oninput="updateGivingPlaque()"
-                            class="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-emerald-400"
-                        >
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-mono-code uppercase tracking-wider text-neutral-400 mb-1">
-                            ④ 心愿寄语 (选填)
-                        </label>
-                        <input
-                            type="text"
-                            id="giving-donor-memo"
-                            placeholder="如：愿大山与城市的孩子都能拥抱好音乐"
-                            value="愿真诚的音乐在更多生命中生根发芽。"
-                            maxlength="60"
-                            oninput="updateGivingPlaque()"
-                            class="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white text-xs focus:outline-none focus:border-emerald-400"
-                        >
-                    </div>
-                </div>
-
-                <!-- 实时电子守护纪念铭牌预览 -->
-                <div class="p-3.5 rounded-2xl bg-gradient-to-br from-neutral-900 via-neutral-950 to-black border border-white/15 relative overflow-hidden text-xs">
-                    <div class="flex items-center justify-between text-[10px] font-mono-code text-emerald-400 font-bold pb-1.5 border-b border-white/10">
-                        <span>★ 声音火种守护纪念铭牌 (实时生成)</span>
-                        <span id="plaque-cert-id">MOMO-2026-0001</span>
-                    </div>
-                    <div class="mt-2.5 flex items-baseline justify-between">
-                        <span class="text-white font-bold text-sm" id="plaque-donor-name">MOMO 同行者</span>
-                        <span class="text-emerald-300 font-mono-code font-bold text-base" id="plaque-amount">¥200</span>
-                    </div>
-                    <div class="text-[11px] text-neutral-300 mt-1" id="plaque-item-title">支持标的：教学设备器材基金</div>
-                    <p class="text-[11px] text-neutral-400 italic mt-1.5 leading-relaxed" id="plaque-message">
-                        “愿真诚的音乐在更多生命中生根发芽。”
-                    </p>
-                </div>
-
+            <!-- 下拉选择框：选择支持项目 -->
+            <div>
+                <label for="giving-project-select" class="block text-xs font-bold text-neutral-800 mb-1.5">
+                    选择您愿意支持的项目，我们会专项用于对应领域 <span class="text-red-500">*</span>
+                </label>
+                <select
+                    id="giving-project-select"
+                    onchange="onGivingProjectChange()"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 bg-neutral-50 text-sm font-semibold text-neutral-900 focus:outline-none focus:ring-2 focus:ring-black"
+                >
+                    <option value="direct">直接支持 Momo（自由支配 · 支持社群发展与日常教学）</option>
+                    <option value="equipment">Momo 教学设备（琴房乐器与排练器材更新）</option>
+                    <option value="scholarship">Momo 助学金池（资助经济困难家庭学子）</option>
+                    <option value="community">Momo 社群活动（青年乐队合奏与音乐沙龙）</option>
+                    <option value="charity">大凉山音乐支教（乡村儿童乐器采购与教学）</option>
+                </select>
             </div>
 
-            <!-- 右侧：直连收款码与操作指南 (占用 5 列) -->
-            <div class="lg:col-span-5 flex flex-col justify-between bg-black/70 p-5 rounded-2xl border border-white/10 space-y-4">
-                
-                <!-- 渠道切换标签：微信支付 / 支付宝 -->
-                <div>
-                    <div class="flex items-center p-1 rounded-xl bg-neutral-900 border border-white/10 text-xs font-mono-code">
-                        <button
-                            type="button"
-                            id="giving-tab-wechat"
-                            onclick="switchGivingChannel('wechat')"
-                            class="flex-1 py-1.5 rounded-lg bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow"
-                        >
-                            <span>💚 微信支付</span>
-                        </button>
-                        <button
-                            type="button"
-                            id="giving-tab-alipay"
-                            onclick="switchGivingChannel('alipay')"
-                            class="flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5"
-                        >
-                            <span>💙 支付宝</span>
-                        </button>
-                    </div>
-
-                    <!-- 微信支付收款码卡片 -->
-                    <div id="giving-card-wechat" class="mt-4 text-center">
-                        <div class="inline-block p-3 rounded-2xl bg-white shadow-xl shadow-black/80 max-w-[210px] mx-auto">
-                            <img
-                                src="../assets/images/giving/momo_wechat_pay_card.jpg"
-                                alt="MOMO 微信支付官方商户收款码"
-                                class="w-full aspect-square object-contain rounded-lg"
-                            >
-                            <div class="text-[11px] font-bold text-black mt-1 font-mono-code">
-                                MOMO 共创中心
-                            </div>
-                        </div>
-                        <div class="mt-2 text-[11px] text-neutral-400 font-mono-code">
-                            微信官方商户号 · 支持微信零钱/储蓄卡/信用卡
-                        </div>
-                    </div>
-
-                    <!-- 支付宝收款码卡片 (默认隐藏) -->
-                    <div id="giving-card-alipay" class="mt-4 text-center hidden">
-                        <div class="inline-block p-3 rounded-2xl bg-white shadow-xl shadow-black/80 max-w-[210px] mx-auto">
-                            <img
-                                src="../assets/images/giving/momo_alipay_card.jpg"
-                                alt="MOMO 支付宝官方收款码"
-                                class="w-full aspect-square object-contain rounded-lg"
-                            >
-                            <div class="text-[11px] font-bold text-black mt-1 font-mono-code">
-                                Momo 音乐
-                            </div>
-                        </div>
-                        <div class="mt-2 text-[11px] text-neutral-400 font-mono-code">
-                            支付宝官方商户号 · 支持余额/储蓄卡/花呗
-                        </div>
-                    </div>
+            <!-- 支付方式切换 Tab -->
+            <div>
+                <div class="flex items-center justify-between text-xs font-bold mb-2">
+                    <span class="text-neutral-700">扫码支持通道</span>
+                    <span class="text-[11px] text-neutral-500 font-normal">支持微信与支付宝</span>
                 </div>
-
-                <!-- 转账备注提示 -->
-                <div class="p-3 rounded-xl bg-white/[0.04] border border-white/10 text-[11px] space-y-1">
-                    <div class="text-emerald-300 font-bold flex items-center gap-1">
-                        <span>📝</span>
-                        <span>转账推荐备注格式：</span>
-                    </div>
-                    <div class="font-mono-code text-white bg-black/60 px-2.5 py-1 rounded border border-white/10 flex items-center justify-between" id="giving-recommended-memo">
-                        <span>设备基金·MOMO同行者</span>
-                        <button type="button" onclick="copyGivingMemo()" class="text-emerald-400 hover:underline text-[10px]">复制</button>
-                    </div>
-                    <div class="text-[10px] text-neutral-400 pt-0.5">
-                        款项 100% 透明定向注入，主理人将亲笔登记入账。
-                    </div>
-                </div>
-
-                <!-- Timo 微信直连求助 -->
-                <div class="pt-2 text-center border-t border-white/10">
+                <div class="grid grid-cols-2 gap-2 p-1 bg-neutral-100 rounded-xl">
                     <button
                         type="button"
-                        onclick="closeGivingModal(); openTimoModal()"
-                        class="text-xs text-neutral-400 hover:text-white transition-colors flex items-center justify-center gap-1.5 mx-auto"
+                        id="tab-btn-wechat"
+                        onclick="switchGivingTab('wechat')"
+                        class="py-2 rounded-lg text-xs font-bold transition-all bg-white text-emerald-700 shadow-sm flex items-center justify-center gap-1.5"
                     >
-                        <span>如有大额对公捐赠或疑问，请直接联系 Timo</span>
-                        <span>&rsaquo;</span>
+                        <span>💚 微信支付</span>
+                    </button>
+                    <button
+                        type="button"
+                        id="tab-btn-alipay"
+                        onclick="switchGivingTab('alipay')"
+                        class="py-2 rounded-lg text-xs font-bold transition-all text-neutral-600 hover:text-black flex items-center justify-center gap-1.5"
+                    >
+                        <span>💙 支付宝</span>
                     </button>
                 </div>
-
             </div>
 
+            <!-- 收款码展示卡片 (纯净白底 · 绝不破图) -->
+            <div class="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 text-center">
+                <div id="giving-qr-wechat" class="space-y-2">
+                    <div class="w-48 sm:w-52 mx-auto rounded-xl overflow-hidden border border-neutral-200 shadow-sm bg-white p-2">
+                        <img src="../assets/images/payment/wechat_pay_card.png" alt="MOMO 微信官方收款码" class="w-full aspect-square object-contain rounded-lg">
+                    </div>
+                    <div class="text-[11px] text-neutral-600 font-medium">
+                        微信官方商户号：<strong>MOMO 共创中心</strong>
+                    </div>
+                </div>
+
+                <div id="giving-qr-alipay" class="hidden space-y-2">
+                    <div class="w-48 sm:w-52 mx-auto rounded-xl overflow-hidden border border-neutral-200 shadow-sm bg-white p-2">
+                        <img src="../assets/images/payment/alipay_card.png" alt="MOMO 支付宝官方收款码" class="w-full aspect-square object-contain rounded-lg">
+                    </div>
+                    <div class="text-[11px] text-neutral-600 font-medium">
+                        支付宝官方商户：<strong>Momo 音乐</strong>
+                    </div>
+                </div>
+
+                <!-- 备注提醒条 -->
+                <div class="mt-3 pt-3 border-t border-neutral-200/80 text-[11px] text-neutral-600 leading-relaxed font-mono-code">
+                    <span>💡 转账时建议在备注栏写上您的名字与支持项目（例如：</span>
+                    <span id="giving-suggested-memo" class="font-bold text-neutral-900 bg-white px-1.5 py-0.5 rounded border border-neutral-300">直接支持·您的名字</span>
+                    <span>），方便我们记入芳名录。</span>
+                </div>
+            </div>
+
+            <!-- 底部主理人直接联系 -->
+            <div class="flex items-center justify-between text-xs text-neutral-500 pt-1">
+                <span>如有大额或对公支持需求：</span>
+                <button type="button" onclick="closeGivingModal(); openTimoModal();" class="text-black font-bold hover:underline inline-flex items-center gap-1">
+                    <span>联系主理人 Timo 微信 &rarr;</span>
+                </button>
+            </div>
         </div>
 
     </div>
 </div>
 
 <script>
-    // 奉献交互状态管理引擎 (经典双轨极简版)
-    let currentGivingCategory = 'equipment';
-    let currentGivingAmount = 200;
+    let currentGivingTab = 'wechat';
 
-    function openGivingModal(title, category, defaultAmount) {
+    function switchGivingTab(tab) {
+        currentGivingTab = tab;
+        const btnWechat = document.getElementById('tab-btn-wechat');
+        const btnAlipay = document.getElementById('tab-btn-alipay');
+        const qrWechat = document.getElementById('giving-qr-wechat');
+        const qrAlipay = document.getElementById('giving-qr-alipay');
+
+        if (tab === 'wechat') {
+            if (btnWechat) btnWechat.className = 'py-2 rounded-lg text-xs font-bold transition-all bg-white text-emerald-700 shadow-sm flex items-center justify-center gap-1.5';
+            if (btnAlipay) btnAlipay.className = 'py-2 rounded-lg text-xs font-bold transition-all text-neutral-600 hover:text-black flex items-center justify-center gap-1.5';
+            if (qrWechat) qrWechat.classList.remove('hidden');
+            if (qrAlipay) qrAlipay.classList.add('hidden');
+        } else {
+            if (btnAlipay) btnAlipay.className = 'py-2 rounded-lg text-xs font-bold transition-all bg-white text-blue-700 shadow-sm flex items-center justify-center gap-1.5';
+            if (btnWechat) btnWechat.className = 'py-2 rounded-lg text-xs font-bold transition-all text-neutral-600 hover:text-black flex items-center justify-center gap-1.5';
+            if (qrAlipay) qrAlipay.classList.remove('hidden');
+            if (qrWechat) qrWechat.classList.add('hidden');
+        }
+    }
+
+    function onGivingProjectChange() {
+        const select = document.getElementById('giving-project-select');
+        const memoBadge = document.getElementById('giving-suggested-memo');
+        if (!select || !memoBadge) return;
+        const val = select.value;
+        let tag = '直接支持';
+        if (val === 'equipment') tag = '设备支持';
+        else if (val === 'scholarship') tag = '助学金';
+        else if (val === 'community') tag = '社群活动';
+        else if (val === 'charity') tag = '支教支持';
+        memoBadge.textContent = tag + '·您的名字';
+    }
+
+    function openGivingModal(itemTitle, category) {
         const modal = document.getElementById('giving-modal');
-        if (!modal) return;
-        if (title) {
-            const titleEl = document.getElementById('giving-modal-title');
-            if (titleEl) {
-                titleEl.innerHTML = '<span>💖</span> <span>' + title + '</span>';
-            }
+        const select = document.getElementById('giving-project-select');
+        if (select && category) {
+            if (category === 'equipment') select.value = 'equipment';
+            else if (category === 'scholarship') select.value = 'scholarship';
+            else if (category === 'charity') select.value = 'charity';
+            else if (category === 'community') select.value = 'community';
+            else select.value = 'direct';
+            onGivingProjectChange();
         }
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-
-        if (category === 'scholarship') {
-            selectGivingCategory('scholarship');
-        } else {
-            selectGivingCategory('equipment');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
         }
-
-        if (defaultAmount && Number(defaultAmount) > 0) {
-            setGivingAmount(Number(defaultAmount));
-        } else {
-            setGivingAmount(200);
-        }
-
-        switchGivingChannel('wechat');
     }
 
     function closeGivingModal(e) {
@@ -1031,110 +923,6 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.style.overflow = '';
-        }
-    }
-
-    function switchGivingChannel(channel) {
-        const wechatTab = document.getElementById('giving-tab-wechat');
-        const alipayTab = document.getElementById('giving-tab-alipay');
-        const wechatCard = document.getElementById('giving-card-wechat');
-        const alipayCard = document.getElementById('giving-card-alipay');
-
-        if (channel === 'wechat') {
-            if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg bg-emerald-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
-            if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5';
-            if (wechatCard) wechatCard.classList.remove('hidden');
-            if (alipayCard) alipayCard.classList.add('hidden');
-        } else {
-            if (alipayTab) alipayTab.className = 'flex-1 py-1.5 rounded-lg bg-cyan-500 text-white font-bold transition-all flex items-center justify-center gap-1.5 shadow';
-            if (wechatTab) wechatTab.className = 'flex-1 py-1.5 rounded-lg text-neutral-400 hover:text-white transition-all flex items-center justify-center gap-1.5';
-            if (alipayCard) alipayCard.classList.remove('hidden');
-            if (wechatCard) wechatCard.classList.add('hidden');
-        }
-    }
-
-    function selectGivingCategory(category) {
-        currentGivingCategory = category;
-        const eqBtn = document.getElementById('cat-btn-equipment');
-        const scBtn = document.getElementById('cat-btn-scholarship');
-
-        if (category === 'equipment') {
-            if (eqBtn) eqBtn.className = 'py-3 px-3 rounded-2xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
-            if (scBtn) scBtn.className = 'py-3 px-3 rounded-2xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2';
-        } else {
-            if (scBtn) scBtn.className = 'py-3 px-3 rounded-2xl border border-amber-500/50 bg-amber-500/20 text-amber-300 font-bold transition-all flex items-center justify-center gap-2 shadow-sm';
-            if (eqBtn) eqBtn.className = 'py-3 px-3 rounded-2xl border border-white/10 bg-white/[0.04] text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-2';
-        }
-
-        updateGivingPlaque();
-    }
-
-    function setGivingAmount(amt) {
-        currentGivingAmount = amt;
-        const customInput = document.getElementById('giving-custom-amount');
-        if (customInput) customInput.value = amt;
-
-        const amtBtns = document.querySelectorAll('.giving-amt-btn');
-        amtBtns.forEach(b => {
-            if (b.textContent.trim().replace(/,/g, '') === '¥' + amt) {
-                b.className = 'giving-amt-btn py-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center shadow-sm';
-            } else {
-                b.className = 'giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center';
-            }
-        });
-
-        updateGivingPlaque();
-    }
-
-    function onCustomAmountChange() {
-        const customInput = document.getElementById('giving-custom-amount');
-        if (customInput && customInput.value) {
-            currentGivingAmount = Math.max(1, Number(customInput.value));
-            const amtBtns = document.querySelectorAll('.giving-amt-btn');
-            amtBtns.forEach(b => {
-                if (b.textContent.trim().replace(/,/g, '') === '¥' + currentGivingAmount) {
-                    b.className = 'giving-amt-btn py-2 rounded-xl border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center shadow-sm';
-                } else {
-                    b.className = 'giving-amt-btn py-2 rounded-xl border border-white/15 bg-white/[0.04] text-neutral-200 hover:border-emerald-400 transition-all text-center';
-                }
-            });
-            updateGivingPlaque();
-        }
-    }
-
-    function updateGivingPlaque() {
-        const donorNameInput = document.getElementById('giving-donor-name');
-        const donorMemoInput = document.getElementById('giving-donor-memo');
-        const plaqueDonorName = document.getElementById('plaque-donor-name');
-        const plaqueAmount = document.getElementById('plaque-amount');
-        const plaqueItemTitle = document.getElementById('plaque-item-title');
-        const plaqueMessage = document.getElementById('plaque-message');
-        const recommendedMemo = document.getElementById('giving-recommended-memo');
-
-        const donorName = (donorNameInput && donorNameInput.value.trim()) ? donorNameInput.value.trim() : 'MOMO 同行者';
-        const donorMemo = (donorMemoInput && donorMemoInput.value.trim()) ? donorMemoInput.value.trim() : '愿真诚的音乐在更多生命中生根发芽。';
-        const categoryLabel = (currentGivingCategory === 'scholarship') ? '音乐学者奖助学金' : '教学设备器材基金';
-        const memoTag = (currentGivingCategory === 'scholarship') ? '奖助学金' : '设备基金';
-
-        if (plaqueDonorName) plaqueDonorName.textContent = donorName;
-        if (plaqueAmount) plaqueAmount.textContent = '¥' + currentGivingAmount;
-        if (plaqueItemTitle) plaqueItemTitle.textContent = '支持标的：' + categoryLabel;
-        if (plaqueMessage) plaqueMessage.textContent = '“' + donorMemo + '”';
-
-        if (recommendedMemo) {
-            const memoStr = memoTag + '·' + donorName;
-            recommendedMemo.innerHTML = '<span>' + memoStr + '</span><button type="button" onclick="copyGivingMemo(\'' + memoStr + '\')" class="text-emerald-400 hover:underline text-[10px]">复制</button>';
-        }
-    }
-
-    function copyGivingMemo(text) {
-        const memo = text || (currentGivingCategory === 'scholarship' ? '奖助学金·MOMO同行者' : '设备基金·MOMO同行者');
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(memo).then(() => {
-                alert('转账备注已复制：' + memo);
-            });
-        } else {
-            prompt('请复制转账备注：', memo);
         }
     }
 </script>
