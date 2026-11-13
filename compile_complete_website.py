@@ -5,11 +5,11 @@ MOMO Family Music — Apple.com Minimalist Storefront & Full Multi-Page Ecosyste
 Architecture:
 - index.html        : Ultra-clean Apple.com style flagship storefront (~650 CN chars vs 11,633 previously!)
                       4 Full-Width Hero Billboards + 6 Full-Bleed Promo Tiles (2x3 Grid) -> Dedicated Pages
-- membership.html   : Dedicated Page — 2026 Plus 家庭音乐会员 (¥6,000/年)
+- membership.html   : Dedicated Page — 2026 Plus 家庭音乐会员 (欢迎来访或咨询)
 - curriculum.html   : Dedicated Page — 《通识音乐学习》 + 九大现代专业学科选修矩阵 + 现代音乐风格试听卡片机
 - ensemble-lab.html : Dedicated Page — 青少年现代爵士大乐队 (正在招募) & 4-on-1 职业乐队实验室
 - faculty.html      : Dedicated Page — 一线艺术家导师智库 (5×2 大画幅全彩肖像矩阵 + 13位导师详情抽屉)
-- study-abroad.html : Dedicated Page — 音乐升学与海外名校留学规划专案 (¥38,800 · 高信博士真实档案 & 24轨实录视频)
+- study-abroad.html : Dedicated Page — 作品积累与方向规划 (欢迎来访或咨询· 高信博士真实档案 & 24轨实录视频)
 - spaces.html       : Dedicated Page — 桐梓林花园 × 麓湖私密声场与器材租用
 - charity.html      : Dedicated Page — 声音火种与大凉山音乐支教公益 & 3天2晚音乐公益共修营
 - store/*.html      : Dedicated Pages — Momo 音乐美学商店及 4 款单品独立页 (全局统一导航与预约)
@@ -547,7 +547,7 @@ def render_apple_nav(prefix: str = "./", active: str = "home") -> str:
         ("curriculum", "通识与学科", f"{prefix}curriculum.html"),
         ("ensemble", "乐团合奏", f"{prefix}ensemble-lab.html"),
         ("faculty", "导师智库", f"{prefix}faculty.html"),
-        ("study", "名校规划", f"{prefix}study-abroad.html"),
+        ("study", "作品与方向", f"{prefix}study-abroad.html"),
         ("spaces", "共享空间", f"{prefix}spaces.html"),
         ("charity", "音乐公益", f"{prefix}charity.html"),
         ("store", "美学商店", f"{prefix}store/index.html"),
@@ -690,7 +690,7 @@ def render_apple_footer_and_scripts(
                         <li><a href="{prefix}ensemble-lab.html#big-band" class="hover:text-white transition-colors">青少年现代爵士大乐队</a></li>
                         <li><a href="{prefix}ensemble-lab.html#lab-detail" class="hover:text-white transition-colors">4-on-1 职业乐队实验室</a></li>
                         <li><a href="{prefix}faculty.html" class="hover:text-white transition-colors">艺术家导师智库</a></li>
-                        <li><a href="{prefix}study-abroad.html" class="hover:text-white transition-colors">海外名校留学规划专案</a></li>
+                        <li><a href="{prefix}study-abroad.html" class="hover:text-white transition-colors">作品积累与方向规划</a></li>
                     </ul>
                 </div>
 
@@ -1406,7 +1406,7 @@ const styleData = [
 
         const claimBtn = document.getElementById('btn-claim-remaining');
         if (claimBtn) {
-            claimBtn.textContent = '全额认领(¥' + gapAmount + ')';
+            claimBtn.textContent = '欢迎来访或咨询';
         }
 
         updateGivingPlaque();
@@ -1420,7 +1420,7 @@ const styleData = [
         // 更新预设金额按钮激活态
         const amtBtns = document.querySelectorAll('.giving-amt-btn');
         amtBtns.forEach(b => {
-            if (b.textContent.trim() === '¥' + amt) {
+            if (b.textContent.trim() === '咨询') {
                 b.className = 'giving-amt-btn py-1.5 rounded-lg border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center';
             } else {
                 b.className = 'giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white hover:border-emerald-400 transition-all text-center';
@@ -1441,7 +1441,7 @@ const styleData = [
             // 清除预设按钮激活态
             const amtBtns = document.querySelectorAll('.giving-amt-btn');
             amtBtns.forEach(b => {
-                if (b.textContent.trim() === '¥' + currentGivingAmount) {
+                if (b.textContent.trim() === '咨询') {
                     b.className = 'giving-amt-btn py-1.5 rounded-lg border border-emerald-500/50 bg-emerald-500/20 text-emerald-300 font-bold transition-all text-center';
                 } else {
                     b.className = 'giving-amt-btn py-1.5 rounded-lg border border-white/15 bg-white/[0.04] text-neutral-200 hover:text-white transition-all text-center';
@@ -1466,7 +1466,7 @@ const styleData = [
 
         if (donorDisplay) donorDisplay.textContent = donorName;
         if (memoDisplay) memoDisplay.textContent = '“' + donorMemo + '”';
-        if (amountDisplay) amountDisplay.textContent = '共建助力：¥' + currentGivingAmount;
+        if (amountDisplay) amountDisplay.textContent = '共建助力：欢迎来访或咨询';
         if (purposeTag) purposeTag.textContent = currentGivingItem;
 
         if (honorTitle) {
@@ -1478,7 +1478,7 @@ const styleData = [
         }
 
         if (memoSuggested) {
-            memoSuggested.textContent = currentItemMemo + '·' + donorName + '·¥' + currentGivingAmount;
+            memoSuggested.textContent = currentItemMemo + '·' + donorName;
         }
     }
 
@@ -1618,7 +1618,7 @@ apple_home_main = '''
                         <span class="bg-gradient-to-r from-cyan-300 via-emerald-300 to-amber-200 bg-clip-text text-transparent">让热爱自然发芽。</span>
                     </h1>
                     <p class="mt-3 text-xs sm:text-base text-neutral-200 font-light leading-relaxed max-w-lg">
-                        现代流行与爵士通识体系 · 家庭音乐教育 · 专业音乐升学规划
+                        现代流行与爵士通识体系 · 家庭音乐教育 · 作品积累与方向规划
                     </p>
                     <div class="mt-6 flex flex-wrap items-center gap-3">
                         <a href="./membership.html" class="px-6 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-cyan-300 transition-all shadow-lg flex items-center gap-1.5">
@@ -1694,8 +1694,8 @@ apple_home_main = '''
                         <!-- 卡片下方价格与保障标签 (清楚明了) -->
                         <div class="mt-8 text-center space-y-2.5">
                             <div class="flex items-baseline justify-center gap-2">
-                                <span class="text-5xl sm:text-6xl font-black text-black tracking-tight">¥6,000</span>
-                                <span class="text-xs sm:text-sm text-neutral-500 font-mono-code">/ 年 (约 ¥16.4/天)</span>
+                                <span class="text-3xl sm:text-4xl font-black text-black tracking-tight">欢迎来访或咨询</span>
+                                <span class="text-xs sm:text-sm text-neutral-500 font-mono-code">当面了解会员</span>
                             </div>
                             <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-300/60 text-xs text-emerald-800 font-semibold">
                                 <span>★</span>
@@ -1861,7 +1861,7 @@ apple_home_main = '''
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <span class="px-2.5 py-1 rounded-full bg-white/10 text-amber-300 text-[10px] font-mono-code font-bold border border-white/20">
-                                    面试录取制 · Audition-Only
+                                    欢迎来预约了解
                                 </span>
                                 <span class="text-xs font-mono-code text-neutral-500">CAMP 03</span>
                             </div>
@@ -2109,7 +2109,7 @@ apple_home_main = '''
                         </div>
                         <div class="p-3.5">
                             <h4 class="text-sm font-bold text-neutral-900">高信博士</h4>
-                            <p class="text-[11px] text-neutral-500 mt-0.5">管乐博士 · 升学学术总监</p>
+                            <p class="text-[11px] text-neutral-500 mt-0.5">管乐博士 · 作品与方向顾问</p>
                         </div>
                     </div>
                     <!-- 3. Joe Longardner -->
@@ -2171,7 +2171,7 @@ apple_home_main = '''
                         </div>
                         <div class="p-3.5">
                             <h4 class="text-sm font-bold text-neutral-900">高信博士</h4>
-                            <p class="text-[11px] text-neutral-500 mt-0.5">管乐博士 · 升学学术总监</p>
+                            <p class="text-[11px] text-neutral-500 mt-0.5">管乐博士 · 作品与方向顾问</p>
                         </div>
                     </div>
                     <!-- 3. Joe Longardner -->
@@ -2399,7 +2399,7 @@ apple_home_main = '''
                                 <option>3–7 岁 少儿音乐通识与亲子互动</option>
                                 <option>8–16 岁 青少年乐手与爵士大乐队</option>
                                 <option selected>成人流行 / 爵士爱好者与乐队合奏</option>
-                                <option>海外音乐名校升学与考学作品集 (伯克利/德奥)</option>
+                                <option>作品积累与方向规划（教学方法参考伯克利）</option>
                                 <option>家庭多成员共同研习 (全家参与)</option>
                             </select>
                         </div>
@@ -2411,10 +2411,10 @@ apple_home_main = '''
                                 id="admission-program"
                                 class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50/80 text-sm focus:outline-none focus:ring-2 focus:ring-black text-neutral-900"
                             >
-                                <option selected>MOMO 2026 Plus 家庭会员 (¥6,000/年 · 旗舰推荐)</option>
+                                <option selected>MOMO 2026 Plus 家庭会员（欢迎来访或咨询）</option>
                                 <option>Momo 冬季共鸣音乐营 (寒假 · 5天4晚)</option>
                                 <option>Momo 夏季即兴音乐营会 (暑期 · 7天6晚)</option>
-                                <option>Momo 国际爵士音乐夏令营 (Audition录取制)</option>
+                                <option>Momo 国际爵士音乐夏令营（欢迎来预约了解）</option>
                                 <option>电吉他 / 贝斯 / 现代打击乐 1对1 课程</option>
                                 <option>流行声乐与乐队主唱 / 萨克斯管乐 1对1</option>
                                 <option>P&R Studio 录音工程与音乐制作专修</option>
@@ -2913,7 +2913,7 @@ ensemble_page_body = f'''
                         01 · 青少年现代爵士大乐队 (正在招募)
                     </a>
                     <a href="#lab-detail" class="rounded-full px-5 py-2 bg-momo-cyan/15 border border-momo-cyan/40 text-momo-cyan text-xs font-semibold hover:bg-momo-cyan hover:text-black transition-all">
-                        02 · 4-on-1 职业乐队实验室 (¥400 / 会员划扣)
+                        02 · 4-on-1 职业乐队实验室（欢迎来访或咨询）
                     </a>
                 </div>
             </div>
@@ -2983,7 +2983,7 @@ charity_body = f'''
                 </div>
                 <div class="lg:col-span-6 space-y-5">
                     <span class="inline-block px-3 py-1 rounded-full bg-momo-mint/15 border border-momo-mint/40 text-momo-mint text-xs font-mono font-bold">
-                        ¥4,000 / 人 · 满 3–4 人即成团出发 · 会员家庭优先
+                        欢迎来访或咨询
                     </span>
                     <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
                         大凉山 3天2晚 音乐公益共修营
@@ -2998,7 +2998,7 @@ charity_body = f'''
                         <div class="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800">✦ 真实支教影像纪录与社会实践证明</div>
                     </div>
                     <div class="pt-4 flex flex-wrap gap-4">
-                        <button type="button" onclick="openBookingModal('申请报名：大凉山 3天2晚 音乐公益共修营 (¥4,000/人)')" class="rounded-full gradient-bg text-black px-8 py-3.5 text-xs font-black uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer">
+                        <button type="button" onclick="openBookingModal('申请报名：大凉山 3天2晚 音乐公益共修营 (欢迎来访或咨询)')" class="rounded-full gradient-bg text-black px-8 py-3.5 text-xs font-black uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer">
                             申请同行席位 / 咨询近期出团排期 &rarr;
                         </button>
                         <a href="./store/index.html" class="rounded-full border border-neutral-700 hover:border-momo-mint text-neutral-300 hover:text-white px-6 py-3.5 text-xs font-mono transition-all">
@@ -3060,28 +3060,28 @@ study_portfolio_showcase = '''
         <!-- 真实 24 轨同期作品集实录现场与舞台实景 -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 pb-16 border-b border-neutral-900">
             <div class="space-y-3">
-                <div class="text-xs font-mono text-momo-mint uppercase tracking-wider">// 欧洲音乐学院硕士申请实录案例 (24轨真乐队同期直录)</div>
+                <div class="text-xs font-mono text-momo-mint uppercase tracking-wider">// 棚内作品实录 (24轨真乐队同期)</div>
                 <div class="aspect-video bg-black rounded-xl overflow-hidden border border-neutral-800">
                     <video controls playsinline preload="metadata" class="w-full h-full object-cover">
                         <source src="./留学作品集/10月7日.mp4" type="video/mp4">
                     </video>
                 </div>
-                <p class="text-xs text-neutral-400">P&amp;R Studio 工业级 24 轨同期实录 · 零修音一次成型，满足欧美考官严苛声学审听标准。</p>
+                <p class="text-xs text-neutral-400">P&amp;R Studio 的 24 轨同期录音，把一次合奏留下来，方便之后反复听、继续改。</p>
             </div>
             <div class="space-y-3">
-                <div class="text-xs font-mono text-[#D4AF37] uppercase tracking-wider">// 欧洲交响与室内乐舞台视野 · 德奥公立免学费与英美名校双轨覆盖</div>
+                <div class="text-xs font-mono text-[#D4AF37] uppercase tracking-wider">// 舞台与室内乐视野</div>
                 <div class="aspect-video bg-black rounded-xl overflow-hidden border border-neutral-800">
                     <img src="./assets/images/gao_xin_stage_live.jpg" alt="高信博士欧洲舞台演出全景" class="w-full h-full object-cover">
                 </div>
-                <p class="text-xs text-neutral-400">直连奥地利、德国公立音乐学院及伯克利、NEC、英皇等欧美顶尖院校在职教授资源。</p>
+                <p class="text-xs text-neutral-400">高信博士的舞台经验，用来帮你听自己的声音。伯克利在这里只作为教学方法参考。</p>
             </div>
         </div>
 '''
 
 study_main_html = study_main_html.replace(old_study_right, new_study_right)
 study_main_html = study_main_html.replace(
-    "高信博士（管乐与和声学博士 · 升学首席学术顾问）",
-    "高信博士（奥地利格拉茨国立音乐与表演艺术大学博士 · 旅欧双簧管演奏家 · 升学首席学术顾问）"
+    "高信博士（管乐与和声学博士 · 作品与方向顾问）",
+    "高信博士（奥地利格拉茨国立音乐与表演艺术大学博士 · 旅欧双簧管演奏家 · 作品与方向顾问）"
 )
 study_main_html = study_main_html.replace(
     "<!-- 交付内容 5 大板块 -->",
@@ -3098,16 +3098,16 @@ study_script = '''
             e.preventDefault();
             const phone = document.getElementById('study-phone').value;
             if (typeof showToast === 'function') {
-                showToast('升学评估申请已受理！', '高信博士与 Timo 主理人将在 12 小时内联络您（' + phone + '）。');
+                showToast('面谈预约已收到。', '高信博士与 Timo 主理人将在 12 小时内联络您（' + phone + '）。');
             } else {
-                alert('升学评估申请已受理！高信博士与 Timo 主理人将在 12 小时内亲自联络您（' + phone + '）。');
+                alert('面谈预约已收到。高信博士与 Timo 主理人将在 12 小时内亲自联络您（' + phone + '）。');
             }
         }
     </script>
 '''
 
 study_html = (
-    build_head("音乐升学与海外名校留学规划专案 (¥38,800) | 高信博士领衔 · Momo")
+    build_head("作品积累与方向规划 (欢迎来访或咨询) | 高信博士领衔 · Momo")
     + render_apple_nav("./", active="study")
     + study_main_html
     + study_script
@@ -3156,7 +3156,7 @@ def upgrade_existing_subpage(filename: str, active_key: str, page_title: str):
 upgrade_existing_subpage(
     "membership.html",
     "membership",
-    "MOMO 家庭音乐会员 Plus (¥6,000/年) · 一人入会 全家共享",
+    "MOMO 家庭音乐会员 Plus (欢迎来访或咨询) · 一人入会 全家共享",
 )
 upgrade_existing_subpage(
     "spaces.html",

@@ -3,9 +3,9 @@
 Generate spaces.html:
 Includes:
 - 隐于成熟小区的私密声场：排练、会议、录音与 60㎡ 户外花园
-- 空间租用明码标价（琴房 80¥/h，乐队排练 200¥/h，乐队录音 500¥/h，会议沙龙 100¥/h，室内音乐会 500¥/场，全空间包场派对 2000¥/5h）
-- 乐器对外租用明码标价（架子鼓全套 1000¥/天，满氏木吉他 300¥/天，电吉他 300¥/天，电钢琴 300¥/天，低音贝斯 800¥/天，罗兰Cube音响 300¥/天）
-- 会员专享 5 折特权与优先锁档
+- 空间使用不在页面标金额，欢迎来访或咨询
+- 乐器使用不在页面标金额，欢迎来访或咨询
+- 会员专享 欢迎来访或咨询特权与优先锁档
 - 预约表单与客服
 """
 
@@ -107,8 +107,8 @@ def get_shared_footer(depth=0):
                     <h4 class="text-xs font-black uppercase tracking-widest text-neutral-400">核心生态与服务</h4>
                     <ul class="text-xs space-y-2 text-neutral-300">
                         <li><a href="{home_href}#offerings" class="hover:text-momo-cyan">产品与活动总览</a></li>
-                        <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (¥6,000)</a></li>
-                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">国际音乐留学规划 (¥38,800)</a></li>
+                        <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (欢迎来访或咨询)</a></li>
+                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">作品与方向 (欢迎来访或咨询)</a></li>
                         <li><a href="{space_href}" class="hover:text-momo-cyan">空间与乐器租用</a></li>
                         <li><a href="{store_href}" class="hover:text-momo-cyan">Momo 音乐美学商店</a></li>
                     </ul>
@@ -174,10 +174,10 @@ def build_spaces():
                     产品货架
                 </a>
                 <a href="./membership.html" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors">
-                    年费会员 PLUS (¥6,000)
+                    年费会员 PLUS (欢迎来访或咨询)
                 </a>
                 <a href="./study-abroad.html" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-[#D4AF37] transition-colors">
-                    留学规划 (¥38,800)
+                    作品与方向
                 </a>
                 <a href="./spaces.html" class="text-xs uppercase font-bold tracking-widest text-momo-mint font-mono">
                     空间与乐器租用
@@ -206,7 +206,7 @@ def build_spaces():
                     桐梓林空间位于成都市武侯区银都花园14栋2单元101，是一处隐秘于高端成熟居民小区内的私密独栋音乐沙龙。远离闹市喧嚣，拥有独立的中央吧台、专业声学隔音琴房与排练大厅，并独享 60 平方米私家庭院花园。
                 </p>
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-momo-mint/10 border border-momo-mint/30 rounded text-momo-mint text-xs font-mono">
-                    <span>★ Momo 家庭音乐年费会员特权：空间租用尊享 5 折优惠，全系乐器对外租借享专属会员价与优先锁档！</span>
+                    <span>空间与乐器如何使用，欢迎来访或咨询。</span>
                 </div>
             </div>
 
@@ -220,14 +220,14 @@ def build_spaces():
             </div>
         </div>
 
-        <!-- 空间场地租用明码标价 (6大类目) -->
+        <!-- 空间场地使用 (6大类目) -->
         <div class="mb-20">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-neutral-800">
                 <div>
                     <span class="text-xs font-mono text-momo-cyan uppercase tracking-widest">// VENUE RENTALS</span>
                     <h2 class="text-2xl sm:text-4xl font-black uppercase text-white mt-1">空间线下场地租用明细</h2>
                 </div>
-                <span class="text-xs font-mono text-neutral-400 mt-2 sm:mt-0">明码标价 · 微信一键预约档期</span>
+                <span class="text-xs font-mono text-neutral-400 mt-2 sm:mt-0">欢迎来访或咨询</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -240,12 +240,12 @@ def build_spaces():
                         </div>
                         <h3 class="text-xl font-black text-white mt-2">琴房日常练琴</h3>
                         <p class="text-xs text-neutral-400 mt-2 leading-relaxed">
-                            独立声学隔音舱，免受外界打扰。备有声学原声钢琴、Nord 电钢、吉他与监听耳机，适合个人练琴、考级自修与声乐开嗓。
+                            独立声学隔音舱，免受外界打扰。备有声学原声钢琴、Nord 电钢、吉他与监听耳机，适合个人练琴与声乐开嗓。
                         </p>
                     </div>
                     <div class="pt-6 border-t border-neutral-900 mt-6 flex items-baseline justify-between">
-                        <div class="text-3xl font-black font-mono text-white">¥80 <span class="text-xs font-normal text-neutral-400 font-sans">/ 小时</span></div>
-                        <span class="text-xs font-mono text-momo-mint font-bold">会员 5折 ¥40/h</span>
+                        <div class="text-3xl font-black text-white">欢迎来访或咨询</div>
+                        <span class="text-xs font-mono text-momo-mint font-bold">欢迎来访或咨询</span>
                     </div>
                 </div>
 
@@ -262,8 +262,8 @@ def build_spaces():
                         </p>
                     </div>
                     <div class="pt-6 border-t border-neutral-900 mt-6 flex items-baseline justify-between">
-                        <div class="text-3xl font-black font-mono text-white">¥200 <span class="text-xs font-normal text-neutral-400 font-sans">/ 小时</span></div>
-                        <span class="text-xs font-mono text-momo-mint font-bold">会员 5折 ¥100/h</span>
+                        <div class="text-3xl font-black text-white">欢迎来访或咨询</div>
+                        <span class="text-xs font-mono text-momo-mint font-bold">欢迎来访或咨询</span>
                     </div>
                 </div>
 
@@ -280,7 +280,7 @@ def build_spaces():
                         </p>
                     </div>
                     <div class="pt-6 border-t border-neutral-900 mt-6 flex items-baseline justify-between">
-                        <div class="text-3xl font-black font-mono text-[#D4AF37]">¥500 <span class="text-xs font-normal text-neutral-400 font-sans">/ 小时</span></div>
+                        <div class="text-3xl font-black text-white">欢迎来访或咨询</div>
                         <span class="text-xs font-mono text-neutral-400">含分轨工程文件导出</span>
                     </div>
                 </div>
@@ -298,8 +298,8 @@ def build_spaces():
                         </p>
                     </div>
                     <div class="pt-6 border-t border-neutral-900 mt-6 flex items-baseline justify-between">
-                        <div class="text-3xl font-black font-mono text-white">¥100 <span class="text-xs font-normal text-neutral-400 font-sans">/ 小时</span></div>
-                        <span class="text-xs font-mono text-momo-mint font-bold">会员 5折 ¥50/h</span>
+                        <div class="text-3xl font-black text-white">欢迎来访或咨询</div>
+                        <span class="text-xs font-mono text-momo-mint font-bold">欢迎来访或咨询</span>
                     </div>
                 </div>
 
@@ -316,7 +316,7 @@ def build_spaces():
                         </p>
                     </div>
                     <div class="pt-6 border-t border-neutral-900 mt-6 flex items-baseline justify-between">
-                        <div class="text-3xl font-black font-mono text-white">¥500 <span class="text-xs font-normal text-neutral-400 font-sans">/ 场</span></div>
+                        <div class="text-3xl font-black text-white">欢迎来访或咨询</div>
                         <span class="text-xs font-mono text-neutral-400">单场约 2.5 小时演展</span>
                     </div>
                 </div>
@@ -334,14 +334,14 @@ def build_spaces():
                         </p>
                     </div>
                     <div class="pt-6 border-t border-neutral-900 mt-6 flex items-baseline justify-between">
-                        <div class="text-3xl font-black font-mono text-momo-cyan">¥2,000 <span class="text-xs font-normal text-neutral-400 font-sans">/ 5小时</span></div>
+                        <div class="text-3xl font-black text-white">欢迎来访或咨询</div>
                         <span class="text-xs font-mono text-momo-mint font-bold">超值包场特权</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 专业乐器对外租用明码标价 (6大硬件) -->
+        <!-- 专业乐器使用 (6大硬件) -->
         <div class="mb-20">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-neutral-800">
                 <div>
@@ -360,7 +360,7 @@ def build_spaces():
                         经典 Gretsch 爵士/流行套鼓，配全套 Zildjian/Sabian 专业合金镲片、踩槌底鼓与稳固硬件支架，声音饱满，现场炸裂。
                     </p>
                     <div class="pt-4 border-t border-neutral-900 flex justify-between items-baseline">
-                        <span class="text-2xl font-black font-mono text-white">¥1,000 <span class="text-xs font-normal text-neutral-400">/ 天</span></span>
+                        <span class="text-2xl font-black text-white">欢迎来访或咨询</span>
                         <span class="text-xs font-mono text-neutral-500">押金随租随退</span>
                     </div>
                 </div>
@@ -373,7 +373,7 @@ def build_spaces():
                         独立制琴名家手工打造，精选全单云杉配玫瑰木背侧，低频沉稳通透，高频如水晶般温润，专为舞台指弹与高阶弹唱而备。
                     </p>
                     <div class="pt-4 border-t border-neutral-900 flex justify-between items-baseline">
-                        <span class="text-2xl font-black font-mono text-white">¥300 <span class="text-xs font-normal text-neutral-400">/ 天</span></span>
+                        <span class="text-2xl font-black text-white">欢迎来访或咨询</span>
                         <span class="text-xs font-mono text-neutral-500">含原装加厚琴包</span>
                     </div>
                 </div>
@@ -386,7 +386,7 @@ def build_spaces():
                         涵盖 Stratocaster / Les Paul 经典型号，弦距经过资深琴匠严谨调校，手感舒适，音色极具穿透力，适应摇滚、流行与现代爵士。
                     </p>
                     <div class="pt-4 border-t border-neutral-900 flex justify-between items-baseline">
-                        <span class="text-2xl font-black font-mono text-white">¥300 <span class="text-xs font-normal text-neutral-400">/ 天</span></span>
+                        <span class="text-2xl font-black text-white">欢迎来访或咨询</span>
                         <span class="text-xs font-mono text-neutral-500">含高品质音频线</span>
                     </div>
                 </div>
@@ -399,7 +399,7 @@ def build_spaces():
                         88 键全配重重锤琴键，逼真还原声学大三角钢琴手感，内置顶级古典钢琴与经典 Rhodes 复古电钢琴音色，配延音踏板与支架。
                     </p>
                     <div class="pt-4 border-t border-neutral-900 flex justify-between items-baseline">
-                        <span class="text-2xl font-black font-mono text-white">¥300 <span class="text-xs font-normal text-neutral-400">/ 天</span></span>
+                        <span class="text-2xl font-black text-white">欢迎来访或咨询</span>
                         <span class="text-xs font-mono text-neutral-500">含原装延音踏板</span>
                     </div>
                 </div>
@@ -412,7 +412,7 @@ def build_spaces():
                         提供稀缺的<strong>原声低音提琴 Double Bass（爵士/古典名琴）</strong>或 <strong>Fender 经典 Jazz Bass 电贝斯</strong>，经过声学拾音调校，低频雄浑扎实。
                     </p>
                     <div class="pt-4 border-t border-neutral-900 flex justify-between items-baseline">
-                        <span class="text-2xl font-black font-mono text-[#D4AF37]">¥800 <span class="text-xs font-normal text-neutral-400">/ 天</span></span>
+                        <span class="text-2xl font-black text-white">欢迎来访或咨询</span>
                         <span class="text-xs font-mono text-neutral-500">稀缺大师级专业低音</span>
                     </div>
                 </div>
@@ -425,7 +425,7 @@ def build_spaces():
                         街头巡演与移动展演的传奇设备！支持电池供电与交流电源，配备麦克风与乐器双通道独立混音，内置经典空间混响与和声效果。
                     </p>
                     <div class="pt-4 border-t border-neutral-900 flex justify-between items-baseline">
-                        <span class="text-2xl font-black font-mono text-white">¥300 <span class="text-xs font-normal text-neutral-400">/ 天</span></span>
+                        <span class="text-2xl font-black text-white">欢迎来访或咨询</span>
                         <span class="text-xs font-mono text-neutral-500">户外展演利器</span>
                     </div>
                 </div>
@@ -435,7 +435,7 @@ def build_spaces():
         <!-- 空间与乐器租用预约表单 -->
         <div class="max-w-2xl mx-auto brutalist-border bg-neutral-950 p-8 sm:p-12 mb-16">
             <h3 class="text-2xl font-black uppercase text-white text-center mb-2">预约空间场地或租借专业乐器</h3>
-            <p class="text-xs font-mono text-neutral-400 text-center mb-8">年费会员享受场地 5 折优惠与乐器租用优先保障</p>
+            <p class="text-xs font-mono text-neutral-400 text-center mb-8">场地与乐器安排，欢迎来访或咨询</p>
             <form onsubmit="handleSpaceForm(event)" class="space-y-4">
                 <div>
                     <label class="text-xs font-mono text-neutral-400 block mb-1">预约人称呼 / 乐队名称 *</label>
@@ -450,20 +450,20 @@ def build_spaces():
                         <label class="text-xs font-mono text-neutral-400 block mb-1">预约租用类目</label>
                         <select id="space-type" class="w-full bg-neutral-900 border border-neutral-800 px-3 py-3 text-xs text-white">
                             <optgroup label="—— 空间场地租用 ——">
-                                <option value="琴房练琴 (80¥/h)">琴房练琴 (80¥/h · 会员40¥/h)</option>
-                                <option value="乐队排练 (200¥/h)">乐队排练 (200¥/h · 会员100¥/h)</option>
-                                <option value="现场录音 (500¥/h)">乐队现场多轨录音 (500¥/h)</option>
-                                <option value="会议沙龙 (100¥/h)">企划会议 & 沙龙 (100¥/h)</option>
-                                <option value="室内音乐会 (500¥/场)">室内音乐会 (500¥/场)</option>
-                                <option value="全空间包场 (2000¥/5h)">全空间包场派对 (2,000¥/5h)</option>
+                                <option value="琴房练琴（欢迎来访或咨询）">琴房练琴（欢迎来访或咨询）</option>
+                                <option value="乐队排练（欢迎来访或咨询）">乐队排练（欢迎来访或咨询）</option>
+                                <option value="现场录音（欢迎来访或咨询）">乐队现场多轨录音（欢迎来访或咨询）</option>
+                                <option value="会议沙龙（欢迎来访或咨询）">企划会议与沙龙（欢迎来访或咨询）</option>
+                                <option value="室内音乐会（欢迎来访或咨询）">室内音乐会（欢迎来访或咨询）</option>
+                                <option value="全空间包场（欢迎来访或咨询）">全空间包场（欢迎来访或咨询）</option>
                             </optgroup>
                             <optgroup label="—— 专业乐器租用 ——">
-                                <option value="全套架子鼓 (1000¥/天)">全套架子鼓 (1,000¥/天)</option>
-                                <option value="满氏木吉他 (300¥/天)">满氏手工木吉他 (300¥/天)</option>
-                                <option value="经典电吉他 (300¥/天)">经典电吉他 (300¥/天)</option>
-                                <option value="专业电钢琴 (300¥/天)">专业舞台电钢琴 (300¥/天)</option>
-                                <option value="低音贝斯 (800¥/天)">低音贝斯 (800¥/天 · Double Bass/电贝斯)</option>
-                                <option value="罗兰Cube音响 (300¥/天)">罗兰 Roland Cube 音响 (300¥/天)</option>
+                                <option value="全套架子鼓（欢迎来访或咨询）">全套架子鼓（欢迎来访或咨询）</option>
+                                <option value="满氏木吉他（欢迎来访或咨询）">满氏手工木吉他（欢迎来访或咨询）</option>
+                                <option value="经典电吉他（欢迎来访或咨询）">经典电吉他（欢迎来访或咨询）</option>
+                                <option value="专业电钢琴（欢迎来访或咨询）">专业舞台电钢琴（欢迎来访或咨询）</option>
+                                <option value="低音贝斯（欢迎来访或咨询）">低音贝斯（欢迎来访或咨询）</option>
+                                <option value="罗兰Cube音响（欢迎来访或咨询）">罗兰 Roland Cube 音响（欢迎来访或咨询）</option>
                             </optgroup>
                         </select>
                     </div>
