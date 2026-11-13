@@ -108,7 +108,7 @@ def get_shared_footer(depth=0):
                     <ul class="text-xs space-y-2 text-neutral-300">
                         <li><a href="{home_href}#offerings" class="hover:text-momo-cyan">产品与活动总览</a></li>
                         <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (欢迎来访或咨询)</a></li>
-                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">国际音乐留学规划 (欢迎来访或咨询)</a></li>
+                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">作品与方向 (欢迎来访或咨询)</a></li>
                         <li><a href="{space_href}" class="hover:text-momo-cyan">空间与乐器租用</a></li>
                         <li><a href="{store_href}" class="hover:text-momo-cyan">Momo 音乐美学商店</a></li>
                     </ul>
@@ -177,7 +177,7 @@ def build_spaces():
                     年费会员 PLUS (欢迎来访或咨询)
                 </a>
                 <a href="./study-abroad.html" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-[#D4AF37] transition-colors">
-                    留学规划 (欢迎来访或咨询)
+                    作品与方向
                 </a>
                 <a href="./spaces.html" class="text-xs uppercase font-bold tracking-widest text-momo-mint font-mono">
                     空间与乐器租用

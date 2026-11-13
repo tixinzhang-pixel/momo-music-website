@@ -9,7 +9,7 @@ Comprehensive standalone pages:
 5. store/tote.html (乐手托特包)
 6. membership.html (家庭年费会员 Plus 2026 官方大页，含 4-on-1 同款高能卡片全集)
 7. ensemble-lab.html (4-on-1 职业乐队实验室专页)
-8. study-abroad.html (留学规划专案 欢迎来访或咨询)
+8. study-abroad.html (作品与方向)
 9. spaces.html (空间租用 6大项目 + 专业乐器租用 6大硬件全费率)
 """
 
@@ -115,7 +115,7 @@ def get_shared_header(current_page="home", depth=0):
                     <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-momo-cyan font-mono">欢迎来访或咨询</span>
                 </a>
                 <a href="{study_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
-                    <span>音乐留学规划</span>
+                    <span>作品与方向</span>
                     <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-[#D4AF37] font-mono">欢迎来访或咨询</span>
                 </a>
                 <a href="{space_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors flex items-center gap-1.5">
@@ -168,7 +168,7 @@ def get_shared_footer(depth=0):
                     <ul class="text-xs space-y-2 text-neutral-300">
                         <li><a href="{home_href}#offerings" class="hover:text-momo-cyan">产品与活动总览</a></li>
                         <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (欢迎来访或咨询)</a></li>
-                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">国际音乐留学规划 (欢迎来访或咨询)</a></li>
+                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">作品与方向 (欢迎来访或咨询)</a></li>
                         <li><a href="{space_href}" class="hover:text-momo-cyan">空间与乐器租用</a></li>
                         <li><a href="{store_href}" class="hover:text-momo-cyan">Momo 音乐美学商店</a></li>
                     </ul>

@@ -547,7 +547,7 @@ def render_apple_nav(prefix: str = "./", active: str = "home") -> str:
         ("curriculum", "通识与学科", f"{prefix}curriculum.html"),
         ("ensemble", "乐团合奏", f"{prefix}ensemble-lab.html"),
         ("faculty", "导师智库", f"{prefix}faculty.html"),
-        ("study", "名校规划", f"{prefix}study-abroad.html"),
+        ("study", "作品与方向", f"{prefix}study-abroad.html"),
         ("spaces", "共享空间", f"{prefix}spaces.html"),
         ("charity", "音乐公益", f"{prefix}charity.html"),
         ("store", "美学商店", f"{prefix}store/index.html"),
