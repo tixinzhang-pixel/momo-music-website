@@ -77,8 +77,8 @@ prominent_membership_section = '''
                         <!-- 卡片下方价格与保障标签 (清楚明了) -->
                         <div class="mt-6 text-center space-y-2">
                             <div class="flex items-baseline justify-center gap-2">
-                                <span class="text-4xl sm:text-5xl font-black text-white tracking-tight">¥6,000</span>
-                                <span class="text-xs sm:text-sm text-neutral-400 font-mono-code">/ 年 (约 ¥16.4/天)</span>
+                                <span class="text-4xl sm:text-5xl font-black text-white tracking-tight">欢迎来访或咨询</span>
+                                <span class="text-xs sm:text-sm text-neutral-400 font-mono-code">/ 年 (约 欢迎来访或咨询)</span>
                             </div>
                             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-500/30 text-[11px] text-emerald-300 font-medium">
                                 <span>★</span>
@@ -129,7 +129,7 @@ prominent_membership_section = '''
                         <div class="pt-4 flex flex-wrap items-center gap-4">
                             <button
                                 type="button"
-                                onclick="openBookingModal('申请 2026 Plus 家庭音乐年费会员 (¥6,000/年)')"
+                                onclick="openBookingModal('申请 2026 Plus 家庭音乐年费会员 (欢迎来访或咨询)')"
                                 class="px-8 py-3.5 rounded-full bg-white text-black font-extrabold text-xs sm:text-sm hover:bg-cyan-300 transition-all shadow-xl shadow-white/10 flex items-center gap-2 cursor-pointer"
                             >
                                 <span>立即申请入会席位</span>
@@ -174,7 +174,7 @@ track_a_cards = '''
                         </div>
                         <div class="p-3.5">
                             <h4 class="text-sm font-bold text-white">高信博士</h4>
-                            <p class="text-[11px] text-neutral-400 mt-0.5">管乐博士 · 升学学术总监</p>
+                            <p class="text-[11px] text-neutral-400 mt-0.5">管乐博士 · 作品与方向顾问</p>
                         </div>
                     </div>
                     <!-- 3. Joe Longardner -->
@@ -356,7 +356,7 @@ new_apple_home = f'''
                         <span class="bg-gradient-to-r from-cyan-300 via-emerald-300 to-amber-200 bg-clip-text text-transparent">让热爱自然发芽。</span>
                     </h1>
                     <p class="mt-3 text-xs sm:text-base text-neutral-200 font-light leading-relaxed max-w-lg">
-                        现代流行与爵士通识体系 · 家庭音乐教育 · 专业音乐升学规划
+                        现代流行与爵士通识体系 · 家庭音乐教育 · 作品积累与方向规划
                     </p>
                     <div class="mt-6 flex flex-wrap items-center gap-3">
                         <a href="./membership.html" class="px-6 py-2.5 rounded-full bg-white text-black font-bold text-xs hover:bg-cyan-300 transition-all shadow-lg flex items-center gap-1.5">
@@ -418,17 +418,17 @@ new_apple_home = f'''
                     </div>
                 </a>
 
-                <!-- 瓷砖 2: 音乐留学与升学 -->
+                <!-- 瓷砖 2: 作品积累与方向规划 -->
                 <a href="./study-abroad.html" class="spotlight-card rounded-3xl p-6 flex flex-col justify-between h-[300px] relative overflow-hidden group">
                     <img src="./assets/images/study_abroad_hero.jpg" alt="Study Abroad" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 group-hover:opacity-45 transition-all duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                     <div class="relative z-10">
                         <span class="text-[10px] font-mono-code uppercase tracking-[0.2em] text-cyan-400 font-bold">ACADEMIC &amp; CONSERVATORY</span>
-                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">音乐名校升学专案</h3>
-                        <p class="text-xs text-neutral-300 mt-1.5 line-clamp-2">高信博士领衔 · 德奥免学费公立 / 伯克利作品集实录。</p>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">作品积累与方向规划</h3>
+                        <p class="text-xs text-neutral-300 mt-1.5 line-clamp-2">高信博士一起听作品、排方向。教学方法参考伯克利现代音乐课程。</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">
-                        <span>查阅升学战绩</span>
+                        <span>听听作品</span>
                         <span>&rarr;</span>
                     </div>
                 </a>
@@ -440,7 +440,7 @@ new_apple_home = f'''
                     <div class="relative z-10">
                         <span class="text-[10px] font-mono-code uppercase tracking-[0.2em] text-cyan-400 font-bold">STUDIOS &amp; SPACES</span>
                         <h3 class="text-xl sm:text-2xl font-bold text-white mt-1">桐梓林与麓湖双空间</h3>
-                        <p class="text-xs text-neutral-300 mt-1.5 line-clamp-2">排练室 80-200¥/h · 60㎡ 花园与自然水岸声场。</p>
+                        <p class="text-xs text-neutral-300 mt-1.5 line-clamp-2">排练室、60㎡ 花园与自然水岸声场。欢迎来访或咨询。</p>
                     </div>
                     <div class="relative z-10 flex items-center justify-between text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">
                         <span>预约空间使用</span>
@@ -527,7 +527,7 @@ new_apple_home = f'''
                             为在 MOMO 研习的孩子与乐队添置专业旗舰舞台电钢、返听监听音箱、专业耳返与高品质录音器材，给学子提供世界一流的声场条件。
                         </p>
                         <div class="mt-4 p-3 rounded-2xl bg-black/40 border border-white/10 text-[11px] text-neutral-400 space-y-1 font-mono-code">
-                            <div>• 支持小额随喜 (¥100 / ¥200) 或任意金额全额认领</div>
+                            <div>• 如何支持，欢迎来访或咨询</div>
                             <div>• 款项定向注入乐器与声场器材采购</div>
                         </div>
                     </div>
@@ -579,11 +579,11 @@ new_apple_home = f'''
             <div class="max-w-3xl mx-auto p-4 rounded-2xl bg-black/60 border border-white/10 text-center">
                 <div class="text-[11px] font-mono-code text-emerald-400 font-bold mb-2">★ 感谢每一位同行者 · 历史支持芳名录</div>
                 <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-neutral-300 font-mono-code">
-                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">林先生 ¥2,000 (设备)</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">MOMO 会员家庭 ¥1,000 (奖学金)</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">匿名伙伴 ¥500 (设备)</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">陈女士 ¥200 (支教乐器)</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">张同学 ¥100 (教学耗材)</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">林先生（设备 · 欢迎来访或咨询）</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">MOMO 会员家庭（奖学金 · 欢迎来访或咨询）</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">匿名伙伴（设备 · 欢迎来访或咨询）</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">陈女士（支教乐器 · 欢迎来访或咨询）</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10">张同学（教学耗材 · 欢迎来访或咨询）</span>
                 </div>
             </div>
         </section>

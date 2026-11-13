@@ -9,7 +9,7 @@ Comprehensive standalone pages:
 5. store/tote.html (乐手托特包)
 6. membership.html (家庭年费会员 Plus 2026 官方大页，含 4-on-1 同款高能卡片全集)
 7. ensemble-lab.html (4-on-1 职业乐队实验室专页)
-8. study-abroad.html (留学规划专案 ¥38,800)
+8. study-abroad.html (留学规划专案 欢迎来访或咨询)
 9. spaces.html (空间租用 6大项目 + 专业乐器租用 6大硬件全费率)
 """
 
@@ -112,11 +112,11 @@ def get_shared_header(current_page="home", depth=0):
                 </a>
                 <a href="{mem_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors flex items-center gap-1.5">
                     <span>年费会员 PLUS</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-momo-cyan font-mono">¥6,000</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-momo-cyan font-mono">欢迎来访或咨询</span>
                 </a>
                 <a href="{study_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
                     <span>音乐留学规划</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-[#D4AF37] font-mono">¥38,800</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-[#D4AF37] font-mono">欢迎来访或咨询</span>
                 </a>
                 <a href="{space_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors flex items-center gap-1.5">
                     <span>空间与乐器租用</span>
@@ -167,8 +167,8 @@ def get_shared_footer(depth=0):
                     <h4 class="text-xs font-black uppercase tracking-widest text-neutral-400">核心生态与服务</h4>
                     <ul class="text-xs space-y-2 text-neutral-300">
                         <li><a href="{home_href}#offerings" class="hover:text-momo-cyan">产品与活动总览</a></li>
-                        <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (¥6,000)</a></li>
-                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">国际音乐留学规划 (¥38,800)</a></li>
+                        <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (欢迎来访或咨询)</a></li>
+                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">国际音乐留学规划 (欢迎来访或咨询)</a></li>
                         <li><a href="{space_href}" class="hover:text-momo-cyan">空间与乐器租用</a></li>
                         <li><a href="{store_href}" class="hover:text-momo-cyan">Momo 音乐美学商店</a></li>
                     </ul>
@@ -243,7 +243,7 @@ def build_store_index():
                 </div>
                 <div class="mt-8 flex flex-wrap items-center gap-4">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-momo-mint/10 border border-momo-mint/30 rounded text-momo-mint text-xs font-mono">
-                        <span>★ 家庭年费会员 Plus 特权：免费获赠 Momo 纯黑刺绣文化衫一件，全部周边享 9 折</span>
+                        <span>家庭会员可以聊到一件 Momo 纯黑刺绣文化衫。周边怎么取，欢迎来访或咨询</span>
                     </div>
                 </div>
             </div>
@@ -272,7 +272,7 @@ def build_store_index():
                     </p>
                 </div>
                 <div class="pt-5 border-t border-neutral-900 mt-5 flex items-center justify-between">
-                    <span class="text-2xl font-black font-mono text-white">¥260</span>
+                    <span class="text-2xl font-black font-mono text-white">欢迎来访或咨询</span>
                     <span class="text-xs font-mono text-momo-cyan group-hover:underline">查阅参数 & 购买 &rarr;</span>
                 </div>
             </a>
@@ -291,7 +291,7 @@ def build_store_index():
                     </p>
                 </div>
                 <div class="pt-5 border-t border-neutral-900 mt-5 flex items-center justify-between">
-                    <span class="text-2xl font-black font-mono text-white">¥180</span>
+                    <span class="text-2xl font-black font-mono text-white">欢迎来访或咨询</span>
                     <span class="text-xs font-mono text-momo-cyan group-hover:underline">查阅参数 & 购买 &rarr;</span>
                 </div>
             </a>
@@ -310,7 +310,7 @@ def build_store_index():
                     </p>
                 </div>
                 <div class="pt-5 border-t border-neutral-900 mt-5 flex items-center justify-between">
-                    <span class="text-2xl font-black font-mono text-white">¥88</span>
+                    <span class="text-2xl font-black font-mono text-white">欢迎来访或咨询</span>
                     <span class="text-xs font-mono text-momo-cyan group-hover:underline">查阅参数 & 购买 &rarr;</span>
                 </div>
             </a>
@@ -332,7 +332,7 @@ def build_store_index():
                     </p>
                 </div>
                 <div class="pt-5 border-t border-neutral-900 mt-5 flex items-center justify-between">
-                    <span class="text-2xl font-black font-mono text-white">¥320</span>
+                    <span class="text-2xl font-black font-mono text-white">欢迎来访或咨询</span>
                     <span class="text-xs font-mono text-momo-cyan group-hover:underline">查阅参数 & 购买 &rarr;</span>
                 </div>
             </a>
@@ -354,7 +354,7 @@ def build_product_pages():
             "file": "tshirt.html",
             "name": "MOMO 纯黑重磅刺绣文化衫",
             "category": "APPAREL 01 · 官方文化穿戴",
-            "price": "¥260",
+            "price": "欢迎来访或咨询",
             "isMemberFree": True,
             "img": "../assets/images/momo_tshirt_te_style.jpg",
             "tagline": "320g 高密精梳纯棉 · 巴黎世家微落肩版型 · 德机 12000 针同色暗黑刺绣",
@@ -366,14 +366,14 @@ def build_product_pages():
                 ("尺码选择", "S (适合 160-170cm) / M (适合 170-180cm) / L (适合 180cm+)"),
                 ("养护建议", "反面常温机洗，中温熨烫，不建议强力烘干")
             ],
-            "meaning": "这件文化衫的销售利润，将直接用于支持 Momo 青年乐队实验室的乐器损耗耗材补充，以及大凉山乡村小学音乐课堂的乐谱印制。成为 Momo 家庭音乐年费会员 Plus 更可直接免费获赠一件！"
+            "meaning": "这件文化衫和青年乐队的耗材、大凉山课堂的乐谱有关。怎么参与，欢迎来访或咨询。"
         },
         {
             "id": "picks",
             "file": "picks.html",
             "name": "纪念款赛璐珞吉他拨片黑锡盒",
             "category": "HARDWARE 03 · 乐手随行金属 EDC",
-            "price": "¥88",
+            "price": "欢迎来访或咨询",
             "isMemberFree": False,
             "img": "../assets/images/real_momo_picks_tin.jpg",
             "tagline": "消光磨砂马口铁盒 · 6枚定制赛璐珞拔片 · 爵士与扫弦硬度全包",
@@ -392,7 +392,7 @@ def build_product_pages():
             "file": "vinyl.html",
             "name": "现场实录限定黑胶声音集",
             "category": "VINYL 04 · 收藏级声音黑胶",
-            "price": "¥320",
+            "price": "欢迎来访或咨询",
             "isMemberFree": False,
             "img": "../assets/images/real_momo_vinyl.jpg",
             "tagline": "180g 重磅高保真黑胶 · 德国压片 · P&R Studio 24-bit 现场同期直录",
@@ -411,7 +411,7 @@ def build_product_pages():
             "file": "tote.html",
             "name": "乐手纯黑机能帆布托特包",
             "category": "ACCESSORY 02 · 乐手机能装备",
-            "price": "¥180",
+            "price": "欢迎来访或咨询",
             "isMemberFree": False,
             "img": "../assets/images/momo_merch_collection.jpg",
             "tagline": "16A 加密防泼水帆布 · 容纳 16寸电脑与乐谱大夹 · 独立拨片暗袋",
@@ -550,7 +550,7 @@ def build_study_abroad_page():
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN" class="dark scroll-smooth">
 <head>
-    <title>音乐升学与海外名校留学规划专案 (¥38,800) · 高信博士与艺术家团队交付 · Momo</title>
+    <title>作品积累与方向规划 | 高信博士与艺术家团队 · 成都Momo约书亚音乐工作坊</title>
     {COMMON_HEAD_DEFS}
 </head>
 <body class="bg-black text-white antialiased font-sans pt-24 selection:bg-momo-cyan selection:text-black">
@@ -559,24 +559,24 @@ def build_study_abroad_page():
     <main class="max-w-7xl mx-auto px-6 md:px-12 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16 pb-16 border-b border-neutral-900">
             <div class="lg:col-span-7 space-y-6">
-                <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#D4AF37] block">// GLOBAL CONSERVATORY PREPARATION</span>
+                <span class="text-xs font-mono font-bold uppercase tracking-widest text-[#D4AF37] block">// WORKS & DIRECTION</span>
                 <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">
-                    音乐升学与海外名校<br>
-                    <span class="text-[#D4AF37]">留学规划深度陪伴专案</span>
+                    作品积累<br>
+                    <span class="text-[#D4AF37]">与方向规划</span>
                 </h1>
                 <div class="flex items-baseline gap-4 pt-2">
-                    <span class="text-5xl font-black font-mono text-[#D4AF37]">¥38,800</span>
-                    <span class="text-sm font-mono text-neutral-400">/ 专案全程深度陪伴 (固定一口价 · 交付直至录取)</span>
+                    <span class="text-3xl sm:text-4xl font-black text-[#D4AF37]">欢迎来访或咨询</span>
+                    <span class="text-sm font-mono text-neutral-400">/ 当面聊聊作品与接下来的方向</span>
                 </div>
                 <p class="text-neutral-300 text-sm sm:text-base leading-relaxed">
-                    专为志在考取欧美顶尖音乐学院（伯克利 Berklee、英国皇家北方 RNCM、曼哈顿、德奥公立免学费体系）的学子量身定制。依托 Momo 音乐教育的坚实教学底盘，提供从能力评估、学术规划、海外教授对接、到作品集高精度多轨同期录制交付的一站式深度陪伴。
+                    成都Momo约书亚音乐工作坊陪你把正在做的曲子、合奏和棚内录音慢慢积累成可以反复听的作品，并一起梳理接下来想走的方向。教学方法参考伯克利现代音乐课程里重视听、唱、合奏与写作的做法。具体安排欢迎来访或咨询。
                 </p>
                 <div class="border-l-2 border-[#D4AF37] pl-5 py-2 space-y-2 bg-neutral-950 p-4">
                     <div class="text-white text-xs sm:text-sm font-bold">
                         ✦ 核心交付阵容：
                     </div>
                     <div class="text-neutral-300 text-xs sm:text-sm leading-relaxed">
-                        • <strong>学术领衔</strong>：高信博士（管乐与和声学博士 · 升学首席学术顾问）<br>
+                        • <strong>学术领衔</strong>：高信博士（管乐与和声学博士 · 作品与方向顾问）<br>
                         • <strong>交付底盘</strong>：Momo 13 位一线艺术家团队全程配合，完成专业课教学与乐队合奏支撑<br>
                         • <strong>品控跟进</strong>：品牌创始人 Timo 亲自参与并把控录音棚同期声像与最终作品集交付
                     </div>
@@ -594,41 +594,41 @@ def build_study_abroad_page():
         </div>
 
         <div class="mb-20">
-            <h2 class="text-2xl sm:text-3xl font-black uppercase text-white mb-10 text-center">专案深度交付五大模块 (¥38,800 包含内容)</h2>
+            <h2 class="text-2xl sm:text-3xl font-black uppercase text-white mb-10 text-center">作品积累与方向规划，我们一起做的五件事</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="brutalist-border bg-neutral-950 p-8 space-y-3">
                     <div class="text-xs font-mono text-[#D4AF37] font-bold">MODULE 01</div>
-                    <h3 class="text-lg font-bold text-white">专业能力精准测评与学术定标</h3>
+                    <h3 class="text-lg font-bold text-white">听听你现在的声音</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        高信博士一对一评估学员当前视唱练耳、和声学底盘、演奏基本功与即兴造诣，对齐欧美各大院校当季考纲与选拔偏好。
+                        高信博士和你一起听视唱、和声、演奏和即兴，看清作品现在的样子，以及下一步可以练什么。
                     </p>
                 </div>
                 <div class="brutalist-border bg-neutral-950 p-8 space-y-3">
                     <div class="text-xs font-mono text-[#D4AF37] font-bold">MODULE 02</div>
-                    <h3 class="text-lg font-bold text-white">全球院校梯队匹配与文书指引</h3>
+                    <h3 class="text-lg font-bold text-white">方向怎么排</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        结合家庭预算（英美私立高奖学金冲刺 vs 欧陆免学费公立体系），量身制定 3 梯队申请方案与个人音乐陈述（Personal Statement）精修。
+                        按你正在做的曲子和能投入的时间，一起排接下来几个月的作品和合奏。不列院校名单。具体安排欢迎来访或咨询。
                     </p>
                 </div>
                 <div class="brutalist-border bg-neutral-950 p-8 space-y-3">
                     <div class="text-xs font-mono text-[#D4AF37] font-bold">MODULE 03</div>
-                    <h3 class="text-lg font-bold text-white">海外教授网课与学术资源直连</h3>
+                    <h3 class="text-lg font-bold text-white">需要时向外请教</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        协助直接连线目标海外院校在职系主任与教授进行在线 MasterClass 诊断，获取一手推荐评估与录取前置沟通。
+                        若你希望听听外面老师怎么说，我们可以协助约一次交流。交流用来改作品。
                     </p>
                 </div>
                 <div class="brutalist-border bg-neutral-950 p-8 space-y-3">
                     <div class="text-xs font-mono text-[#D4AF37] font-bold">MODULE 04</div>
-                    <h3 class="text-lg font-bold text-white">Momo 艺术家团队高强度陪练与合奏</h3>
+                    <h3 class="text-lg font-bold text-white">和乐队把作品练出来</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        依托 Momo 真实乐队底盘，4位艺术家老师进场陪同排练，解决考生单独练琴缺乏合奏呼吸感与节奏律动死板的致命短板。
+                        依托工作室的真实乐队，几位艺术家老师进排练，把合奏的呼吸和律动放进作品里。
                     </p>
                 </div>
                 <div class="brutalist-border bg-neutral-950 p-8 space-y-3">
                     <div class="text-xs font-mono text-[#D4AF37] font-bold">MODULE 05</div>
-                    <h3 class="text-lg font-bold text-white">P&amp;R Studio 24轨录音棚作品集实录</h3>
+                    <h3 class="text-lg font-bold text-white">进棚把作品录下来</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        由首席制作人与 Timo 亲自主理，提供工业级 4K 多机位与 24 轨录音棚现场录音直出，制作符合国际考官严苛声学标准的作品集母带。
+                        由制作人与创始人 Timo 一起，在录音棚完成多轨现场录音，留下可以反复听、可以继续改的作品。
                     </p>
                 </div>
                 <div class="brutalist-border bg-neutral-950 p-8 space-y-3 flex flex-col justify-between">
@@ -636,22 +636,22 @@ def build_study_abroad_page():
                         <div class="text-xs font-mono text-momo-mint font-bold">GUARANTEE</div>
                         <h3 class="text-lg font-bold text-white">透明合同 · 全程陪伴</h3>
                         <p class="text-xs text-neutral-400 leading-relaxed">
-                            所有条款签订正规法律服务协议，无任何后期隐形捆绑收费。
+                            过程怎么安排，欢迎来访或咨询，当面把步骤说清楚。
                         </p>
                     </div>
                     <button type="button" onclick="document.getElementById('study-apply').scrollIntoView({{behavior:'smooth'}})" class="w-full gradient-bg text-black py-2.5 font-bold text-xs uppercase tracking-wider">
-                        预约高信博士与 Timo 面谈评估 &rarr;
+                        欢迎来访或咨询 &rarr;
                     </button>
                 </div>
             </div>
         </div>
 
         <div id="study-apply" class="max-w-2xl mx-auto brutalist-border bg-[#0d0d0d] p-8 sm:p-12 mb-16">
-            <h3 class="text-2xl font-black uppercase text-white text-center mb-2">预约 1对1 升学评估面谈</h3>
-            <p class="text-xs font-mono text-neutral-400 text-center mb-8">我们将安排高信博士与 Timo 创始人亲自与考生及家长进行面对面沟通</p>
+            <h3 class="text-2xl font-black uppercase text-white text-center mb-2">预约一次作品与方向的面谈</h3>
+            <p class="text-xs font-mono text-neutral-400 text-center mb-8">成都Momo约书亚音乐工作坊会安排高信博士与创始人 Timo，和你以及家人当面聊聊正在做的作品</p>
             <form onsubmit="handleStudyForm(event)" class="space-y-4">
                 <div>
-                    <label class="text-xs font-mono text-neutral-400 block mb-1">考生与家长姓名 *</label>
+                    <label class="text-xs font-mono text-neutral-400 block mb-1">你与家人的称呼 *</label>
                     <input type="text" id="study-name" required placeholder="如：张同学与父亲" class="w-full bg-neutral-900 border border-neutral-800 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
                 </div>
                 <div>
@@ -659,11 +659,11 @@ def build_study_abroad_page():
                     <input type="text" id="study-phone" required placeholder="如：13800000000 (微信同号)" class="w-full bg-neutral-900 border border-neutral-800 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
                 </div>
                 <div>
-                    <label class="text-xs font-mono text-neutral-400 block mb-1">主修专业与意向国家院校</label>
-                    <input type="text" id="study-target" placeholder="如：爵士萨克斯 / 伯克利与英皇 / 预计 2027 入学" class="w-full bg-neutral-900 border border-neutral-800 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
+                    <label class="text-xs font-mono text-neutral-400 block mb-1">正在做的作品与想聊的方向</label>
+                    <input type="text" id="study-target" placeholder="如：爵士萨克斯 / 想先把三首曲子录下来" class="w-full bg-neutral-900 border border-neutral-800 px-4 py-3 text-xs text-white focus:outline-none focus:border-[#D4AF37]">
                 </div>
                 <button type="submit" class="w-full bg-[#D4AF37] text-black py-4 font-black text-xs uppercase tracking-wider hover:opacity-90">
-                    提交升学评估预约申请 &rarr;
+                    提交面谈预约 &rarr;
                 </button>
             </form>
         </div>
@@ -673,7 +673,7 @@ def build_study_abroad_page():
         function handleStudyForm(e) {{
             e.preventDefault();
             const phone = document.getElementById('study-phone').value;
-            alert('升学评估申请已受理！高信博士与 Timo 主理人将在 12 小时内亲自联络您（' + phone + '），为您安排专属作品集诊断会议。');
+            alert('面谈预约已收到。高信博士与 Timo 主理人将在 12 小时内亲自联络您（' + phone + '），为您安排专属作品集诊断会议。');
         }}
     </script>
 
