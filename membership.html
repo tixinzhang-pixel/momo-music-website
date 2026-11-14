@@ -465,6 +465,24 @@
             box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
         }
 
+        
+        /* 风格卡片机声波跳杆 */
+        .wave-bar {
+            width: 3px;
+            height: 5px;
+            background: #22d3ee;
+            border-radius: 2px;
+            transition: height 0.15s ease;
+        }
+        .sound-wave-active .wave-bar:nth-child(1) { animation: eqPulse 0.45s ease infinite alternate; }
+        .sound-wave-active .wave-bar:nth-child(2) { animation: eqPulse 0.65s ease infinite alternate 0.1s; }
+        .sound-wave-active .wave-bar:nth-child(3) { animation: eqPulse 0.40s ease infinite alternate 0.2s; }
+        .sound-wave-active .wave-bar:nth-child(4) { animation: eqPulse 0.60s ease infinite alternate 0.15s; }
+        .sound-wave-active .wave-bar:nth-child(5) { animation: eqPulse 0.50s ease infinite alternate 0.25s; }
+        .sound-wave-active .wave-bar:nth-child(6) { animation: eqPulse 0.70s ease infinite alternate 0.05s; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         /* Apple.com Flagship Storefront Refinements */
         .apple-nav-glass {
             background: rgba(8, 8, 10, 0.82);

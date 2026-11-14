@@ -465,6 +465,24 @@
             box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
         }
 
+        
+        /* 风格卡片机声波跳杆 */
+        .wave-bar {
+            width: 3px;
+            height: 5px;
+            background: #22d3ee;
+            border-radius: 2px;
+            transition: height 0.15s ease;
+        }
+        .sound-wave-active .wave-bar:nth-child(1) { animation: eqPulse 0.45s ease infinite alternate; }
+        .sound-wave-active .wave-bar:nth-child(2) { animation: eqPulse 0.65s ease infinite alternate 0.1s; }
+        .sound-wave-active .wave-bar:nth-child(3) { animation: eqPulse 0.40s ease infinite alternate 0.2s; }
+        .sound-wave-active .wave-bar:nth-child(4) { animation: eqPulse 0.60s ease infinite alternate 0.15s; }
+        .sound-wave-active .wave-bar:nth-child(5) { animation: eqPulse 0.50s ease infinite alternate 0.25s; }
+        .sound-wave-active .wave-bar:nth-child(6) { animation: eqPulse 0.70s ease infinite alternate 0.05s; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
         /* Apple.com Flagship Storefront Refinements */
         .apple-nav-glass {
             background: rgba(8, 8, 10, 0.82);
@@ -991,22 +1009,22 @@
 
                 <!-- 风格胶囊标签栏 (清楚切换，可横向轻滑) -->
                 <div class="flex items-center gap-2 overflow-x-auto py-2 no-scrollbar" id="style-tabs-list">
-                    <button type="button" onclick="selectStyleCard(0)" class="style-tab-pill active px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-white text-black shadow">
+                    <button type="button" onclick="selectStyleCard(0)" class="style-tab-pill active px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-white text-black shadow shrink-0">
                         01 Swing 摇摆
                     </button>
-                    <button type="button" onclick="selectStyleCard(1)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800">
+                    <button type="button" onclick="selectStyleCard(1)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800 shrink-0">
                         02 Bebop 波普
                     </button>
-                    <button type="button" onclick="selectStyleCard(2)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800">
+                    <button type="button" onclick="selectStyleCard(2)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800 shrink-0">
                         03 Blues 德州布鲁斯
                     </button>
-                    <button type="button" onclick="selectStyleCard(3)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800">
+                    <button type="button" onclick="selectStyleCard(3)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800 shrink-0">
                         04 Hard Rock 硬摇滚
                     </button>
-                    <button type="button" onclick="selectStyleCard(4)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800">
+                    <button type="button" onclick="selectStyleCard(4)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800 shrink-0">
                         05 Bossa Nova 波萨
                     </button>
-                    <button type="button" onclick="selectStyleCard(5)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800">
+                    <button type="button" onclick="selectStyleCard(5)" class="style-tab-pill px-3.5 py-1.5 rounded-full text-xs font-mono-code font-bold transition-all bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800 shrink-0">
                         06 Pop &amp; Funk 放克
                     </button>
                 </div>
