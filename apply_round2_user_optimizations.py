@@ -27,7 +27,7 @@ code = code.replace("102 · Momo 国际爵士音乐夏令营", "Momo 国际爵�
 code = code.replace("102·Momo 国际爵士音乐夏令营", "Momo 国际爵士音乐夏令营")
 code = code.replace("102·Momo 国际爵士夏令营", "Momo 国际爵士夏令营")
 code = code.replace("申请【102·Momo 国际爵士夏令营】Audition 考核", "申请【Momo 国际爵士夏令营】Audition 考核")
-code = code.replace("102·Momo 国际爵士音乐夏令营 (Audition录取制)", "Momo 国际爵士音乐夏令营 (Audition录取制)")
+code = code.replace("Momo 国际爵士音乐夏令营（欢迎来预约了解）", "Momo 国际爵士音乐夏令营（欢迎来预约了解）")
 code = code.replace("102·Momo 国际爵士夏令营", "Momo 国际爵士夏令营")
 
 # ---------------------------------------------------------------------------

@@ -7,20 +7,20 @@ Generate membership.html and ensemble-lab.html:
    - Philosophy statement (因为音乐需要大家一起玩起来)
    - 「会员包含的核心实战项目与尊享权益大赏」:
      Uses the exact brutalist card format from Timo's screenshot:
-     #01 4-on-1 职业乐队实验室 (¥400/30min 或 会员直接划扣1次额度)
-     #02 3-7岁 全家庭周末合奏包 (400¥/45min 或 会员直接划扣)
+     #01 4-on-1 职业乐队实验室 (欢迎来访或咨询 或 会员直接划扣1次额度)
+     #02 3-7岁 全家庭周末合奏包 (欢迎来访或咨询 或 会员直接划扣)
      #03 P&R Studio 24轨现场唱片级录制 (仅耗 1 次课时)
      #04 城市真实舞台通行证 (城市公共音乐专案 · 非内卷选拔 · 自然登台)
      #05 3次 全年家庭音乐成长与教育规划深度诊断 (3小时面对面)
-     #06 城市音乐共享空间与琴房 5 折特权 (琴房40/h, 排练100/h, 录音250/h)
-     #07 会员专属礼遇：MOMO 纯黑刺绣重磅文化衫 (免费赠送 · 标价¥260)
+     #06 城市音乐共享空间与琴房 (琴房40/h, 排练100/h, 录音250/h)
+     #07 会员专属礼遇：MOMO 纯黑刺绣重磅文化衫 (免费赠送 · 标价欢迎来访或咨询)
    - 2026 Plus 五大核心保障
    - 入会预约申请表单 + 7天无理由退款承诺 + FAQ
 2. ensemble-lab.html:
    - Dedicated deep-dive page for 4-on-1 职业乐队实验室
    - Real recording studio photography (real_ensemble_rehearsal.jpg)
    - Band rhythm section breakdown (鼓手、贝斯、吉他、键盘)
-   - Dual-track access: 单次体验 ¥400/30min vs 年费会员 ¥6,000 划扣
+   - Dual-track access: 单次体验 欢迎来访或咨询 vs 年费会员 欢迎来访或咨询划扣
    - Direct seat reservation form
 """
 
@@ -121,11 +121,11 @@ def get_shared_header(current_page="membership", depth=0):
                 </a>
                 <a href="{mem_href}" class="text-xs uppercase font-bold tracking-widest {'text-momo-cyan' if current_page=='membership' else 'text-neutral-300'} hover:text-momo-cyan transition-colors flex items-center gap-1.5">
                     <span>年费会员 PLUS</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-momo-cyan font-mono">¥6,000</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-momo-cyan font-mono">欢迎来访或咨询</span>
                 </a>
                 <a href="{study_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-[#D4AF37] transition-colors flex items-center gap-1.5">
-                    <span>音乐留学规划</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-[#D4AF37] font-mono">¥38,800</span>
+                    <span>作品与方向</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-[#D4AF37] font-mono">欢迎来访或咨询</span>
                 </a>
                 <a href="{space_href}" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors flex items-center gap-1.5">
                     <span>空间与乐器租用</span>
@@ -176,8 +176,8 @@ def get_shared_footer(depth=0):
                     <h4 class="text-xs font-black uppercase tracking-widest text-neutral-400">核心生态与服务</h4>
                     <ul class="text-xs space-y-2 text-neutral-300">
                         <li><a href="{home_href}#offerings" class="hover:text-momo-cyan">产品与活动总览</a></li>
-                        <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (¥6,000)</a></li>
-                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">国际音乐留学规划 (¥38,800)</a></li>
+                        <li><a href="{mem_href}" class="hover:text-momo-cyan text-momo-mint font-bold">家庭年费会员 Plus (欢迎来访或咨询)</a></li>
+                        <li><a href="{study_href}" class="hover:text-[#D4AF37] text-[#D4AF37] font-bold">作品与方向 (欢迎来访或咨询)</a></li>
                         <li><a href="{space_href}" class="hover:text-momo-cyan">空间与乐器租用</a></li>
                         <li><a href="{store_href}" class="hover:text-momo-cyan">Momo 音乐美学商店</a></li>
                     </ul>
@@ -242,15 +242,15 @@ def build_membership_page():
                     音乐从来不是靠独自机械堆砌课时学出来的——<strong>因为音乐的本质，最终是需要大家一起玩起来的。</strong>
                 </p>
                 <p class="text-neutral-400 text-xs sm:text-sm leading-relaxed">
-                    通过成为我们的年费会员，可以非常顺畅地让我们为您调动起全工作室的艺术家老师、排练与合奏实验室，以及我们持续推出的创新音乐产品，带着大家一起把音乐鲜活地玩起来，形成一个长期浸润的教育环境。加入我们，不仅对您自己的家庭成长有益，更能汇聚成滋养整个平台与社群的力量——<strong>每个人只要稍微投入一点，最终不仅能收获自己的音乐成果，更能带动整个平台所有的师资、舞台与社群资源为大家所用。</strong>因此，这 ¥6,000 元所开启的，绝对是远远超越 ¥6,000 元本身的长期价值。
+                    通过成为我们的年费会员，可以非常顺畅地让我们为您调动起全工作室的艺术家老师、排练与合奏实验室，以及我们持续推出的创新音乐产品，带着大家一起把音乐鲜活地玩起来，形成一个长期浸润的教育环境。加入我们，不仅对您自己的家庭成长有益，更能汇聚成滋养整个平台与社群的力量——<strong>每个人只要稍微投入一点，最终不仅能收获自己的音乐成果，更能带动整个平台所有的师资、舞台与社群资源为大家所用。</strong>因此，这份会员所开启的，是长期在一起做音乐。具体安排欢迎来访或咨询。
                 </p>
                 <div class="flex items-baseline gap-4 pt-4">
-                    <span class="text-5xl font-black font-mono text-white">¥6,000</span>
-                    <span class="text-sm font-mono text-neutral-400">/ 年 (365天有效 · 一人缴费全家共用)</span>
+                    <span class="text-3xl sm:text-4xl font-black text-white">欢迎来访或咨询</span>
+                    <span class="text-sm font-mono text-neutral-400">一人入会，全家一起用</span>
                 </div>
                 <div class="text-xs text-momo-mint font-semibold flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-momo-mint animate-pulse"></span>
-                    <span>折合每天仅约 ¥16.4 · 调动全平台艺术家导师、月度合奏舞台与专属家庭智囊团</span>
+                    <span>调动全平台艺术家导师、月度合奏舞台与专属家庭智囊团 · 欢迎来访或咨询</span>
                 </div>
                 <div class="pt-4 flex flex-wrap gap-4">
                     <a href="#signature-gallery" class="px-6 py-3.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-white font-mono text-xs uppercase tracking-wider transition-all">
@@ -291,7 +291,7 @@ def build_membership_page():
                     </h2>
                 </div>
                 <p class="mt-4 md:mt-0 text-xs sm:text-sm font-mono text-neutral-400 max-w-md">
-                    以下所有先锋实战与空间权益，全部无缝接入 ¥6,000 年费会员体系，支持课时自由划扣或专享会员折扣。
+                    下面这些合奏、录音和空间，都在会员里一起安排。具体怎么用，欢迎来访或咨询。
                 </p>
             </div>
 
@@ -321,14 +321,14 @@ def build_membership_page():
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
                             <div class="text-neutral-300">• 适用：流行主唱 / 电吉他 / 贝斯 / 鼓手实战</div>
                             <div class="text-momo-mint font-bold">• 会员权益：直接划扣 1 次课时额度</div>
-                            <div class="text-neutral-500 text-[11px]">• 非会员单次：¥400 / 30min</div>
+                            <div class="text-neutral-500 text-[11px]">• 单次安排：欢迎来访或咨询</div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-4 border-t border-neutral-900 flex items-baseline justify-between bg-black/40">
                         <div>
                             <span class="text-2xl font-black font-mono text-white">划扣 1 课时</span>
-                            <span class="text-[11px] text-neutral-400 font-mono"> / 或 ¥400/30min</span>
+                            <span class="text-[11px] text-neutral-400 font-mono"></span>
                         </div>
                         <div class="flex items-center gap-2">
                             <a href="./ensemble-lab.html" class="text-xs font-mono text-momo-cyan hover:underline">
@@ -361,14 +361,14 @@ def build_membership_page():
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
                             <div class="text-neutral-300">• 适用：3-7岁幼儿家庭 / 亲子双向声部启蒙</div>
                             <div class="text-momo-mint font-bold">• 会员权益：直接划扣 1 次课时额度</div>
-                            <div class="text-neutral-500 text-[11px]">• 非会员单次：¥400 / 45min</div>
+                            <div class="text-neutral-500 text-[11px]">• 单次安排：欢迎来访或咨询</div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-4 border-t border-neutral-900 flex items-baseline justify-between bg-black/40">
                         <div>
                             <span class="text-2xl font-black font-mono text-white">划扣 1 课时</span>
-                            <span class="text-[11px] text-neutral-400 font-mono"> / 或 ¥400/45min</span>
+                            <span class="text-[11px] text-neutral-400 font-mono"></span>
                         </div>
                         <a href="#apply-form" class="text-xs font-mono text-momo-mint hover:underline">
                             预约周末合奏 &rarr;
@@ -399,7 +399,7 @@ def build_membership_page():
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
                             <div class="text-neutral-300">• 产出：高保真 24-bit 现场母带分轨 + 混音档案</div>
                             <div class="text-momo-mint font-bold">• 会员超值礼遇：仅需消耗 1 次常规会员课时</div>
-                            <div class="text-neutral-500 text-[11px]">• 市场同等标准棚费与乐手费通常高达数千元</div>
+                            <div class="text-neutral-500 text-[11px]">• 棚内录音怎么安排，欢迎来访或咨询</div>
                         </div>
                     </div>
 
@@ -470,19 +470,19 @@ def build_membership_page():
                             家庭音乐成长深度诊断 (3次)
                         </h3>
                         <p class="text-xs text-neutral-400 mt-2.5 leading-relaxed">
-                            由主理人 Timo 与资深音乐教育导师提供全年 3 次深度面对面诊断会议（共 3 小时）。量身定制家庭音乐声场、乐器选购、国内外升学方向与阶段性合奏目标。
+                            由主理人 Timo 与资深音乐教育导师提供全年 3 次深度面对面诊断会议（共 3 小时）。量身定制家庭音乐声场、乐器选购、接下来的方向与阶段性合奏目标。
                         </p>
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
                             <div class="text-neutral-300">• 形式：线上/线下桐梓林花园私享沙龙面对面</div>
                             <div class="text-momo-mint font-bold">• 会员权益：年费包含 3 次深度诊断 (共3小时)</div>
-                            <div class="text-neutral-500 text-[11px]">• 单独咨询市场价：¥1,000 / 小时</div>
+                            <div class="text-neutral-500 text-[11px]">• 单独咨询：欢迎来访或咨询</div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-4 border-t border-neutral-900 flex items-baseline justify-between bg-black/40">
                         <div>
                             <span class="text-2xl font-black font-mono text-white">会员包含</span>
-                            <span class="text-[11px] text-neutral-400 font-mono"> (价值 ¥3,000)</span>
+                            <span class="text-[11px] text-neutral-400 font-mono"> </span>
                         </div>
                         <a href="#apply-form" class="text-xs font-mono text-momo-mint hover:underline">
                             预约本季度亲诊 &rarr;
@@ -490,7 +490,7 @@ def build_membership_page():
                     </div>
                 </div>
 
-                <!-- 06. 城市音乐共享空间与琴房 5 折特权 -->
+                <!-- 06. 城市音乐共享空间与琴房 -->
                 <div class="brutalist-border bg-[#0b0b0d] flex flex-col justify-between relative group hover:border-momo-cyan transition-all">
                     <div class="absolute top-0 right-0 bg-neutral-900 border-l border-b border-neutral-800 text-neutral-300 font-mono text-[10px] px-3.5 py-1.5 uppercase tracking-widest z-10">
                         #06 SPACES PRIVILEGE
@@ -505,21 +505,21 @@ def build_membership_page():
 
                         <div class="text-xs font-mono text-momo-cyan uppercase tracking-widest font-bold">VENUE DISCOUNT</div>
                         <h3 class="text-2xl font-black text-white mt-1 group-hover:text-momo-cyan transition-colors">
-                            共享空间与乐器 5 折特权
+                            共享空间与乐器
                         </h3>
                         <p class="text-xs text-neutral-400 mt-2.5 leading-relaxed">
-                            隐于成熟小区的私密声场，自带中央咖啡吧台与 60㎡ 阳光私家花园。会员享所有场地与乐器租借统一 5 折结算，并享周末热门黄金档优先锁档特权。
+                            隐于成熟小区的私密声场，自带中央咖啡吧台与 60㎡ 阳光私家花园。场地与乐器如何使用，欢迎来访或咨询。
                         </p>
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
-                            <div class="text-neutral-300">• 琴房练琴：会员 <strong>¥40/h</strong> (对外 ¥80/h)</div>
-                            <div class="text-neutral-300">• 乐队排练：会员 <strong>¥100/h</strong> (对外 ¥200/h)</div>
+                            <div class="text-neutral-300">• 琴房练琴：欢迎来访或咨询</div>
+                            <div class="text-neutral-300">• 乐队排练：欢迎来访或咨询</div>
                             <div class="text-momo-mint font-bold">• 录音棚/会议/包场派对/乐器租用全部半价</div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-4 border-t border-neutral-900 flex items-baseline justify-between bg-black/40">
                         <div>
-                            <span class="text-2xl font-black font-mono text-white">全线 5 折</span>
+                            <span class="text-2xl font-black font-mono text-white">欢迎来访或咨询</span>
                             <span class="text-[11px] text-neutral-400 font-mono"> + 优先锁档</span>
                         </div>
                         <a href="./spaces.html" class="text-xs font-mono text-momo-cyan hover:underline">
@@ -546,19 +546,19 @@ def build_membership_page():
                             MOMO 纯黑刺绣重磅文化衫
                         </h3>
                         <p class="text-xs text-neutral-400 mt-2.5 leading-relaxed">
-                            成为会员，即赠送一件 MOMO 纯黑限定文化衫（标价 ¥260）。选用特选 280g 重磅有机精梳棉，胸前哑光低调刺绣 MOMO 盾徽，兼具乐手排练与日常出街美学。
+                            会员里可以聊到一件 MOMO 纯黑限定文化衫。选用 280g 重磅有机精梳棉，胸前哑光刺绣 MOMO 盾徽。具体安排欢迎来访或咨询。
                         </p>
                         <div class="mt-4 text-xs font-mono space-y-1.5 pt-3 border-t border-neutral-900">
                             <div class="text-neutral-300">• 材质：280g 重磅双纱有机棉 / 微落肩版型</div>
                             <div class="text-momo-mint font-bold">• 会员礼遇：开卡即赠一件（自选尺码）</div>
-                            <div class="text-neutral-500 text-[11px]">• 亦可在 Momo 音乐美学商店单买（¥260）</div>
+                            <div class="text-neutral-500 text-[11px]">• 商店怎么取，欢迎来访或咨询</div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-4 border-t border-neutral-900 flex items-baseline justify-between bg-black/40">
                         <div>
                             <span class="text-2xl font-black font-mono text-white">入会免费赠送</span>
-                            <span class="text-[11px] text-neutral-400 font-mono"> (价值 ¥260)</span>
+                            <span class="text-[11px] text-neutral-400 font-mono"> </span>
                         </div>
                         <a href="./store/tshirt.html" class="text-xs font-mono text-white hover:underline">
                             文化衫详情 &rarr;
@@ -595,7 +595,7 @@ def build_membership_page():
                     <div class="text-xs font-mono font-black text-momo-mint border border-neutral-800 bg-neutral-900 px-2 py-1 inline-block">02</div>
                     <h3 class="text-lg font-bold text-white">3 次 全年家庭音乐成长与教育规划深度诊断</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        共 3 小时深度咨询。由主理人 Timo 与资深音乐教育规划导师提供 1对1 深度规划会议，量身定制家庭音乐氛围搭建、乐器配置、国内外升学方向与阶段性合奏目标。
+                        共 3 小时深度咨询。由主理人 Timo 与资深音乐教育规划导师提供 1对1 深度规划会议，量身定制家庭音乐氛围搭建、乐器配置、接下来的方向与阶段性合奏目标。
                     </p>
                     <div class="text-[11px] font-mono text-neutral-400 pt-2 border-t border-neutral-900">
                         精准切中痛点，避免家庭走弯路、花冤枉钱。
@@ -643,7 +643,7 @@ def build_membership_page():
                     <div class="text-xs font-mono font-black text-white border border-neutral-800 bg-neutral-900 px-2 py-1 inline-block">06 · 赠品与保障</div>
                     <h3 class="text-lg font-bold text-white">赠送文化衫 + 7天安心退费</h3>
                     <p class="text-xs text-neutral-400 leading-relaxed">
-                        入会即赠送 MOMO 纯黑重磅刺绣文化衫一件（标价 ¥260）。同时享有 <strong>7 天冷静期全额退费保障</strong>：开通后 7 天内若感到理念不合或体验不适，无隐形门槛全额退费。
+                        入会时可以聊到一件 MOMO 纯黑重磅刺绣文化衫。同时保留 <strong>7 天冷静期</strong>：开通后 7 天内若感到理念不合，欢迎直接说。具体安排欢迎来访或咨询。
                     </p>
                     <div class="text-[11px] font-mono text-white pt-2 border-t border-neutral-900">
                         真实信赖始于坦荡透明 · 365天长效陪伴。
@@ -658,7 +658,7 @@ def build_membership_page():
                 <span class="text-xs font-mono uppercase tracking-widest text-momo-cyan">// JOIN MOMO FAMILY</span>
                 <h3 class="text-2xl font-black uppercase text-white mt-1">申请开通 2026 Plus 家庭会员</h3>
                 <p class="text-xs font-mono text-neutral-400 mt-2">
-                    ¥6,000/年 · 365天全家共享 · 主理人 Timo 亲自主理交付
+                    全家一起使用 · 主理人 Timo 当面说明 · 欢迎来访或咨询
                 </p>
             </div>
 
@@ -679,7 +679,7 @@ def build_membership_page():
                     ※ 提交后，主理人 Timo 与顾问团队将在 2 小时内与您联络，安排面对面建档及专属微信群建立。开通后享 7 天无忧退费。
                 </div>
                 <button type="submit" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider hover:opacity-95">
-                    确认提交入会申请 (¥6,000/年) &rarr;
+                    提交了解申请（欢迎来访或咨询） &rarr;
                 </button>
             </form>
         </div>
@@ -770,7 +770,7 @@ def build_ensemble_lab_page():
                     <div class="text-xs text-neutral-300 mt-1">真鼓真实声场 · 电子管管箱真实反馈 · 监听系统精准同步</div>
                 </div>
                 <div class="flex items-baseline gap-3">
-                    <span class="text-3xl font-black font-mono text-white">¥400</span>
+                    <span class="text-3xl font-black font-mono text-white">欢迎来访或咨询</span>
                     <span class="text-xs font-mono text-neutral-400">/ 30min 体验</span>
                     <span class="text-xs font-mono text-momo-mint font-bold px-2 py-0.5 bg-momo-mint/10 border border-momo-mint/30 rounded">年费会员直接划扣</span>
                 </div>
@@ -870,7 +870,7 @@ def build_ensemble_lab_page():
                     </div>
                     <div class="pt-8 border-t border-neutral-900 mt-8 flex items-baseline justify-between">
                         <div>
-                            <span class="text-4xl font-black font-mono text-white">¥400</span>
+                            <span class="text-4xl font-black font-mono text-white">欢迎来访或咨询</span>
                             <span class="text-xs text-neutral-400 font-mono"> / 30min</span>
                         </div>
                         <a href="#lab-book-form" class="px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-white font-mono text-xs uppercase">
@@ -888,19 +888,19 @@ def build_ensemble_lab_page():
                         <span class="text-xs font-mono text-momo-mint uppercase tracking-widest">OPTION B · 家庭年费会员划扣</span>
                         <h3 class="text-2xl font-black text-white">加入 2026 Plus 会员体系</h3>
                         <p class="text-xs text-neutral-400 leading-relaxed">
-                            办理 ¥6,000 家庭年费会员，享 12 次 1对1 定制课时额度。<strong>可直接将额度划扣用于 4-on-1 乐队实验室</strong>，更有 365 天一户一群导师随时辅导、3次成长亲诊与全套多轨分轨录音！
+                            家庭会员里包含 1对1 课时，也可以用来进 4-on-1 乐队实验室，并有导师陪伴、成长面谈和多轨录音。具体安排欢迎来访或咨询。
                         </p>
                         <div class="pt-4 border-t border-neutral-900 space-y-2 text-xs font-mono text-momo-mint">
                             <div>★ 12次额度自由支配（支持4-on-1划扣）</div>
-                            <div>★ 赠送 MOMO 纯黑刺绣重磅文化衫 (¥260)</div>
+                            <div>★ 可以聊到一件 MOMO 纯黑刺绣文化衫</div>
                             <div>★ P&amp;R 录音棚 Live Session 唱片级录音</div>
-                            <div>★ 享桐梓林/麓湖双空间租用 5 折特权</div>
+                            <div>★ 桐梓林 / 麓湖双空间，欢迎来访或咨询</div>
                         </div>
                     </div>
                     <div class="pt-8 border-t border-neutral-900 mt-8 flex items-baseline justify-between">
                         <div>
-                            <span class="text-4xl font-black font-mono text-white">¥6,000</span>
-                            <span class="text-xs text-neutral-400 font-mono"> / 年 (折合 ¥16.4/天)</span>
+                            <span class="text-3xl font-black text-white">欢迎来访或咨询</span>
+                            <span class="text-xs text-neutral-400 font-mono"> 当面了解会员</span>
                         </div>
                         <a href="./membership.html" class="gradient-bg text-black px-5 py-2.5 font-black text-xs uppercase tracking-wider hover:opacity-90">
                             开通年费会员 &rarr;
@@ -916,7 +916,7 @@ def build_ensemble_lab_page():
                 <span class="text-xs font-mono text-momo-cyan uppercase tracking-widest">// BOOK YOUR SEAT</span>
                 <h3 class="text-2xl font-black uppercase text-white mt-1">预约 4-on-1 乐队实验室席位</h3>
                 <p class="text-xs font-mono text-neutral-400 mt-2">
-                    单次试奏 ¥400 / 或会员划扣 · 桐梓林与麓湖双空间可选
+                    单次试奏或会员安排 · 桐梓林与麓湖都可以 · 欢迎来访或咨询
                 </p>
             </div>
 

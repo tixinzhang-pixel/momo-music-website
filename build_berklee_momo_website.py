@@ -89,8 +89,8 @@ section_02_membership = '''
                         <!-- 卡片下方价格与保障标签 (清楚明了) -->
                         <div class="mt-8 text-center space-y-2.5">
                             <div class="flex items-baseline justify-center gap-2">
-                                <span class="text-5xl sm:text-6xl font-black text-black tracking-tight">¥6,000</span>
-                                <span class="text-xs sm:text-sm text-neutral-500 font-mono-code">/ 年 (约 ¥16.4/天)</span>
+                                <span class="text-3xl sm:text-4xl font-black text-black tracking-tight">欢迎来访或咨询</span>
+                                <span class="text-xs sm:text-sm text-neutral-500 font-mono-code">当面了解会员</span>
                             </div>
                             <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-300/60 text-xs text-emerald-800 font-semibold">
                                 <span>★</span>
@@ -257,7 +257,7 @@ section_03_camps = '''
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <span class="px-2.5 py-1 rounded-full bg-white/10 text-amber-300 text-[10px] font-mono-code font-bold border border-white/20">
-                                    面试录取制 · Audition-Only
+                                    欢迎来预约了解
                                 </span>
                                 <span class="text-xs font-mono-code text-neutral-500">CAMP 03</span>
                             </div>
@@ -386,7 +386,7 @@ section_06_admission = '''
                                 <option>3–7 岁 少儿音乐通识与亲子互动</option>
                                 <option>8–16 岁 青少年乐手与爵士大乐队</option>
                                 <option selected>成人流行 / 爵士爱好者与乐队合奏</option>
-                                <option>海外音乐名校升学与考学作品集 (伯克利/德奥)</option>
+                                <option>作品积累与方向规划（教学方法参考伯克利）</option>
                                 <option>家庭多成员共同研习 (全家参与)</option>
                             </select>
                         </div>
@@ -398,10 +398,10 @@ section_06_admission = '''
                                 id="admission-program"
                                 class="w-full px-4 py-3 rounded-xl border border-neutral-300 bg-neutral-50/80 text-sm focus:outline-none focus:ring-2 focus:ring-black text-neutral-900"
                             >
-                                <option selected>MOMO 2026 Plus 家庭会员 (¥6,000/年 · 旗舰推荐)</option>
+                                <option selected>MOMO 2026 Plus 家庭会员（欢迎来访或咨询）</option>
                                 <option>Momo 冬季共鸣音乐营 (寒假 · 5天4晚)</option>
                                 <option>Momo 夏季即兴音乐营会 (暑期 · 7天6晚)</option>
-                                <option>102·Momo 国际爵士音乐夏令营 (Audition录取制)</option>
+                                <option>Momo 国际爵士音乐夏令营（欢迎来预约了解）</option>
                                 <option>电吉他 / 贝斯 / 现代打击乐 1对1 课程</option>
                                 <option>流行声乐与乐队主唱 / 萨克斯管乐 1对1</option>
                                 <option>P&R Studio 录音工程与音乐制作专修</option>

@@ -66,7 +66,7 @@ new_nav = f'''
                 </button>
                 <button type="button" onclick="scrollToSection('membership-tier')" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors flex items-center gap-1.5 cursor-pointer">
                     <span>家庭会员</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400 font-mono">¥6,000</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400 font-mono">欢迎来访或咨询</span>
                 </button>
                 <button type="button" onclick="scrollToSection('spaces-rental')" class="text-xs uppercase font-bold tracking-widest text-neutral-300 hover:text-momo-cyan transition-colors flex items-center gap-1.5 cursor-pointer">
                     <span>空间租用</span>
@@ -105,11 +105,11 @@ new_nav = f'''
             </button>
             <button type="button" onclick="scrollToSection('membership-tier'); toggleMobileMenu();" class="text-left text-xs uppercase font-bold tracking-widest text-white py-1.5 flex justify-between cursor-pointer">
                 <span>02. MOMO 家庭音乐会员 (Membership)</span>
-                <span class="text-neutral-400 font-mono">¥6,000</span>
+                <span class="text-neutral-400 font-mono">欢迎来访或咨询</span>
             </button>
             <button type="button" onclick="scrollToSection('spaces-rental'); toggleMobileMenu();" class="text-left text-xs uppercase font-bold tracking-widest text-white py-1.5 flex justify-between cursor-pointer">
                 <span>03. 线下空间与排练室租用 (Spaces)</span>
-                <span class="text-neutral-400 font-mono">¥200/h起</span>
+                <span class="text-neutral-400 font-mono">欢迎来访或咨询</span>
             </button>
             <button type="button" onclick="scrollToSection('merch-store'); toggleMobileMenu();" class="text-left text-xs uppercase font-bold tracking-widest text-white py-1.5 flex justify-between cursor-pointer">
                 <span>04. 先锋美学周边商店 (Store)</span>
@@ -198,7 +198,7 @@ new_hero = '''
                         onclick="openMembershipModal()" 
                         class="border border-neutral-700 bg-black/60 backdrop-blur-md hover:border-momo-mint text-white px-8 py-4 font-bold text-sm uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
                     >
-                        <span>开通家庭音乐会员 (¥6,000)</span>
+                        <span>开通家庭音乐会员 (欢迎来访或咨询)</span>
                         <span class="text-xs text-momo-mint font-mono">送文化衫</span>
                     </button>
                 </div>
@@ -224,9 +224,9 @@ new_hero = '''
                 <span class="mx-6 text-momo-cyan">4-ON-1 BAND REHEARSAL & RECORDING</span>
                 <span class="mx-6">• KIND • TRUTH • PASSION</span>
                 <span class="mx-6 text-momo-mint">EARLY SONIC & FAMILY JAM</span>
-                <span class="mx-6 text-white">• GLOBAL CONSERVATORY PORTFOLIO (¥38,800)</span>
-                <span class="mx-6 text-momo-cyan">URBAN SHARED REHEARSAL SPACE (¥200/H)</span>
-                <span class="mx-6 text-momo-mint">DALIANGSHAN PILGRIMAGE RETREAT (¥4,000)</span>
+                <span class="mx-6 text-white">• GLOBAL CONSERVATORY PORTFOLIO (欢迎来访或咨询)</span>
+                <span class="mx-6 text-momo-cyan">URBAN SHARED REHEARSAL SPACE (欢迎来访或咨询)</span>
+                <span class="mx-6 text-momo-mint">DALIANGSHAN PILGRIMAGE RETREAT (欢迎来访或咨询)</span>
             </div>
         </section>
 '''
@@ -274,7 +274,7 @@ new_offerings = f'''
                                         一卡全家尊享 · 专属于生活与声音的安全场
                                     </p>
                                     <div class="mt-4 flex items-baseline gap-3">
-                                        <span class="text-4xl sm:text-5xl font-black text-white font-mono">¥6,000</span>
+                                        <span class="text-4xl sm:text-5xl font-black text-white font-mono">欢迎来访或咨询</span>
                                         <span class="text-neutral-400 text-sm font-mono">/ 年（额度全自由划扣 · 入会即赠文化衫）</span>
                                     </div>
                                 </div>
@@ -284,13 +284,13 @@ new_offerings = f'''
                                     <div class="border border-neutral-800 bg-neutral-900/60 p-3.5 rounded-lg">
                                         <div class="text-[10px] font-mono text-momo-mint uppercase">UNIT 01 · 进阶精修</div>
                                         <div class="text-base font-bold text-white mt-0.5">4-on-1 职业乐队实验室</div>
-                                        <div class="text-sm font-mono text-momo-cyan mt-0.5">¥400 / 30min</div>
+                                        <div class="text-sm font-mono text-momo-cyan mt-0.5">欢迎来访或咨询</div>
                                         <div class="text-xs text-neutral-400 mt-1">4 位职业艺术家围着你一人伴奏与现场多轨实录</div>
                                     </div>
                                     <div class="border border-neutral-800 bg-neutral-900/60 p-3.5 rounded-lg">
                                         <div class="text-[10px] font-mono text-momo-mint uppercase">UNIT 02 · 亲子合奏</div>
                                         <div class="text-base font-bold text-white mt-0.5">3–7岁 全家庭音乐时光</div>
-                                        <div class="text-sm font-mono text-momo-cyan mt-0.5">¥400 / 45min</div>
+                                        <div class="text-sm font-mono text-momo-cyan mt-0.5">欢迎来访或咨询</div>
                                         <div class="text-xs text-neutral-400 mt-1">爸爸妈妈与孩子同场拿起真实乐器，排练真实作品</div>
                                     </div>
                                 </div>
@@ -317,7 +317,7 @@ new_offerings = f'''
                                     </button>
                                     <button 
                                         type="button" 
-                                        onclick="openBookingModal('申请开通 MOMO 家庭音乐会员 (¥6,000)')" 
+                                        onclick="openBookingModal('申请开通 MOMO 家庭音乐会员 (欢迎来访或咨询)')" 
                                         class="border border-white/60 hover:border-white text-white px-7 py-3 rounded-full font-semibold text-xs tracking-wider transition-all hover:bg-white/10 cursor-pointer"
                                     >
                                         立即申请
@@ -342,7 +342,7 @@ new_offerings = f'''
                         </div>
                     </div>
 
-                    <!-- ==================== 产品 02 (旗舰高定)：欧美音乐学院·升学与艺术留学全景规划 ==================== -->
+                    <!-- ==================== 产品 02：作品积累与方向规划 ==================== -->
                     <div id="study-abroad-rack" class="lg:col-span-6 brutalist-border bg-[#0d0d0d] p-8 md:p-10 flex flex-col justify-between group">
                         <div class="space-y-6">
                             <div class="aspect-16/9 overflow-hidden rounded border border-neutral-800 relative cursor-pointer" onclick="openStudyAbroadModal()">
@@ -354,11 +354,11 @@ new_offerings = f'''
                             <div>
                                 <div class="text-xs font-mono text-momo-cyan uppercase tracking-widest">FLAGSHIP MENTORSHIP</div>
                                 <h3 class="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mt-1">
-                                    欧美音乐学院 · 升学与艺术留学全景规划
+                                    作品积累与方向规划
                                 </h3>
                                 <div class="mt-2 flex items-baseline gap-3">
-                                    <span class="text-3xl sm:text-4xl font-black text-white font-mono">¥38,800</span>
-                                    <span class="text-neutral-400 text-xs font-mono">/ 全案固定陪伴价（无二次隐形加价）</span>
+                                    <span class="text-3xl sm:text-4xl font-black text-white font-mono">欢迎来访或咨询</span>
+                                    <span class="text-neutral-400 text-xs font-mono">/ 当面聊聊作品与方向</span>
                                 </div>
                             </div>
                             <!-- 交付金三角 -->
@@ -368,20 +368,20 @@ new_offerings = f'''
                                     <span class="text-white font-bold">高信博士</span>的学术评估与海外教授资源 + <span class="text-white font-bold">MOMO 艺术家团队</span>全程配合交付 + <span class="text-white font-bold">主理人 Timo</span> 亲自跟项目。
                                 </div>
                                 <div class="text-neutral-400 leading-relaxed pt-1 border-t border-neutral-800/80">
-                                    <span class="text-momo-cyan font-semibold">核心壁垒：</span>依托 MOMO 音乐教育板块的全部底座（专业课程、独家真录音棚作品集多轨实录、大乐队合奏支撑），直接对标德奥公立免学费、英皇、伯克利、洗足学园等名校。
+                                    <span class="text-momo-cyan font-semibold">核心壁垒：</span>依托 MOMO 音乐教育板块的全部底座（专业课程、独家真录音棚作品集多轨实录、大乐队合奏支撑），一起把曲子、合奏和棚内录音积累下来。教学方法参考伯克利现代音乐课程。具体安排欢迎来访或咨询。
                                 </div>
                             </div>
                             <div class="text-xs text-neutral-400 space-y-1">
-                                <div>• 包含：专业能力硬核评估 / 选校策略矩阵 / 独家专业文书指导</div>
-                                <div>• 包含：欧美顶尖教授线上大师课 / 考学资源与试奏直连对接</div>
+                                <div>• 一起听现在的作品，排接下来练什么、录什么</div>
+                                <div>• 需要时可以约外面的老师听一次。具体安排欢迎来访或咨询</div>
                             </div>
                         </div>
                         <div class="pt-6 border-t border-neutral-800 mt-6 flex flex-wrap gap-3">
-                            <button type="button" onclick="openBookingModal('预约高信博士与Timo 留学评估 (¥38,800项目)')" class="gradient-bg text-black px-6 py-3 font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex-1 text-center cursor-pointer">
+                            <button type="button" onclick="openBookingModal('预约作品与方向面谈（欢迎来访或咨询）')" class="gradient-bg text-black px-6 py-3 font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex-1 text-center cursor-pointer">
                                 预约高信博士评估咨询
                             </button>
                             <button type="button" onclick="openStudyAbroadModal()" class="border border-neutral-700 hover:border-white text-white px-5 py-3 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer">
-                                查看学员作品集实录案例 >
+                                听听棚内录音 >
                             </button>
                         </div>
                     </div>
@@ -408,12 +408,12 @@ new_offerings = f'''
                             <div class="grid grid-cols-2 gap-3 pt-1">
                                 <div class="border border-neutral-800 bg-neutral-950 p-3.5 rounded cursor-pointer" onclick="openSpacesModal()">
                                     <div class="text-xs text-neutral-400 font-mono">排练室租用</div>
-                                    <div class="text-2xl font-black text-momo-cyan font-mono mt-0.5">¥200 <span class="text-xs font-normal text-neutral-400">/ 小时</span></div>
+                                    <div class="text-2xl font-black text-momo-cyan font-mono mt-0.5">欢迎来访或咨询<span class="text-xs font-normal text-neutral-400">/ 小时</span></div>
                                     <div class="text-[11px] text-neutral-400 mt-1">钢琴、电钢、吉他、音响、专业架子鼓全配可用</div>
                                 </div>
                                 <div class="border border-neutral-800 bg-neutral-950 p-3.5 rounded cursor-pointer" onclick="openSpacesModal()">
                                     <div class="text-xs text-neutral-400 font-mono">会议/沙龙空间</div>
-                                    <div class="text-2xl font-black text-white font-mono mt-0.5">¥100 <span class="text-xs font-normal text-neutral-400">/ 小时</span></div>
+                                    <div class="text-2xl font-black text-white font-mono mt-0.5">欢迎来访或咨询<span class="text-xs font-normal text-neutral-400">/ 小时</span></div>
                                     <div class="text-[11px] text-neutral-400 mt-1">可舒适容纳 10～40 人深度企划与分享</div>
                                 </div>
                             </div>
@@ -425,7 +425,7 @@ new_offerings = f'''
                             </div>
                         </div>
                         <div class="pt-6 border-t border-neutral-800 mt-6 flex flex-wrap gap-3">
-                            <button type="button" onclick="openBookingModal('预订线下场地租用 (排练室¥200/h 或 会议室¥100/h)')" class="gradient-bg text-black px-6 py-3 font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex-1 text-center cursor-pointer">
+                            <button type="button" onclick="openBookingModal('预订线下场地租用 (排练室欢迎来访或咨询 或 会议室欢迎来访或咨询)')" class="gradient-bg text-black px-6 py-3 font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex-1 text-center cursor-pointer">
                                 预订排练 / 会议时段
                             </button>
                             <button type="button" onclick="openSpacesModal()" class="border border-neutral-700 hover:border-white text-white px-5 py-3 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer">
@@ -445,15 +445,15 @@ new_offerings = f'''
                                     大凉山 3天2晚 音乐公益共修营
                                 </h3>
                                 <div class="flex items-baseline gap-3">
-                                    <span class="text-3xl sm:text-4xl font-black text-momo-mint font-mono">¥4,000</span>
+                                    <span class="text-3xl sm:text-4xl font-black text-momo-mint font-mono">欢迎来访或咨询</span>
                                     <span class="text-neutral-400 text-xs font-mono">/ 人（含全程交通、食宿、乐器物料及导师陪同）</span>
                                 </div>
                                 <p class="text-neutral-300 text-sm leading-relaxed max-w-2xl">
-                                    走出城市的内卷与情绪牢笼。由提莫（Timomo）带领导师团亲自带队，奔赴大凉山乡村学校送乐器、建乐队。让高敏感青少年在最纯粹的山野歌声与利他中找回生命韧性，同时收获无法作假的真实国际升学公益背书。
+                                    走出城市的内卷与情绪牢笼。由提莫（Timomo）带领导师团亲自带队，奔赴大凉山乡村学校送乐器、建乐队。让高敏感青少年在最纯粹的山野歌声与利他中找回生命韧性，也是一次把音乐带去乡村的同行。
                                 </p>
                                 <div class="pt-2 flex flex-wrap gap-4">
-                                    <button type="button" onclick="openBookingModal('申请大凉山 3天2晚音乐公益营 (¥4,000/人)')" class="gradient-bg text-black px-7 py-3 font-black text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all cursor-pointer">
-                                        申请本期行程席位 (¥4,000)
+                                    <button type="button" onclick="openBookingModal('申请大凉山 3天2晚音乐公益营 (欢迎来访或咨询)')" class="gradient-bg text-black px-7 py-3 font-black text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all cursor-pointer">
+                                        申请本期行程席位 (欢迎来访或咨询)
                                     </button>
                                     <button type="button" onclick="openCharityRetreatModal()" class="border border-neutral-700 hover:border-white text-white px-6 py-3 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer">
                                         查看 3天2晚详细行程手册与蜕变档案 >
@@ -509,7 +509,7 @@ new_merch_store = '''
                             </p>
                         </div>
                         <div class="pt-4 border-t border-neutral-900 mt-4 flex items-center justify-between">
-                            <span class="text-xl font-black font-mono text-white">¥260</span>
+                            <span class="text-xl font-black font-mono text-white">欢迎来访或咨询</span>
                             <span class="text-xs font-mono text-momo-cyan group-hover:underline">查看细节 ></span>
                         </div>
                     </div>
@@ -529,7 +529,7 @@ new_merch_store = '''
                             </p>
                         </div>
                         <div class="pt-4 border-t border-neutral-900 mt-4 flex items-center justify-between">
-                            <span class="text-xl font-black font-mono text-white">¥180</span>
+                            <span class="text-xl font-black font-mono text-white">欢迎来访或咨询</span>
                             <span class="text-xs font-mono text-momo-cyan group-hover:underline">查看细节 ></span>
                         </div>
                     </div>
@@ -549,7 +549,7 @@ new_merch_store = '''
                             </p>
                         </div>
                         <div class="pt-4 border-t border-neutral-900 mt-4 flex items-center justify-between">
-                            <span class="text-xl font-black font-mono text-white">¥88</span>
+                            <span class="text-xl font-black font-mono text-white">欢迎来访或咨询</span>
                             <span class="text-xs font-mono text-momo-cyan group-hover:underline">查看细节 ></span>
                         </div>
                     </div>
@@ -569,7 +569,7 @@ new_merch_store = '''
                             </p>
                         </div>
                         <div class="pt-4 border-t border-neutral-900 mt-4 flex items-center justify-between">
-                            <span class="text-xl font-black font-mono text-white">¥320</span>
+                            <span class="text-xl font-black font-mono text-white">欢迎来访或咨询</span>
                             <span class="text-xs font-mono text-momo-cyan group-hover:underline">查看细节 ></span>
                         </div>
                     </div>
@@ -604,7 +604,7 @@ new_faculty = '''
                         </div>
                         <div class="text-[11px] font-mono text-momo-cyan">FOUNDER / DRUMS & PRODUCTION</div>
                         <h4 class="text-lg font-bold text-white mt-1 group-hover:text-momo-cyan transition-colors">Timo (提莫)</h4>
-                        <p class="text-xs text-neutral-400 mt-1 line-clamp-2">品牌主理人 · 爵士鼓手与制作人 · 深度交付升学实录与合奏</p>
+                        <p class="text-xs text-neutral-400 mt-1 line-clamp-2">品牌主理人 · 爵士鼓手与制作人 · 棚内录音与合奏</p>
                         <div class="mt-3 text-[11px] font-mono text-neutral-500 group-hover:text-white transition-colors">查看完整艺术档案 ></div>
                     </div>
 
@@ -615,7 +615,7 @@ new_faculty = '''
                         </div>
                         <div class="text-[11px] font-mono text-momo-mint">ACADEMIC DIRECTOR / PHD</div>
                         <h4 class="text-lg font-bold text-white mt-1 group-hover:text-momo-mint transition-colors">高信博士</h4>
-                        <p class="text-xs text-neutral-400 mt-1 line-clamp-2">管乐博士 · 欧美名校升学规划首席学术顾问 · 国际教授直连</p>
+                        <p class="text-xs text-neutral-400 mt-1 line-clamp-2">管乐博士 · 作品与方向顾问</p>
                         <div class="mt-3 text-[11px] font-mono text-neutral-500 group-hover:text-white transition-colors">查看完整艺术档案 ></div>
                     </div>
 
@@ -682,7 +682,7 @@ new_spaces = '''
                             成都市武侯区桐梓林核心社区。配备三角钢琴、电钢、专业全套吉他管箱与架子鼓排练室，自带中央咖啡吧台与 60㎡ 阳光私家庭院。
                         </p>
                         <div class="pt-2 flex items-center justify-between text-xs font-mono text-neutral-400 border-t border-neutral-900 pt-4">
-                            <span>排练室 ¥200/h ｜ 会议室 ¥100/h</span>
+                            <span>排练室 欢迎来访或咨询 ｜ 会议室 欢迎来访或咨询</span>
                             <span class="text-momo-cyan hover:underline">查看空间全景配置 ></span>
                         </div>
                     </div>
@@ -754,7 +754,7 @@ comprehensive_level2_modals = f'''
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800">
                                 <div class="flex items-center justify-between">
                                     <span class="font-bold text-white text-base">01. 4-on-1 职业乐队实验室划扣特权</span>
-                                    <span class="text-xs font-mono text-momo-cyan">¥400 / 30min</span>
+                                    <span class="text-xs font-mono text-momo-cyan">欢迎来访或咨询</span>
                                 </div>
                                 <p class="text-xs text-neutral-400 mt-1.5 leading-relaxed">
                                     由4位中外爵士与流行音乐家（吉他、贝斯、鼓、键盘）围着你一人伴奏。在真录音棚同期多轨实录，直接完成你自己的作品。
@@ -764,7 +764,7 @@ comprehensive_level2_modals = f'''
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800">
                                 <div class="flex items-center justify-between">
                                     <span class="font-bold text-white text-base">02. 3–7岁 全家庭音乐时光</span>
-                                    <span class="text-xs font-mono text-momo-cyan">¥400 / 45min</span>
+                                    <span class="text-xs font-mono text-momo-cyan">欢迎来访或咨询</span>
                                 </div>
                                 <p class="text-xs text-neutral-400 mt-1.5 leading-relaxed">
                                     告别死记硬背指法。爸爸妈妈与孩子同场拿起真实乐器，在专业音乐人陪伴下排练属于家庭的第一首乐队作品。
@@ -787,7 +787,7 @@ comprehensive_level2_modals = f'''
                                     <span class="text-xs font-mono text-momo-mint">免费获赠一件</span>
                                 </div>
                                 <p class="text-xs text-neutral-400 mt-1.5 leading-relaxed">
-                                    320g 巴黎世家版型同色刺绣文化衫（价值 ¥260），入会即赠，成为 MOMO 音乐公民的专属标志。
+                                    320g 巴黎世家版型同色刺绣文化衫，入会即赠，成为 MOMO 音乐公民的专属标志。
                                 </p>
                             </div>
 
@@ -806,8 +806,8 @@ comprehensive_level2_modals = f'''
 
                 <!-- 抽屉底部申请栏 -->
                 <div class="pt-8 border-t border-neutral-800 mt-8 space-y-3">
-                    <button type="button" onclick="closeMembershipModal(); openBookingModal('申请开通 MOMO 家庭音乐会员 (¥6,000)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer">
-                        立即申请开通 MOMO 家庭音乐会员 (¥6,000)
+                    <button type="button" onclick="closeMembershipModal(); openBookingModal('申请开通 MOMO 家庭音乐会员 (欢迎来访或咨询)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer">
+                        立即申请开通 MOMO 家庭音乐会员 (欢迎来访或咨询)
                     </button>
                     <div class="text-center text-[11px] font-mono text-neutral-500">
                         一户开通 · 全家共享 · 额度自由划扣 · 支持预约到店理念沟通
@@ -831,10 +831,10 @@ comprehensive_level2_modals = f'''
 
                     <div>
                         <div class="inline-block px-3 py-1 bg-momo-cyan/10 border border-momo-cyan/30 text-momo-cyan text-xs font-mono rounded mb-2">
-                            FIXED COMPANIONSHIP · ¥38,800 固定的深度陪伴
+                            WORKS &amp; DIRECTION · 欢迎来访或咨询
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-                            欧美音乐学院 · 升学与艺术留学全景规划
+                            作品积累与方向规划
                         </h2>
                         <p class="text-neutral-300 text-sm leading-relaxed mt-2">
                             项目负责人：<span class="text-white font-bold">高信博士</span>（学术评估与海外教授资源）+ <span class="text-white font-bold">MOMO 艺术家团队</span>全程配合交付 + <span class="text-white font-bold">主理人 Timo</span> 亲自下场跟项目。
@@ -851,8 +851,8 @@ comprehensive_level2_modals = f'''
                             </video>
                         </div>
                         <div class="text-xs text-neutral-400 flex justify-between">
-                            <span>欧洲音乐学院硕士申请实录现场</span>
-                            <span>24轨真乐队同期直录 · 零修音一次成型</span>
+                            <span>棚内作品实录</span>
+                            <span>24轨真乐队同期录音</span>
                         </div>
                     </div>
 
@@ -866,8 +866,8 @@ comprehensive_level2_modals = f'''
                                 <div class="text-xs text-neutral-400 mt-1">高信博士 1对1 面对面测评视唱练耳、和声分析、即兴造诣与曲目储备，出具专业评估报告。</div>
                             </div>
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800">
-                                <div class="font-bold text-white text-sm">阶段二 · 全球目标院校与导师梯度规划</div>
-                                <div class="text-xs text-neutral-400 mt-1">精准锁定德奥公立免学费音乐学院（汉堡/慕尼黑等）、英国皇家RNCM/RAM、美国伯克利及日韩名校。</div>
+                                <div class="font-bold text-white text-sm">阶段二 · 方向怎么排</div>
+                                <div class="text-xs text-neutral-400 mt-1">按正在做的曲子和能投入的时间，排接下来几个月的作品和合奏。</div>
                             </div>
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800">
                                 <div class="font-bold text-white text-sm">阶段三 · 24轨真乐队同期多轨实录作品集制作</div>
@@ -878,15 +878,15 @@ comprehensive_level2_modals = f'''
                                 <div class="text-xs text-neutral-400 mt-1">由真正懂音乐的导师深度梳理艺术心路，撰写最具穿透力的个人陈述（PS）与导师推荐信。</div>
                             </div>
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800">
-                                <div class="font-bold text-white text-sm">阶段五 · 海外教授网课与试奏直连</div>
-                                <div class="text-xs text-neutral-400 mt-1">直接连线海外院校在职教授线上大师课，考前一对一针对性点拨面试题型与试奏心态。</div>
+                                <div class="font-bold text-white text-sm">阶段五 · 需要时向外请教</div>
+                                <div class="text-xs text-neutral-400 mt-1">若希望听听外面老师怎么说，可以约一次交流，用来改作品。</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="pt-8 border-t border-neutral-800 mt-8 space-y-3">
-                    <button type="button" onclick="closeStudyAbroadModal(); openBookingModal('预约高信博士与Timo 留学评估 (¥38,800)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider text-center cursor-pointer">
+                    <button type="button" onclick="closeStudyAbroadModal(); openBookingModal('预约作品与方向面谈（欢迎来访或咨询）');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider text-center cursor-pointer">
                         预约高信博士与 Timo 1对1 留学硬核评估
                     </button>
                     <div class="text-center text-[11px] font-mono text-neutral-500">
@@ -936,7 +936,7 @@ comprehensive_level2_modals = f'''
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800 space-y-2">
                                 <div class="text-xs font-mono text-momo-cyan uppercase">VENUE 01 · 乐队排练室</div>
-                                <div class="text-2xl font-black text-white font-mono">¥200 <span class="text-xs text-neutral-400">/ 小时</span></div>
+                                <div class="text-2xl font-black text-white font-mono">欢迎来访或咨询<span class="text-xs text-neutral-400">/ 小时</span></div>
                                 <div class="text-xs text-neutral-300 leading-relaxed">
                                     • 全配雅马哈原声钢琴 / Nord 电钢<br>
                                     • Fender/Marshall 经典电子管吉他箱<br>
@@ -946,7 +946,7 @@ comprehensive_level2_modals = f'''
                             </div>
                             <div class="p-4 rounded-lg bg-neutral-950 border border-neutral-800 space-y-2">
                                 <div class="text-xs font-mono text-momo-mint uppercase">VENUE 02 · 会议与沙龙厅</div>
-                                <div class="text-2xl font-black text-white font-mono">¥100 <span class="text-xs text-neutral-400">/ 小时</span></div>
+                                <div class="text-2xl font-black text-white font-mono">欢迎来访或咨询<span class="text-xs text-neutral-400">/ 小时</span></div>
                                 <div class="text-xs text-neutral-300 leading-relaxed">
                                     • 可舒适容纳 10～40 人深度企划会议<br>
                                     • 4K 超清智能无线投屏与音响系统<br>
@@ -959,7 +959,7 @@ comprehensive_level2_modals = f'''
                 </div>
 
                 <div class="pt-8 border-t border-neutral-800 mt-8 space-y-3">
-                    <button type="button" onclick="closeSpacesModal(); openBookingModal('预订线下场地租用 (排练室¥200/h 或 会议室¥100/h)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider text-center cursor-pointer">
+                    <button type="button" onclick="closeSpacesModal(); openBookingModal('预订线下场地租用 (排练室欢迎来访或咨询 或 会议室欢迎来访或咨询)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider text-center cursor-pointer">
                         立即预约时段 / 实地考察
                     </button>
                     <div class="text-center text-[11px] font-mono text-neutral-500">
@@ -992,13 +992,13 @@ comprehensive_level2_modals = f'''
 
                     <div>
                         <div class="inline-block px-3 py-1 bg-momo-mint/10 border border-momo-mint/30 text-momo-mint text-xs font-mono rounded mb-2">
-                            ¥4,000 / 人 · 满 3–4 人即成团出发
+                            欢迎来访或咨询
                         </div>
                         <h2 class="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
                             大凉山 3天2晚 音乐公益共修营
                         </h2>
                         <p class="text-neutral-300 text-sm leading-relaxed mt-2">
-                            由主理人提莫（Timomo）带领 MOMO 导师团亲自带队。在山野歌声中走出内卷与情绪牢笼，既是一次深度的生命治愈，也是一份任何中介都无法伪造的真实国际升学公益背书。
+                            由主理人提莫（Timomo）带领 MOMO 导师团亲自带队。在山野歌声中走出内卷与情绪牢笼，既是一次深度的生命治愈，也是一次把音乐带去乡村的同行。
                         </p>
                     </div>
 
@@ -1030,8 +1030,8 @@ comprehensive_level2_modals = f'''
                 </div>
 
                 <div class="pt-8 border-t border-neutral-800 mt-8 space-y-3">
-                    <button type="button" onclick="closeCharityRetreatModal(); openBookingModal('申请大凉山 3天2晚音乐公益营 (¥4,000/人)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider text-center cursor-pointer">
-                        申请本期共修营席位 (¥4,000/人)
+                    <button type="button" onclick="closeCharityRetreatModal(); openBookingModal('申请大凉山 3天2晚音乐公益营 (欢迎来访或咨询)');" class="w-full gradient-bg text-black py-4 font-black text-xs uppercase tracking-wider text-center cursor-pointer">
+                        申请本期共修营席位 (欢迎来访或咨询)
                     </button>
                     <div class="text-center text-[11px] font-mono text-neutral-500">
                         费用含成都往返专车交通、全程食宿及乐器耗材 · 结余汇入大山乐器基金
@@ -1060,14 +1060,13 @@ comprehensive_level2_modals = f'''
 
                         <div>
                             <div id="drawer-member-badge" class="inline-block px-3 py-1 bg-momo-mint/20 border border-momo-mint/50 text-momo-mint text-xs font-bold rounded mb-2">
-                                ★ 开通 MOMO 家庭音乐会员（¥6,000），本款免费赠送！
+                                ★ 开通 MOMO 家庭音乐会员（欢迎来访或咨询），本款免费赠送！
                             </div>
                             <h2 id="drawer-title" class="text-3xl font-black uppercase tracking-tight text-white">
                                 MOMO 纯黑重磅刺绣文化衫
                             </h2>
                             <div class="mt-2 text-3xl font-mono font-black text-momo-cyan" id="drawer-price">
-                                ¥260
-                            </div>
+                                欢迎来访或咨询</div>
                         </div>
 
                         <div class="text-sm text-neutral-300 leading-relaxed border-t border-neutral-800 pt-4" id="drawer-desc">
@@ -1286,15 +1285,15 @@ additional_scripts = '''
             title: '品牌创始人 · 爵士鼓演奏家 · 首席音频制作人',
             img: './assets/images/hero_trumpet.jpg',
             bio: '常年深耕现代爵士鼓演奏与乐队重奏教育，发起大凉山音乐支教公益。深度陪伴学员完成真录音棚作品集多轨实录与现场合奏打磨。',
-            focus: '• 4-on-1 职业乐队实验室主理<br>• 欧美音乐留学作品集 24 轨现场同期录音交付<br>• 大凉山音乐公益营全程带队'
+            focus: '• 4-on-1 职业乐队实验室主理<br>• 棚内 24 轨现场同期录音<br>• 大凉山音乐公益营全程带队'
         },
         gaoxin: {
             name: '高信博士',
             tag: 'ACADEMIC DIRECTOR / PHD',
-            title: '管乐与现代音乐和声博士 · 升学规划首席学术顾问',
+            title: '管乐与现代音乐和声博士 · 作品与方向顾问',
             img: './assets/images/modern_violin.jpg',
-            bio: '毕业于海外著名音乐学院管乐博士学位，具有深厚西方传统与现代爵士乐学理造诣，熟稔欧美日韩顶尖音乐学院录取评审机制。',
-            focus: '• 升学学术评估与专业能力测评<br>• 德奥公立免学费体系 / 英国皇家RNCM / 伯克利规划<br>• 海外在职教授大师课对接直连'
+            bio: '毕业于海外著名音乐学院管乐博士学位，具有深厚西方传统与现代爵士乐学理造诣，也一起听学员正在做的曲子。',
+            focus: '• 听听现在的作品<br>• 排接下来的方向。教学方法参考伯克利现代音乐课程<br>• 需要时协助约一次交流'
         },
         wangchongen: {
             name: '王崇恩',
@@ -1354,7 +1353,7 @@ additional_scripts = '''
         tshirt: {
             category: '// APPAREL · 成为会员免费赠送',
             title: 'MOMO 纯黑重磅刺绣文化衫',
-            price: '¥260',
+            price: '欢迎来访或咨询',
             img: './assets/images/momo_tshirt_te_style.jpg',
             desc: '320g 高密精梳纯棉，巴黎世家经典落肩微阔版型。前胸同色黑线立体刺绣 MOMO 盾牌微标，洗水工艺保持长久不褪色、不变形。穿上它，你就是 MOMO 先锋音乐社群的同行者。',
             isMemberFree: true,
@@ -1368,7 +1367,7 @@ additional_scripts = '''
         tote: {
             category: '// ACCESSORY · 乐手随行托特包',
             title: '乐手纯黑机能帆布托特包',
-            price: '¥180',
+            price: '欢迎来访或咨询',
             img: './assets/images/momo_merch_collection.jpg',
             desc: '专为常年奔波于排练室与现场的乐手设计。16A 加密防泼水帆布，内衬加厚防震层，轻松装下 16 寸 MacBook Pro、iPad Pro、耳机以及厚重的重奏大总谱。',
             isMemberFree: false,
@@ -1381,7 +1380,7 @@ additional_scripts = '''
         picks: {
             category: '// HARDWARE · 赛璐珞拨片盒',
             title: '纪念款赛璐珞吉他拨片黑锡盒',
-            price: '¥88',
+            price: '欢迎来访或咨询',
             img: './assets/images/real_momo_picks_tin.jpg',
             desc: '经典磨砂黑马口铁滑动开启盒。内含 6 枚精选赛璐珞材质拨片，涵盖 0.71mm（民谣扫弦）、0.96mm（摇滚 Solo）与 1.14mm（爵士重单音）三种专业硬度。',
             isMemberFree: false,
@@ -1394,7 +1393,7 @@ additional_scripts = '''
         vinyl: {
             category: '// VINYL · 限定黑胶唱片',
             title: '现场实录限定黑胶声音集',
-            price: '¥320',
+            price: '欢迎来访或咨询',
             img: './assets/images/real_momo_vinyl.jpg',
             desc: '全球限量 300 张。采用德国压片工艺，收录菲比现场乐队版《Jingle Bells》与 24-bit 独家现场同期直录无损音频源。',
             isMemberFree: false,
