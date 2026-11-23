@@ -45,6 +45,33 @@ body[data-page="home"] .hero-copy a{
   pointer-events:auto;
 }
 
+/* Note interaction only. Resting --x/--y/--w/--rot stay in hero_revise.css.
+   Other characters keep the global focus 1.15 and hop. */
+@keyframes hop-note{
+  0%,100%{transform:scale(1)}
+  18%{transform:scale(calc(1 + .04 * var(--k)),calc(1 - .035 * var(--k)))}
+  45%{transform:translateY(-4%) scale(calc(1 - .04 * var(--k)),calc(1 + .05 * var(--k)))}
+  70%{transform:scale(calc(1 + .035 * var(--k)),calc(1 - .0325 * var(--k)))}
+  85%{transform:scale(calc(1 - .01 * var(--k)),calc(1 + .0125 * var(--k)))}
+}
+body[data-page="home"] .hero .mascot-stage > .m-note.is-hopping .m-hop{
+  animation-name:hop-note;
+}
+@media (max-width:1023px){
+  /* --fy stays -8px. At 320 that endpoint alone covers the subtitle dot. */
+  body[data-page="home"] .hero .mascot-stage > .m-note{
+    --fx:0px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-note.is-active .m-spot{
+    transform:scale(1.06);
+  }
+}
+@media (min-width:1024px){
+  body[data-page="home"] .hero .mascot-stage > .m-note.is-active .m-spot{
+    transform:scale(1.08);
+  }
+}
+
 .preview-boundary{
   padding:72px 0 96px;
 }

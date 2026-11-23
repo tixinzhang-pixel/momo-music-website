@@ -249,11 +249,12 @@ const PAGE_FN = function pageMeasure(eyes) {
   }
 
   const textTargets = [
-    ['label', glyphBoxes(document.querySelector('.hero-copy .label'))],
-    ['title', glyphBoxes(document.querySelector('#home-title'))],
-    ['sub', glyphBoxes(document.querySelector('.hero-copy .sub'))],
-    ...[...document.querySelectorAll('.hero-copy .actions a')].map((a, i) => [`button${i}`, [a.getBoundingClientRect()]]),
+    ['label', inkBoxes(document.querySelector('.hero-copy .label'))],
+    ['title', inkBoxes(document.querySelector('#home-title'))],
+    ['sub', inkBoxes(document.querySelector('.hero-copy .sub'))],
+    ...[...document.querySelectorAll('.hero-copy .actions a')].map((a, i) => [`button${i}`, inkBoxes(a)]),
   ];
+  for (const [name, boxes] of textTargets) if (!boxes.length) fail(`no glyph ink for ${name}`);
   const art = new Map();
   function artwork(m) {
     const role = m.dataset.role;
@@ -309,12 +310,70 @@ const PAGE_FN = function pageMeasure(eyes) {
     const info = artwork(m);
     const corners = cornersOf(m);
     let hits = 0;
-    for (let y = top + 1; y <= bottom; y += 2) {
-      for (let x = left + 1; x <= right; x += 2) {
+    for (let y = top + 0.5; y <= bottom; y += 1) {
+      for (let x = left + 0.5; x <= right; x += 1) {
         if (alphaAt(info, corners, x, y) > 20) hits++;
       }
     }
     return hits;
+  }
+  function inkBoxes(el) {
+    const cs = getComputedStyle(el);
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    const boxes = [];
+    const walk = (node) => {
+      for (const child of node.childNodes) {
+        if (child.nodeType === 3 && child.textContent.trim()) {
+          const mark = document.createElement('span');
+          mark.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline;pointer-events:none';
+          child.parentNode.insertBefore(mark, child);
+          const baseline = mark.getBoundingClientRect().top;
+          mark.remove();
+          const text = child.textContent;
+          for (let i = 0; i < text.length; i++) {
+            const ch = text[i];
+            if (!ch.trim()) continue;
+            const range = document.createRange();
+            range.setStart(child, i);
+            range.setEnd(child, i + 1);
+            const rect = range.getBoundingClientRect();
+            if (rect.width < 0.2) continue;
+            const metrics = ctx.measureText(ch);
+            const left = rect.left - (metrics.actualBoundingBoxLeft || 0);
+            const right = rect.left + (metrics.actualBoundingBoxRight || 0);
+            const top = baseline - (metrics.actualBoundingBoxAscent || 0);
+            const bottom = baseline + (metrics.actualBoundingBoxDescent || 0);
+            if (right - left < 0.3 || bottom - top < 0.3) continue;
+            boxes.push({ left, right, top, bottom, ch });
+          }
+        } else if (child.nodeType === 1 && child.tagName !== 'BR') walk(child);
+      }
+    };
+    walk(el);
+    return boxes;
+  }
+  function inkGap(m, box) {
+    const rect = faceRect(m);
+    if (opaqueHits(m, box, rect) > 0) return -1;
+    const info = artwork(m);
+    const corners = cornersOf(m);
+    const pad = 28;
+    let best = Infinity;
+    const left = Math.max(rect.left, box.left - pad);
+    const right = Math.min(rect.right, box.right + pad);
+    const top = Math.max(rect.top, box.top - pad);
+    const bottom = Math.min(rect.bottom, box.bottom + pad);
+    for (let y = top; y <= bottom; y += 1) {
+      for (let x = left; x <= right; x += 1) {
+        if (alphaAt(info, corners, x, y) <= 20) continue;
+        const dx = x < box.left ? box.left - x : x > box.right ? x - box.right : 0;
+        const dy = y < box.top ? box.top - y : y > box.bottom ? y - box.bottom : 0;
+        const dist = Math.hypot(dx, dy);
+        if (dist < best) best = dist;
+      }
+    }
+    return best;
   }
   const bars = document.querySelector('.hero-levels').getBoundingClientRect();
 
@@ -356,7 +415,13 @@ const PAGE_FN = function pageMeasure(eyes) {
   if (stageCs.overflow === 'hidden' || heroCs.overflow === 'hidden') fail('stage or hero overflow hidden');
 
   const roles = {};
+  const motions = new Map();
   let worstPose = null;
+  function scaleOf(transform) {
+    if (!transform || transform === 'none') return 1;
+    const matrix = new DOMMatrix(transform);
+    return Math.max(Math.abs(matrix.a), Math.abs(matrix.d));
+  }
   for (const m of visible()) {
     const role = m.dataset.role;
     const k = num(m, '--k');
@@ -372,7 +437,10 @@ const PAGE_FN = function pageMeasure(eyes) {
     restart(hop);
     m.classList.add('is-hopping');
     void hop.offsetWidth;
-    const hopAnim = animNamed(hop, 'hop');
+    const hopName = getComputedStyle(hop).animationName;
+    if (role === 'note' && hopName !== 'hop-note') fail(`${role} hop animation is ${hopName}`);
+    if (role !== 'note' && hopName !== 'hop') fail(`${role} hop animation is ${hopName}`);
+    const hopAnim = animNamed(hop, hopName);
     const hopTiming = hopAnim.effect.getComputedTiming();
     const hopDur = hopTiming.activeDuration;
     const hopSamples = [];
@@ -390,23 +458,32 @@ const PAGE_FN = function pageMeasure(eyes) {
     hop.style.transform = 'none';
 
     spot.style.animation = 'none';
-    spot.style.transition = 'transform 700ms cubic-bezier(.34, 1.4, .64, 1)';
-    spot.style.transform = 'scale(1)';
+    spot.style.transition = '';
+    spot.style.transform = '';
+    m.classList.remove('is-active');
     void spot.offsetWidth;
-    spot.style.transform = 'scale(1.15)';
+    m.classList.add('is-active');
+    void spot.offsetWidth;
     const transition = spot.getAnimations().find((a) => a.transitionProperty === 'transform');
-    if (!transition) throw new Error('focus transition was not created');
+    if (!transition) throw new Error(`focus transition was not created for ${role}; transform ${getComputedStyle(spot).transform}`);
+    const focusTiming = transition.effect.getComputedTiming();
+    const focusDur = focusTiming.activeDuration || 700;
     let peak = 1;
-    let peakTransform = 'scale(1.15)';
-    for (let t = 0; t <= 700; t += 4) {
-      transition.currentTime = t;
+    let peakTransform = 'none';
+    for (let t = 0; t <= focusDur + 0.01; t += 4) {
+      transition.currentTime = (focusTiming.delay || 0) + Math.min(t, focusDur);
       const transform = getComputedStyle(spot).transform;
-      const matrix = new DOMMatrix(transform);
-      const s = Math.max(Math.abs(matrix.a), Math.abs(matrix.d));
+      const s = scaleOf(transform);
       if (s > peak) { peak = s; peakTransform = transform; }
     }
+    transition.currentTime = (focusTiming.delay || 0) + focusDur;
+    const settled = getComputedStyle(spot).transform;
+    m.classList.remove('is-active');
     spot.style.transition = 'none';
     spot.style.transform = 'none';
+    const peakCap = clientW <= 1023 ? 1.08 : 1.10;
+    if (role === 'note' && peak > peakCap + 0.0005) fail(`${role} focus peak ${peak.toFixed(4)} > ${peakCap}`);
+    if (role !== 'note' && peak < 1.14) fail(`${role} focus peak ${peak.toFixed(4)} dropped below the locked 1.15 curve`);
 
     const floats = ['translate(0px, 0px)', `translate(${fx}px, ${fy}px)`];
     const breaths = ['scale(1, 1)', `scale(${1 - 0.018 * k}, ${1 + 0.022 * k})`];
@@ -415,6 +492,7 @@ const PAGE_FN = function pageMeasure(eyes) {
     let worstEntry = { clearance: Infinity };
     let restOverlap = 0;
     let motionOverlap = 0;
+    let entryOverlap = 0;
     const consider = (rect, pose, bucket) => {
       const top = rect.top - sr.top;
       const left = rect.left - sr.left;
@@ -430,6 +508,7 @@ const PAGE_FN = function pageMeasure(eyes) {
         for (const [, boxes] of textTargets) for (const box of boxes) hits += opaqueHits(m, box, rect);
       }
       if (pose === 'rest') restOverlap = Math.max(restOverlap, hits);
+      else if (String(pose).startsWith('entry')) entryOverlap = Math.max(entryOverlap, hits);
       else motionOverlap = Math.max(motionOverlap, hits);
       const de = document.documentElement;
       if (de.scrollWidth > de.clientWidth + 0.5) fail(`${role} ${pose} horizontal scroll ${de.scrollWidth}>${de.clientWidth}`);
@@ -458,7 +537,8 @@ const PAGE_FN = function pageMeasure(eyes) {
     pop.style.animation = 'none';
     pop.style.transform = 'none';
 
-    const focusExtremes = ['scale(1)', 'scale(1.15)', peakTransform];
+    const focusExtremes = ['none', settled, peakTransform];
+    motions.set(role, { peakTransform, settled, hopKeyframes, fx, fy, k });
     for (const hopT of hopSamples) {
       for (const fl of floats) for (const br of breaths) {
         applyLayers(m, { spot: peakTransform, hop: hopT, float: fl, breath: br });
@@ -473,24 +553,47 @@ const PAGE_FN = function pageMeasure(eyes) {
         }
       }
     }
-    const clearanceMsg = `${role} combo clearance ${worst.clearance.toFixed(2)} < 16 (${worst.pose} t${worst.top.toFixed(1)} l${worst.left.toFixed(1)} r${worst.right.toFixed(1)} b${worst.bottom.toFixed(1)})`;
-    const requiredWidth = [320, 390, 860, 1100, 1280, 1440].some((w) => Math.abs(clientW - w) < 1);
-    if (worst.clearance < 16) (requiredWidth ? fail : note)(clearanceMsg);
-    if (worstEntry.clearance < 16) (requiredWidth ? fail : note)(`${role} entry clearance ${worstEntry.clearance.toFixed(2)} < 16`);
-    if (restOverlap > 0) note(`${role} resting line-box samples ${restOverlap}`);
-    if (motionOverlap > 0) note(`${role} motion line-box samples ${motionOverlap}`);
+    if (worst.clearance < 16) fail(`${role} combo clearance ${worst.clearance.toFixed(2)} < 16 (${worst.pose} t${worst.top.toFixed(1)} l${worst.left.toFixed(1)} r${worst.right.toFixed(1)} b${worst.bottom.toFixed(1)})`);
+    if (worstEntry.clearance < 16) fail(`${role} entry clearance ${worstEntry.clearance.toFixed(2)} < 16`);
+    if (restOverlap > 0) fail(`${role} rest ink intrusion ${restOverlap}`);
+    if (entryOverlap > 0) fail(`${role} entry ink intrusion ${entryOverlap}`);
+    if (motionOverlap > 0) fail(`${role} motion ink intrusion ${motionOverlap}`);
+    let restGap = null;
+    if (role === 'note') {
+      clearMotion(m);
+      applyLayers(m, {});
+      const gaps = textTargets.flatMap(([, boxes]) => boxes.map((box) => inkGap(m, box))).filter((g) => Number.isFinite(g));
+      restGap = gaps.length ? Math.min(...gaps) : null;
+      if (Math.abs(clientW - 320) < 1 && restGap != null) {
+        note(`320 rest ink gap ${restGap.toFixed(2)}px is the recorded brand exception, not a motion allowance`);
+      }
+      if (Math.abs(clientW - 320) < 1 && (motionOverlap > 0 || entryOverlap > 0)) {
+        clearMotion(m);
+        applyLayers(m, { float: `translate(0px, ${fy}px)` });
+        const fyHits = textTargets.reduce((sum, [, boxes]) => sum + boxes.reduce((n, box) => n + opaqueHits(m, box, faceRect(m)), 0), 0);
+        applyLayers(m, {});
+        const restHits = textTargets.reduce((sum, [, boxes]) => sum + boxes.reduce((n, box) => n + opaqueHits(m, box, faceRect(m)), 0), 0);
+        note(`320 --fy ${fy}px alone ink hits ${fyHits}; focus off and hop off rest hits ${restHits}`);
+      }
+    }
+    if (role === 'note' && clientW <= 1023 && Math.abs(fx) > 0.01) fail(`mobile note --fx is ${fx}, expected 0`);
+    if (role === 'note' && clientW >= 1024 && Math.abs(fx - 8) > 0.01) fail(`desktop note --fx is ${fx}, expected 8`);
     clearMotion(m);
     roles[role] = {
       combo: +worst.clearance.toFixed(2),
       entry: +worstEntry.clearance.toFixed(2),
-      restOverlap: +restOverlap.toFixed(2),
-      motionOverlap: +motionOverlap.toFixed(2),
+      restOverlap,
+      entryOverlap,
+      motionOverlap,
+      restGap: restGap == null ? null : +restGap.toFixed(2),
       peakScale: +peak.toFixed(4),
+      hop: hopName,
       top: +worst.top.toFixed(2),
       left: +worst.left.toFixed(2),
       right: +worst.right.toFixed(2),
       bottom: +worst.bottom.toFixed(2),
       w: +faceRect(m).width.toFixed(2),
+      fx,
       fy,
     };
   }
@@ -519,7 +622,7 @@ const PAGE_FN = function pageMeasure(eyes) {
         const info = artwork(other.m);
         const corners = cornersOf(other.m);
         for (const [x, y] of eye.pts) {
-          if (alphaAt(info, corners, x, y) > 20) note(`${eye.role} eye covered by ${other.role} at ${label}`);
+          if (alphaAt(info, corners, x, y) > 20) fail(`${eye.role} eye covered by ${other.role} at ${label}`);
         }
       }
     }
@@ -527,27 +630,57 @@ const PAGE_FN = function pageMeasure(eyes) {
   for (const m of shown) clearMotion(m);
   faceCovered('rest');
   for (const active of shown) {
-    for (const m of shown) clearMotion(m);
-    const k = num(active, '--k');
-    const fx = num(active, '--fx');
-    const fy = num(active, '--fy');
-    applyLayers(active, {
-      spot: 'scale(1.15)',
-      hop: `translateY(-8%) scale(${1 - 0.08 * k}, ${1 + 0.10 * k})`,
-      float: `translate(${fx}px, ${fy}px)`,
-      breath: `scale(${1 - 0.018 * k}, ${1 + 0.022 * k})`,
-    });
-    for (const other of shown) {
-      if (other === active) continue;
-      const ofx = num(other, '--fx');
-      const ofy = num(other, '--fy');
-      const ok = num(other, '--k');
-      applyLayers(other, {
-        float: `translate(${ofx}px, ${ofy}px)`,
-        breath: `scale(${1 - 0.018 * ok}, ${1 + 0.022 * ok})`,
-      });
+    const motion = motions.get(active.dataset.role);
+    const breathOn = `scale(${1 - 0.018 * motion.k}, ${1 + 0.022 * motion.k})`;
+    const poses = [];
+    for (const hopT of motion.hopKeyframes) {
+      for (const fl of [`translate(0px, 0px)`, `translate(${motion.fx}px, ${motion.fy}px)`]) {
+        for (const br of ['scale(1, 1)', breathOn]) poses.push({ spot: motion.peakTransform, hop: hopT, float: fl, breath: br });
+      }
     }
-    faceCovered(`${active.dataset.role}-focus`);
+    for (const otherFloat of [0, 1]) {
+      for (const pose of poses) {
+        for (const m of shown) clearMotion(m);
+        applyLayers(active, pose);
+        for (const other of shown) {
+          if (other === active) continue;
+          const om = motions.get(other.dataset.role);
+          applyLayers(other, otherFloat
+            ? { float: `translate(${om.fx}px, ${om.fy}px)`, breath: `scale(${1 - 0.018 * om.k}, ${1 + 0.022 * om.k})` }
+            : {});
+        }
+        faceCovered(`${active.dataset.role}-focus`);
+      }
+    }
+    const pop = active.querySelector('.m-pop');
+    restart(pop);
+    const popAnim = animNamed(pop, 'pop');
+    const popTiming = popAnim.effect.getComputedTiming();
+    const popDur = popTiming.activeDuration;
+    const entrySamples = [];
+    for (const frac of [0, 0.42, 0.5, 0.58, 0.74, 0.88, 1]) {
+      popAnim.currentTime = (popTiming.delay || 0) + popDur * frac;
+      entrySamples.push(getComputedStyle(pop).transform);
+    }
+    pop.style.animation = 'none';
+    for (const popT of entrySamples) {
+      for (const otherFloat of [0, 1]) {
+        for (const m of shown) clearMotion(m);
+        applyLayers(active, {
+          pop: popT,
+          float: `translate(${motion.fx}px, ${motion.fy}px)`,
+          breath: breathOn,
+        });
+        for (const other of shown) {
+          if (other === active) continue;
+          const om = motions.get(other.dataset.role);
+          applyLayers(other, otherFloat
+            ? { float: `translate(${om.fx}px, ${om.fy}px)`, breath: `scale(${1 - 0.018 * om.k}, ${1 + 0.022 * om.k})` }
+            : {});
+        }
+        faceCovered(`${active.dataset.role}-entry`);
+      }
+    }
   }
   for (const m of shown) clearMotion(m);
 
