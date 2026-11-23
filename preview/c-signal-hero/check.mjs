@@ -353,12 +353,16 @@ const PAGE_FN = function pageMeasure(eyes) {
     walk(el);
     return boxes;
   }
-  function inkGap(m, box) {
+  function boxGap(a, b) {
+    const dx = a.right < b.left ? b.left - a.right : b.right < a.left ? a.left - b.right : 0;
+    const dy = a.bottom < b.top ? b.top - a.bottom : b.bottom < a.top ? a.top - b.bottom : 0;
+    return dx === 0 && dy === 0 ? 0 : Math.hypot(dx, dy);
+  }
+  function inkGap(m, box, pad = 28) {
     const rect = faceRect(m);
     if (opaqueHits(m, box, rect) > 0) return -1;
     const info = artwork(m);
     const corners = cornersOf(m);
-    const pad = 28;
     let best = Infinity;
     const left = Math.max(rect.left, box.left - pad);
     const right = Math.min(rect.right, box.right + pad);
@@ -493,6 +497,8 @@ const PAGE_FN = function pageMeasure(eyes) {
     let restOverlap = 0;
     let motionOverlap = 0;
     let entryOverlap = 0;
+    let minTextGap = Infinity;
+    let minTextPose = 'none';
     const consider = (rect, pose, bucket) => {
       const top = rect.top - sr.top;
       const left = rect.left - sr.left;
@@ -510,6 +516,19 @@ const PAGE_FN = function pageMeasure(eyes) {
       if (pose === 'rest') restOverlap = Math.max(restOverlap, hits);
       else if (String(pose).startsWith('entry')) entryOverlap = Math.max(entryOverlap, hits);
       else motionOverlap = Math.max(motionOverlap, hits);
+      if (clientW <= 374) {
+        for (const [, boxes] of textTargets) {
+          for (const box of boxes) {
+            const separated = boxGap(rect, box);
+            let gap = separated;
+            if (separated < 16) {
+              const measured = inkGap(m, box, 40);
+              gap = measured < 0 ? -1 : (Number.isFinite(measured) ? measured : 40);
+            }
+            if (gap < minTextGap) { minTextGap = gap; minTextPose = pose; }
+          }
+        }
+      }
       const de = document.documentElement;
       if (de.scrollWidth > de.clientWidth + 0.5) fail(`${role} ${pose} horizontal scroll ${de.scrollWidth}>${de.clientWidth}`);
     };
@@ -558,23 +577,13 @@ const PAGE_FN = function pageMeasure(eyes) {
     if (restOverlap > 0) fail(`${role} rest ink intrusion ${restOverlap}`);
     if (entryOverlap > 0) fail(`${role} entry ink intrusion ${entryOverlap}`);
     if (motionOverlap > 0) fail(`${role} motion ink intrusion ${motionOverlap}`);
+    if (clientW <= 374 && minTextGap < 16) fail(`${role} text ink clearance ${Number.isFinite(minTextGap) ? minTextGap.toFixed(2) : minTextGap}px < 16 (${minTextPose})`);
     let restGap = null;
-    if (role === 'note') {
+    if (role === 'note' && clientW <= 374) {
       clearMotion(m);
       applyLayers(m, {});
-      const gaps = textTargets.flatMap(([, boxes]) => boxes.map((box) => inkGap(m, box))).filter((g) => Number.isFinite(g));
+      const gaps = textTargets.flatMap(([, boxes]) => boxes.map((box) => inkGap(m, box, 160))).filter((g) => Number.isFinite(g) && g >= 0);
       restGap = gaps.length ? Math.min(...gaps) : null;
-      if (Math.abs(clientW - 320) < 1 && restGap != null) {
-        note(`320 rest ink gap ${restGap.toFixed(2)}px is the recorded brand exception, not a motion allowance`);
-      }
-      if (Math.abs(clientW - 320) < 1 && (motionOverlap > 0 || entryOverlap > 0)) {
-        clearMotion(m);
-        applyLayers(m, { float: `translate(0px, ${fy}px)` });
-        const fyHits = textTargets.reduce((sum, [, boxes]) => sum + boxes.reduce((n, box) => n + opaqueHits(m, box, faceRect(m)), 0), 0);
-        applyLayers(m, {});
-        const restHits = textTargets.reduce((sum, [, boxes]) => sum + boxes.reduce((n, box) => n + opaqueHits(m, box, faceRect(m)), 0), 0);
-        note(`320 --fy ${fy}px alone ink hits ${fyHits}; focus off and hop off rest hits ${restHits}`);
-      }
     }
     if (role === 'note' && clientW <= 1023 && Math.abs(fx) > 0.01) fail(`mobile note --fx is ${fx}, expected 0`);
     if (role === 'note' && clientW >= 1024 && Math.abs(fx - 8) > 0.01) fail(`desktop note --fx is ${fx}, expected 8`);
@@ -586,6 +595,8 @@ const PAGE_FN = function pageMeasure(eyes) {
       entryOverlap,
       motionOverlap,
       restGap: restGap == null ? null : +restGap.toFixed(2),
+      textGap: Number.isFinite(minTextGap) ? +minTextGap.toFixed(2) : null,
+      textPose: Number.isFinite(minTextGap) ? minTextPose : null,
       peakScale: +peak.toFixed(4),
       hop: hopName,
       top: +worst.top.toFixed(2),
@@ -698,6 +709,15 @@ const PAGE_FN = function pageMeasure(eyes) {
   const hiddenNow = all.filter((m) => getComputedStyle(m).display === 'none').map((m) => m.dataset.role).sort();
   const expectHidden = de.clientWidth <= 1023 ? ['amp', 'guitar', 'pick'] : [];
   if (hiddenNow.join() !== expectHidden.join()) fail(`hidden ${hiddenNow.join()} expected ${expectHidden.join()}`);
+  const subEl = document.querySelector('.sub');
+  const intact = [...subEl.childNodes].some((node) => node.nodeType === 3 && node.textContent.includes('家庭音乐俱乐部'));
+  if (!intact) fail('家庭音乐俱乐部 is not one text run');
+  const xsDisplay = getComputedStyle(document.querySelector('.sub-break-xs')).display;
+  const subDisplay = getComputedStyle(document.querySelector('.sub-break')).display;
+  if (de.clientWidth <= 374 && xsDisplay !== 'block') fail(`sub-break-xs is ${xsDisplay} at <=374`);
+  if (de.clientWidth > 374 && xsDisplay !== 'none') fail(`sub-break-xs is ${xsDisplay} above 374`);
+  if (de.clientWidth <= 1023 && subDisplay !== 'block') fail(`sub-break is ${subDisplay} at <=1023`);
+  if (de.clientWidth >= 1024 && subDisplay !== 'none') fail(`sub-break is ${subDisplay} at >=1024`);
 
   return {
     fails,
@@ -716,7 +736,8 @@ const PAGE_FN = function pageMeasure(eyes) {
     glow: glow.slice(0, 160),
     roles,
     links,
-    subBreak: getComputedStyle(document.querySelector('.sub-break')).display,
+    subBreak: subDisplay,
+    subBreakXs: xsDisplay,
   };
 };
 
@@ -825,14 +846,14 @@ async function main() {
       measured.height = 1800;
       report.geometry.push(measured);
       const flag = measured.fails.length ? 'FAIL' : 'ok';
-      const tight = Object.entries(measured.roles).map(([role, v]) => `${role}:${v.combo}/${v.entry}`).join(' ');
-      console.log(`${flag} ${width} stage ${measured.stage.w}x${measured.stage.h} title ${measured.title} ${tight}`);
+      const tight = Object.entries(measured.roles).map(([role, v]) => `${role}:${v.combo}/${v.entry}${v.textGap == null ? '' : `/g${v.textGap}@${v.textPose}`}`).join(' ');
+      console.log(`${flag} ${width} scroll ${measured.scrollWidth}/${measured.clientWidth} stage ${measured.stage.w}x${measured.stage.h} title ${measured.title} ${tight}`);
       measured.fails.forEach((item) => console.log('  FAIL', item));
       measured.findings.forEach((item) => console.log('  note', item));
     }
 
     const shortHeights = [640, 800, 900, 1080];
-    for (const width of [320, 390, 860, 1100, 1280, 1440]) {
+    for (const width of [320, 374, 390, 860, 1100, 1280, 1440]) {
       for (const height of shortHeights) {
         await open(width, height, false);
         const box = await evaluate(cdp, `(() => {
@@ -943,6 +964,7 @@ async function main() {
     }
     await shot('hero_1440.png', 1440, 1100);
     await shot('hero_390.png', 390, 900);
+    await shot('hero_374.png', 374, 800);
     await shot('hero_320.png', 320, 800);
 
     writeFileSync(join(shotDir, 'report.json'), JSON.stringify(report, null, 2));

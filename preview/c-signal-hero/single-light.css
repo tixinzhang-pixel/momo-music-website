@@ -57,8 +57,13 @@ body[data-page="home"] .hero-copy a{
 body[data-page="home"] .hero .mascot-stage > .m-note.is-hopping .m-hop{
   animation-name:hop-note;
 }
+/* ≤374 only: move 「家庭音乐俱乐部 ·」 onto its own line. ≥375 keeps the existing break. */
+.hero-copy .sub-break-xs{display:none}
+@media (max-width:374px){
+  .hero-copy .sub-break-xs{display:block}
+}
+
 @media (max-width:1023px){
-  /* --fy stays -8px. At 320 that endpoint alone covers the subtitle dot. */
   body[data-page="home"] .hero .mascot-stage > .m-note{
     --fx:0px;
   }
