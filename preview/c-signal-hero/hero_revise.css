@@ -1,0 +1,325 @@
+/* Home hero revision only (2026-11-24). Does not change tokens_C.css.
+   Higher-specificity overrides, scoped to the homepage hero.
+   Goal: title, mascots, and C signal field read as one composition.
+   Character artwork is unchanged v2_eyes SVG. */
+
+body[data-page="home"] .hero{
+  position:relative;
+  display:block;
+  isolation:isolate;
+  height:960px;
+  min-height:960px;
+  margin:0;
+  padding:0;
+  gap:0;
+  overflow:visible;
+}
+
+body[data-page="home"] .hero-signal{
+  position:absolute;
+  top:0; left:0; right:0;
+  height:960px;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+body[data-page="home"] .hero-dots{
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size:var(--dot-gap) var(--dot-gap);
+  -webkit-mask-image:radial-gradient(72% 64% at 58% 46%, #000 15%, transparent 78%);
+  mask-image:radial-gradient(72% 64% at 58% 46%, #000 15%, transparent 78%);
+}
+
+body[data-page="home"] .hero-glow{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(720px 540px at 56% 46%, color-mix(in srgb, var(--acc) 14%, transparent), transparent 68%);
+}
+
+body[data-page="home"] .hero-levels{
+  position:absolute;
+  left:22%;
+  right:5%;
+  bottom:16%;
+  height:88px;
+  display:flex;
+  align-items:flex-end;
+  gap:5px;
+  opacity:var(--level-opacity);
+  color:var(--acc);
+}
+
+body[data-page="home"] .hero-levels i{
+  flex:1;
+  height:var(--level);
+  background:currentColor;
+  border-radius:var(--r-pill);
+}
+
+/* A few bars pick up identity colors so the field feels tied to the characters. */
+body[data-page="home"] .hero-levels i:nth-child(7){color:var(--m-mic);opacity:.85}
+body[data-page="home"] .hero-levels i:nth-child(13){color:var(--m-drum);opacity:.85}
+body[data-page="home"] .hero-levels i:nth-child(17){color:var(--m-note);opacity:.9}
+body[data-page="home"] .hero-levels i:nth-child(22){color:var(--m-guitar);opacity:.85}
+body[data-page="home"] .hero-levels i:nth-child(28){color:var(--m-amp);opacity:.8}
+body[data-page="home"] .hero-levels i:nth-child(34){color:var(--m-pick);opacity:.8}
+
+body[data-page="home"] .hero-copy{
+  position:relative;
+  z-index:5;
+  max-width:560px;
+  margin-right:auto;
+  padding:128px 0 0;
+}
+
+body[data-page="home"] .hero-copy h1{
+  font-size:var(--fs-h1);
+  line-height:1.08;
+  letter-spacing:-.03em;
+}
+
+body[data-page="home"] .hero-copy .sub{
+  max-width:26em;
+}
+body[data-page="home"] .hero-copy .sub-break{
+  display:none;
+}
+
+body[data-page="home"] .hero .mascot-stage{
+  position:absolute;
+  top:0; left:0; right:0;
+  height:960px;
+  z-index:2;
+  width:auto;
+  min-width:0;
+  pointer-events:none;
+}
+
+body[data-page="home"] .hero .mascot-stage > .mascot{
+  pointer-events:auto;
+}
+
+/* Desktop: 1 large / 2 mid / 3 small, clear gaps, large note shares the title band. */
+body[data-page="home"] .hero .mascot-stage > .m-note{
+  --w:30%;
+  --x:60%;
+  --y:48%;
+  --z:3;
+  --rot:4deg;
+  --fx:8px;
+  --fy:-16px;
+}
+body[data-page="home"] .hero .mascot-stage > .m-drum{
+  --w:16%;
+  --x:84%;
+  --y:26%;
+  --z:2;
+  --rot:-6deg;
+  --fx:-7px;
+  --fy:-14px;
+}
+body[data-page="home"] .hero .mascot-stage > .m-guitar{
+  --w:15%;
+  --x:74%;
+  --y:78%;
+  --z:2;
+  --rot:3deg;
+  --fx:6px;
+  --fy:-14px;
+}
+body[data-page="home"] .hero .mascot-stage > .m-mic{
+  --w:5.5%;
+  --x:68%;
+  --y:15%;
+  --z:1;
+  --rot:-8deg;
+  --fx:-5px;
+  --fy:0px;
+}
+body[data-page="home"] .hero .mascot-stage > .m-amp{
+  --w:8%;
+  --x:91%;
+  --y:58%;
+  --z:1;
+  --rot:5deg;
+  --fx:5px;
+  --fy:-12px;
+  display:block;
+}
+body[data-page="home"] .hero .mascot-stage > .m-pick{
+  --w:7.5%;
+  --x:90%;
+  --y:88%;
+  --z:1;
+  --rot:-6deg;
+  --fx:-5px;
+  --fy:-12px;
+  display:block;
+}
+
+@media (min-width:1024px) and (max-width:1199px){
+  body[data-page="home"] .hero{
+    height:860px;
+    min-height:860px;
+  }
+  body[data-page="home"] .hero-signal,
+  body[data-page="home"] .hero .mascot-stage{
+    height:860px;
+  }
+  body[data-page="home"] .hero-copy{
+    max-width:460px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-note{ --w:28%; --x:62%; --y:50%; }
+  body[data-page="home"] .hero .mascot-stage > .m-drum{ --w:15%; --x:86%; --y:28%; }
+  body[data-page="home"] .hero .mascot-stage > .m-guitar{ --w:14%; --x:76%; --y:80%; }
+  body[data-page="home"] .hero .mascot-stage > .m-mic{ --w:5%; --x:68%; --y:15%; }
+  body[data-page="home"] .hero-levels{ left:24%; height:76px; bottom:15%; }
+}
+
+/* Mobile / tablet: one shared stage, not a sticker sheet above the title. */
+@media (max-width:1023px){
+  body[data-page="home"] .hero{
+    display:block;
+    height:720px;
+    min-height:720px;
+    padding:0;
+  }
+  body[data-page="home"] .hero-signal,
+  body[data-page="home"] .hero .mascot-stage{
+    height:720px;
+  }
+  body[data-page="home"] .hero-copy{
+    order:unset;
+    z-index:5;
+    /* keep .wrap 24px inset; do not zero out width/margin */
+    padding:176px 0 0;
+  }
+  body[data-page="home"] .hero-copy .label,
+  body[data-page="home"] .hero-copy h1{
+    max-width:62%;
+  }
+  body[data-page="home"] .hero-copy h1{
+    font-size:var(--fs-h1);
+    line-height:1.1;
+  }
+  body[data-page="home"] .hero-copy .sub{
+    max-width:90%;
+    margin-top:22px;
+    text-wrap:pretty;
+  }
+  body[data-page="home"] .hero-copy .sub-break{
+    display:block;
+  }
+  body[data-page="home"] .hero-copy .actions{
+    flex-wrap:wrap;
+  }
+  body[data-page="home"] .hero-dots{
+    -webkit-mask-image:radial-gradient(90% 70% at 58% 40%, #000 10%, transparent 78%);
+    mask-image:radial-gradient(90% 70% at 58% 40%, #000 10%, transparent 78%);
+  }
+  body[data-page="home"] .hero-glow{
+    background:radial-gradient(420px 360px at 72% 40%, color-mix(in srgb, var(--acc) 14%, transparent), transparent 70%);
+  }
+  body[data-page="home"] .hero-levels{
+    left:6%;
+    right:6%;
+    top:auto;
+    bottom:9%;
+    height:48px;
+    gap:4px;
+  }
+  body[data-page="home"] .hero .mascot-stage{
+    position:absolute;
+    top:0; left:0; right:0;
+    width:auto;
+    /* height stays the locked frame (720px / 680px); do not stretch or clip */
+    aspect-ratio:auto;
+    align-self:auto;
+    flex-shrink:0;
+    overflow:visible;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-amp,
+  body[data-page="home"] .hero .mascot-stage > .m-pick,
+  body[data-page="home"] .hero .mascot-stage > .m-guitar{
+    display:none;
+  }
+  /* Sizes cap in px so 600–1023 does not grow out of the 720px frame.
+     Positions leave ≥16px after rotation + float/breath/focus 1.15/hop.
+     Float is aimed inward so the envelope does not grow toward the edge. */
+  body[data-page="home"] .hero .mascot-stage > .m-note{
+    --w:27%;
+    width:min(var(--w), 128px);
+    --x:78%;
+    --y:42%;
+    --rot:3deg;
+    --fx:-4px;
+    --fy:-8px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-drum{
+    --w:20%;
+    width:min(var(--w), 88px);
+    --x:82.5%;
+    --y:16%;
+    --rot:-5deg;
+    --fx:-4px;
+    --fy:-6px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-mic{
+    --w:12%;
+    width:min(var(--w), 52px);
+    --x:20%;
+    --y:16%;
+    --rot:-6deg;
+    --fx:3px;
+    --fy:-6px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-guitar{
+    --w:20%;
+    --x:18%;
+    --y:86%;
+    --rot:3deg;
+    --fx:3px;
+    --fy:-7px;
+  }
+}
+
+@media (max-width:374px){
+  body[data-page="home"] .hero{
+    height:680px;
+    min-height:680px;
+  }
+  body[data-page="home"] .hero-signal,
+  body[data-page="home"] .hero .mascot-stage{
+    height:680px;
+  }
+  body[data-page="home"] .hero-copy{
+    padding:168px 0 0;
+  }
+  body[data-page="home"] .hero-copy .label,
+  body[data-page="home"] .hero-copy h1{
+    max-width:72%;
+  }
+  /* Scoped size only: --fs-h1 floors at 34px, too wide for 「长进每个家庭」 in the 24px inset. */
+  body[data-page="home"] .hero-copy h1{
+    font-size:30px;
+  }
+  body[data-page="home"] .hero-copy .actions{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-note{ --w:26%; width:26%; --x:77.5%; --y:44%; }
+  body[data-page="home"] .hero .mascot-stage > .m-drum{ --w:18%; width:18%; --x:82%; --y:16%; }
+  body[data-page="home"] .hero .mascot-stage > .m-mic{ --w:12%; width:12%; --x:20%; --y:16%; }
+  body[data-page="home"] .hero-levels{ height:40px; top:auto; bottom:6%; gap:3px; }
+}
+
+html[data-shot="static"] *,
+html[data-shot="static"] *::before,
+html[data-shot="static"] *::after{
+  animation:none!important;
+  transition:none!important;
+}

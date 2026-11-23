@@ -1,0 +1,9 @@
+Noto Sans SC (subset)
+Copyright 2014-2021 Adobe, with Reserved Font Name "Source".
+Licensed under the SIL Open Font License, Version 1.1. See OFL.txt.
+
+Space Grotesk
+Copyright 2020 The Space Grotesk Project Authors (https://github.com/floriankarsten/space-grotesk)
+Licensed under the SIL Open Font License, Version 1.1. See OFL.txt.
+
+These files are subsets used only so this offline preview can match the named font stack.

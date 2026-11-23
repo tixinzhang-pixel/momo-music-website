@@ -1,0 +1,57 @@
+/* Isolated preview layer. Does not change tokens_C.css, style.css, or hero_revise.css.
+   Body --glow and .hero-glow are one page light: the locked hero beam stays,
+   and the body layer is not painted. Named fonts are local files, no font host. */
+
+@font-face{
+  font-family:"Noto Sans SC";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url("fonts/noto-sans-sc-400.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Noto Sans SC";
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url("fonts/noto-sans-sc-700.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Noto Sans SC";
+  font-style:normal;
+  font-weight:900;
+  font-display:swap;
+  src:url("fonts/noto-sans-sc-900.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Space Grotesk";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url("fonts/space-grotesk-400.woff2") format("woff2");
+}
+
+body[data-page="home"]{
+  background:var(--bg);
+}
+
+/* The copy block is only as wide as the column, so its empty box sits above
+   the phone note. Let taps pass through that empty area; the links stay active.
+   Paint order is unchanged. */
+body[data-page="home"] .hero-copy{
+  pointer-events:none;
+}
+body[data-page="home"] .hero-copy a{
+  pointer-events:auto;
+}
+
+.preview-boundary{
+  padding:72px 0 96px;
+}
+.preview-boundary h2{
+  margin-top:12px;
+}
+.preview-boundary p:not(.label){
+  margin-top:16px;
+  max-width:36em;
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="219 120 586 792" width="1024" height="1024">
+<g transform="translate(81.9,85.9) scale(4.3008)"><g><path fill="#10C056" d="M 32,50 C 32,16 58,8 100,8 C 142,8 168,16 168,50 C 168,72 156,112 126,158 C 116,174 108,186 100,192 C 92,186 84,174 74,158 C 44,112 32,72 32,50 Z"/><g transform="translate(100 72)"><g transform="translate(-16.5 0) rotate(-18)"><ellipse cx="0" cy="0" rx="17" ry="13" fill="#000"/><circle cx="0" cy="0" r="4.3" fill="#10C056"/></g><g transform="translate(16.5 0) rotate(-18)"><ellipse cx="0" cy="0" rx="17" ry="13" fill="#000"/><circle cx="0" cy="0" r="4.3" fill="#10C056"/></g></g></g></g>
+</svg>
