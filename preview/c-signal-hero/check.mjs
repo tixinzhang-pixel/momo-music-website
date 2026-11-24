@@ -388,8 +388,9 @@ const PAGE_FN = function pageMeasure(eyes) {
   if (Math.abs(heroH - expectedH) > 0.6) fail(`hero height ${heroH} expected ${expectedH}`);
   if (Math.abs(stageH - expectedH) > 0.6) fail(`stage height ${stageH} expected ${expectedH}`);
   const h1 = getComputedStyle(document.querySelector('#home-title')).fontSize;
-  if (clientW <= 374 && h1 !== '30px') fail(`title size ${h1} expected 30px`);
-  if (clientW > 374 && h1 === '30px') fail('30px title leaked past 374');
+  const langForType = document.documentElement.lang;
+  if (langForType.startsWith('zh') && clientW <= 374 && h1 !== '30px') fail(`title size ${h1} expected 30px`);
+  if (langForType.startsWith('zh') && clientW > 374 && h1 === '30px') fail('30px title leaked past 374');
 
   const copyLeft = document.querySelector('.hero-copy').getBoundingClientRect().left;
   const headerLeft = document.querySelector('.header').getBoundingClientRect().left;
@@ -704,20 +705,32 @@ const PAGE_FN = function pageMeasure(eyes) {
   const de = document.documentElement;
   const links = [...document.querySelectorAll('a')].map((a) => a.getAttribute('href'));
   if (links.some((href) => href && /about\.html|weixin|wechat/i.test(href))) fail('unexpected link ' + links.join(','));
+  const langNow = document.documentElement.lang;
   const boundary = document.querySelector('#preview-boundary');
-  if (!boundary || !boundary.textContent.includes('当前仅首屏演示')) fail('boundary note missing');
+  if (langNow.startsWith('zh')) {
+    if (!boundary || !boundary.textContent.includes('当前仅首屏演示')) fail('boundary note missing');
+  } else if (!boundary || !boundary.textContent.includes('Homepage intro preview')) {
+    fail('english boundary note missing');
+  }
   const hiddenNow = all.filter((m) => getComputedStyle(m).display === 'none').map((m) => m.dataset.role).sort();
   const expectHidden = de.clientWidth <= 1023 ? ['amp', 'guitar', 'pick'] : [];
   if (hiddenNow.join() !== expectHidden.join()) fail(`hidden ${hiddenNow.join()} expected ${expectHidden.join()}`);
   const subEl = document.querySelector('.sub');
   const intact = [...subEl.childNodes].some((node) => node.nodeType === 3 && node.textContent.includes('家庭音乐俱乐部'));
-  if (!intact) fail('家庭音乐俱乐部 is not one text run');
-  const xsDisplay = getComputedStyle(document.querySelector('.sub-break-xs')).display;
-  const subDisplay = getComputedStyle(document.querySelector('.sub-break')).display;
-  if (de.clientWidth <= 374 && xsDisplay !== 'block') fail(`sub-break-xs is ${xsDisplay} at <=374`);
-  if (de.clientWidth > 374 && xsDisplay !== 'none') fail(`sub-break-xs is ${xsDisplay} above 374`);
-  if (de.clientWidth <= 1023 && subDisplay !== 'block') fail(`sub-break is ${subDisplay} at <=1023`);
-  if (de.clientWidth >= 1024 && subDisplay !== 'none') fail(`sub-break is ${subDisplay} at >=1024`);
+  if (langNow.startsWith('zh') && !intact) fail('家庭音乐俱乐部 is not one text run');
+  if (!langNow.startsWith('zh') && intact) fail('english subtitle still contains the chinese club line');
+  let xsDisplay = 'absent';
+  let subDisplay = 'absent';
+  if (langNow.startsWith('zh')) {
+    xsDisplay = getComputedStyle(document.querySelector('.sub-break-xs')).display;
+    subDisplay = getComputedStyle(document.querySelector('.sub-break')).display;
+    if (de.clientWidth <= 374 && xsDisplay !== 'block') fail(`sub-break-xs is ${xsDisplay} at <=374`);
+    if (de.clientWidth > 374 && xsDisplay !== 'none') fail(`sub-break-xs is ${xsDisplay} above 374`);
+    if (de.clientWidth <= 1023 && subDisplay !== 'block') fail(`sub-break is ${subDisplay} at <=1023`);
+    if (de.clientWidth >= 1024 && subDisplay !== 'none') fail(`sub-break is ${subDisplay} at >=1024`);
+  } else if (document.querySelector('.sub-break, .sub-break-xs')) {
+    fail('english subtitle kept a chinese line break');
+  }
 
   return {
     fails,
@@ -839,24 +852,71 @@ async function main() {
       await evaluate(cdp, 'document.fonts.ready', true);
     }
 
-    for (const width of widths) {
-      await open(width, 1800, false);
-      const measured = await evaluate(cdp, `(${PAGE_FN})(${JSON.stringify(EYES)})`);
+    function logMeasure(measured, width, locale) {
       measured.requestedWidth = width;
+      measured.locale = locale;
       measured.height = 1800;
       report.geometry.push(measured);
       const flag = measured.fails.length ? 'FAIL' : 'ok';
       const tight = Object.entries(measured.roles).map(([role, v]) => `${role}:${v.combo}/${v.entry}${v.textGap == null ? '' : `/g${v.textGap}@${v.textPose}`}`).join(' ');
-      console.log(`${flag} ${width} scroll ${measured.scrollWidth}/${measured.clientWidth} stage ${measured.stage.w}x${measured.stage.h} title ${measured.title} ${tight}`);
+      console.log(`${flag} ${locale} ${width} scroll ${measured.scrollWidth}/${measured.clientWidth} stage ${measured.stage.w}x${measured.stage.h} title ${measured.title} ${tight}`);
       measured.fails.forEach((item) => console.log('  FAIL', item));
       measured.findings.forEach((item) => console.log('  note', item));
+    }
+    async function setLocale(locale) {
+      await evaluate(cdp, `document.querySelector('[data-locale="${locale}"]').click()`);
+    }
+    for (const width of widths) {
+      await open(width, 1800, false);
+      if (!report.fonts) {
+        report.fonts = await evaluate(cdp, `(() => {
+          const tests = [
+            ['400 16px "Noto Sans SC"', '中文'],
+            ['700 16px "Noto Sans SC"', '中文成都'],
+            ['900 32px "Noto Sans SC"', '让音乐自然Let music grow'],
+            ['400 16px "Noto Sans SC"', "A pop & jazz family music club · Kids and grown-ups play together."],
+            ['400 12px "Space Grotesk"', 'MUSIC · FAMILY · PLAY THIS SCREEN ONLY'],
+          ];
+          return tests.map(([font, sample]) => ({font, ok: document.fonts.check(font, sample)}));
+        })()`);
+        report.fonts.filter((item) => !item.ok).forEach((item) => console.log('FONT GAP', item.font, item.ok));
+      }
+      const zh = await evaluate(cdp, `(${PAGE_FN})(${JSON.stringify(EYES)})`);
+      logMeasure(zh, width, 'zh-CN');
+      await setLocale('en');
+      const en = await evaluate(cdp, `(${PAGE_FN})(${JSON.stringify(EYES)})`);
+      logMeasure(en, width, 'en');
+      await setLocale('zh-CN');
+      if (width === 320) {
+        const restored = await evaluate(cdp, `(() => {
+          const h1 = document.getElementById('home-title');
+          const sub = document.querySelector('.hero-copy .sub');
+          return {
+            lang: document.documentElement.lang,
+            title: document.title,
+            br: h1.querySelectorAll('br').length,
+            xs: !!sub.querySelector('.sub-break-xs'),
+            wide: !!sub.querySelector('.sub-break'),
+            phrase: [...sub.childNodes].some((node) => node.nodeType === 3 && node.textContent.includes('家庭音乐俱乐部')),
+            pressed: document.querySelector('.lang-switch [data-locale="zh-CN"]').getAttribute('aria-pressed'),
+          };
+        })()`);
+        const again = await evaluate(cdp, `(${PAGE_FN})(${JSON.stringify(EYES)})`);
+        const delta = Math.abs((again.roles.note.textGap || 0) - (zh.roles.note.textGap || 0));
+        report.roundTrip = { restored, before: zh.roles.note.textGap, after: again.roles.note.textGap, delta };
+        console.log('roundTrip', JSON.stringify(report.roundTrip));
+        if (restored.lang !== 'zh-CN' || restored.br !== 1 || !restored.xs || !restored.phrase || restored.pressed !== 'true' || delta > 0.25) {
+          again.fails.push(`chinese restore failed ${JSON.stringify(report.roundTrip)}`);
+          logMeasure(again, width, 'zh-CN-restored');
+        }
+      }
     }
 
     const shortHeights = [640, 800, 900, 1080];
     for (const width of [320, 374, 390, 860, 1100, 1280, 1440]) {
       for (const height of shortHeights) {
         await open(width, height, false);
-        const box = await evaluate(cdp, `(() => {
+        const readBox = `(() => {
           const de = document.documentElement;
           const stage = document.querySelector('.mascot-stage').getBoundingClientRect();
           const hero = document.querySelector('.hero').getBoundingClientRect();
@@ -865,11 +925,16 @@ async function main() {
             scrollHeight: de.scrollHeight, clientHeight: de.clientHeight,
             stageH: +stage.height.toFixed(2), stageBottom: +stage.bottom.toFixed(2),
             heroH: +hero.height.toFixed(2), viewport: de.clientHeight,
+            lang: document.documentElement.lang,
           };
-        })()`);
-        const overflow = box.scrollWidth > box.clientWidth + 0.5;
-        report.overflow.push({ width, height, ...box, overflow });
-        if (overflow) console.log('OVERFLOW', width, height, box.scrollWidth, box.clientWidth);
+        })()`;
+        for (const locale of ['zh-CN', 'en']) {
+          if (locale === 'en') await setLocale('en');
+          const box = await evaluate(cdp, readBox);
+          const overflow = box.scrollWidth > box.clientWidth + 0.5;
+          report.overflow.push({ width, height, locale, ...box, overflow });
+          if (overflow) console.log('OVERFLOW', locale, width, height, box.scrollWidth, box.clientWidth);
+        }
       }
     }
 
@@ -895,6 +960,7 @@ async function main() {
       })()`);
     }
     await open(1440, 900, false);
+    await setLocale('zh-CN');
     const tabPath = [];
     const reached = new Set();
     let noteFocused = false;
@@ -948,8 +1014,43 @@ async function main() {
     const reducedAfter = await evaluate(cdp, `(() => { const m = document.querySelector('.m-note'); const r = m.querySelector('.face-default').getBoundingClientRect(); return {expr:m.dataset.expression||'', hop:m.classList.contains('is-hopping'), active:m.classList.contains('is-active'), w:r.width, top:r.top, left:r.left}; })()`);
     report.reduced = { reducedBefore, reducedMid, reducedAfter };
 
-    async function shot(name, width, height) {
+    await open(390, 844, false);
+    await evaluate(cdp, `localStorage.setItem('momo-preview-locale','en')`);
+    await open(390, 844, false);
+    const remembered = await evaluate(cdp, `({lang:document.documentElement.lang,title:document.title,pressed:document.querySelector('.lang-switch [data-locale="en"]').getAttribute('aria-pressed')})`);
+    await evaluate(cdp, `localStorage.setItem('momo-preview-locale','fr')`);
+    await open(390, 844, false);
+    const ignored = await evaluate(cdp, `document.documentElement.lang`);
+    await evaluate(cdp, `localStorage.getItem=()=>{throw new Error('denied')}; localStorage.setItem=()=>{throw new Error('denied')};`);
+    const errorsBefore = consoleErrors.length;
+    await setLocale('en');
+    const denied = await evaluate(cdp, `({lang:document.documentElement.lang,title:document.title})`);
+    const storageErrors = consoleErrors.slice(errorsBefore);
+    for (let i = 0; i < 8; i++) await setLocale(i % 2 === 0 ? 'en' : 'zh-CN');
+    const rapid = await evaluate(cdp, `({lang:document.documentElement.lang,phrase:[...document.querySelector('.sub').childNodes].some((node)=>node.nodeType===3&&node.textContent.includes('家庭音乐俱乐部'))})`);
+    for (let i = 0; i < 6; i++) await press('Tab', 'Tab', 9);
+    const langKey = await activeInfo();
+    await press('Enter', 'Enter', 13, '\r');
+    const langAfterKey = await evaluate(cdp, `document.documentElement.lang`);
+    await open(390, 844, false);
+    await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+    const langPoint = await evaluate(cdp, `(() => { const r = document.querySelector('[data-locale="en"]').getBoundingClientRect(); return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width,h:r.height}; })()`);
+    await cdp('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: langPoint.x, y: langPoint.y, id: 0, radiusX: 4, radiusY: 4 }] });
+    await cdp('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await new Promise((r) => setTimeout(r, 80));
+    let langTouch = await evaluate(cdp, `document.documentElement.lang`);
+    if (langTouch !== 'en') {
+      await cdp('Input.dispatchMouseEvent', { type: 'mousePressed', x: langPoint.x, y: langPoint.y, button: 'left', clickCount: 1, pointerType: 'touch' });
+      await cdp('Input.dispatchMouseEvent', { type: 'mouseReleased', x: langPoint.x, y: langPoint.y, button: 'left', clickCount: 1, pointerType: 'touch' });
+      langTouch = await evaluate(cdp, `document.documentElement.lang`);
+    }
+    await cdp('Emulation.setTouchEmulationEnabled', { enabled: false });
+    report.localeChecks = { remembered, ignored, denied, storageErrors, rapid, langKey, langAfterKey, langTouch, langPoint };
+    console.log('localeChecks', JSON.stringify(report.localeChecks));
+
+    async function shot(name, width, height, locale) {
       await open(width, height, false);
+      await setLocale(locale === 'en' ? 'en' : 'zh-CN');
       await evaluate(cdp, `document.documentElement.dataset.shot='static'; document.querySelectorAll('.mascot').forEach(m => { m.classList.remove('is-active','is-hopping'); delete m.dataset.expression; });`);
       const frame = await evaluate(cdp, `(() => { const top = 0; const bottom = document.querySelector('.hero').getBoundingClientRect().bottom + window.scrollY; return {w: document.documentElement.clientWidth, h: Math.ceil(bottom)}; })()`);
       await cdp('Emulation.setDeviceMetricsOverride', { width, height: Math.max(height, frame.h), deviceScaleFactor: 1, mobile: false });
@@ -962,10 +1063,12 @@ async function main() {
       writeFileSync(file, Buffer.from(png.data, 'base64'));
       console.log('shot', file, frame.w, frame.h);
     }
-    await shot('hero_1440.png', 1440, 1100);
-    await shot('hero_390.png', 390, 900);
-    await shot('hero_374.png', 374, 800);
-    await shot('hero_320.png', 320, 800);
+    await shot('hero_desktop_1440_zh.png', 1440, 1100, 'zh-CN');
+    await shot('hero_desktop_1440_en.png', 1440, 1100, 'en');
+    await shot('hero_390_zh.png', 390, 900, 'zh-CN');
+    await shot('hero_390_en.png', 390, 900, 'en');
+    await shot('hero_320_zh.png', 320, 800, 'zh-CN');
+    await shot('hero_320_en.png', 320, 800, 'en');
 
     writeFileSync(join(shotDir, 'report.json'), JSON.stringify(report, null, 2));
     const geoFail = report.geometry.some((g) => g.fails.length);
@@ -974,8 +1077,11 @@ async function main() {
     const touchFail = !report.interaction.touch390.expr;
     const keyFail = report.interaction.afterSpace.expr !== 'surprised' || report.interaction.afterEnter.expr !== 'surprised';
     const reducedFail = report.reduced.reducedAfter.hop || report.reduced.reducedAfter.active || report.reduced.reducedMoved || report.reduced.reducedAfter.expr !== 'surprised';
+    const fontFail = (report.fonts || []).some((item) => !item.ok);
+    const localeFail = !report.localeChecks || report.localeChecks.remembered.lang !== 'en' || report.localeChecks.ignored !== 'zh-CN' || report.localeChecks.denied.lang !== 'en' || report.localeChecks.storageErrors.length > 0 || report.localeChecks.rapid.lang !== 'zh-CN' || !report.localeChecks.rapid.phrase || report.localeChecks.langAfterKey !== 'en' || report.localeChecks.langTouch !== 'en';
+    const roundFail = report.roundTrip && report.roundTrip.delta > 0.25;
     console.log(JSON.stringify({
-      geoFail, overflowFail, resourceFail, touchFail, keyFail, reducedFail,
+      geoFail, overflowFail, resourceFail, touchFail, keyFail, reducedFail, fontFail, localeFail, roundFail,
       consoleErrors: report.consoleErrors,
       reached: report.interaction.reached,
       afterSpace: report.interaction.afterSpace,
@@ -985,7 +1091,7 @@ async function main() {
       reducedMoved: report.reduced.reducedBefore.top !== report.reduced.reducedMid.top,
     }, null, 2));
     ws.close();
-    const failed = geoFail || overflowFail || resourceFail || touchFail || keyFail || reducedFail || report.consoleErrors.length;
+    const failed = geoFail || overflowFail || resourceFail || touchFail || keyFail || reducedFail || fontFail || localeFail || roundFail || report.consoleErrors.length;
     process.exitCode = failed ? 1 : 0;
   } finally {
     chrome.kill('SIGKILL');

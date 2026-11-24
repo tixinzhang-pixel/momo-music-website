@@ -63,6 +63,71 @@ body[data-page="home"] .hero .mascot-stage > .m-note.is-hopping .m-hop{
   .hero-copy .sub-break-xs{display:block}
 }
 
+.header{flex-wrap:wrap}
+.header-end{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:16px;
+  margin-left:auto;
+}
+.lang-switch{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex:none;
+}
+.lang-switch button{
+  min-width:40px;
+  min-height:40px;
+  padding:8px 10px;
+  border:0;
+  border-radius:var(--r-pill);
+  background:transparent;
+  color:var(--ink2);
+  font:inherit;
+  font-size:12px;
+  line-height:1;
+  cursor:pointer;
+}
+.lang-switch button[aria-pressed="true"]{
+  background:var(--acc);
+  color:var(--btn-ink);
+  font-weight:700;
+}
+@media (max-width:1023px){
+  .header-end{gap:12px}
+  .lang-switch{flex:1 0 100%;justify-content:flex-end}
+}
+html[lang="en"] body[data-page="home"] .hero-copy{
+  max-width:460px;
+}
+html[lang="en"] body[data-page="home"] .hero-copy h1{
+  line-height:1.08;
+}
+html[lang="en"] body[data-page="home"] .hero-copy .sub{
+  max-width:28em;
+}
+html[lang="en"] .pill{
+  max-width:100%;
+  white-space:normal;
+}
+@media (max-width:1023px){
+  html[lang="en"] body[data-page="home"] .hero-copy h1,
+  html[lang="en"] body[data-page="home"] .hero-copy .sub{
+    max-width:58%;
+  }
+}
+@media (max-width:374px){
+  html[lang="en"] body[data-page="home"] .hero-copy h1{
+    font-size:22px;
+    max-width:52%;
+  }
+  html[lang="en"] body[data-page="home"] .hero-copy .sub{
+    max-width:52%;
+  }
+}
+
 @media (max-width:1023px){
   body[data-page="home"] .hero .mascot-stage > .m-note{
     --fx:0px;
