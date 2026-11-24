@@ -1,0 +1,154 @@
+/* Isolated preview layer. Does not change tokens_C.css, style.css, or hero_revise.css.
+   Body --glow and .hero-glow are one page light: the locked hero beam stays,
+   and the body layer is not painted. Named fonts are local files, no font host. */
+
+@font-face{
+  font-family:"Noto Sans SC";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url("fonts/noto-sans-sc-400.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Noto Sans SC";
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url("fonts/noto-sans-sc-700.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Noto Sans SC";
+  font-style:normal;
+  font-weight:900;
+  font-display:swap;
+  src:url("fonts/noto-sans-sc-900.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Space Grotesk";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url("fonts/space-grotesk-400.woff2") format("woff2");
+}
+
+body[data-page="home"]{
+  background:var(--bg);
+}
+
+/* The copy block is only as wide as the column, so its empty box sits above
+   the phone note. Let taps pass through that empty area; the links stay active.
+   Paint order is unchanged. */
+body[data-page="home"] .hero-copy{
+  pointer-events:none;
+}
+body[data-page="home"] .hero-copy a{
+  pointer-events:auto;
+}
+
+/* Note interaction only. Resting --x/--y/--w/--rot stay in hero_revise.css.
+   Other characters keep the global focus 1.15 and hop. */
+@keyframes hop-note{
+  0%,100%{transform:scale(1)}
+  18%{transform:scale(calc(1 + .04 * var(--k)),calc(1 - .035 * var(--k)))}
+  45%{transform:translateY(-4%) scale(calc(1 - .04 * var(--k)),calc(1 + .05 * var(--k)))}
+  70%{transform:scale(calc(1 + .035 * var(--k)),calc(1 - .0325 * var(--k)))}
+  85%{transform:scale(calc(1 - .01 * var(--k)),calc(1 + .0125 * var(--k)))}
+}
+body[data-page="home"] .hero .mascot-stage > .m-note.is-hopping .m-hop{
+  animation-name:hop-note;
+}
+/* ≤374 only: move 「家庭音乐俱乐部 ·」 onto its own line. ≥375 keeps the existing break. */
+.hero-copy .sub-break-xs{display:none}
+@media (max-width:374px){
+  .hero-copy .sub-break-xs{display:block}
+}
+
+.header{flex-wrap:wrap}
+.header-end{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:16px;
+  margin-left:auto;
+}
+.lang-switch{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex:none;
+}
+.lang-switch button{
+  min-width:40px;
+  min-height:40px;
+  padding:8px 10px;
+  border:0;
+  border-radius:var(--r-pill);
+  background:transparent;
+  color:var(--ink2);
+  font:inherit;
+  font-size:12px;
+  line-height:1;
+  cursor:pointer;
+}
+.lang-switch button[aria-pressed="true"]{
+  background:var(--acc);
+  color:var(--btn-ink);
+  font-weight:700;
+}
+@media (max-width:1023px){
+  .header-end{gap:12px}
+  .lang-switch{flex:1 0 100%;justify-content:flex-end}
+}
+html[lang="en"] body[data-page="home"] .hero-copy{
+  max-width:460px;
+}
+html[lang="en"] body[data-page="home"] .hero-copy h1{
+  line-height:1.08;
+}
+html[lang="en"] body[data-page="home"] .hero-copy .sub{
+  max-width:28em;
+}
+html[lang="en"] .pill{
+  max-width:100%;
+  white-space:normal;
+}
+@media (max-width:1023px){
+  html[lang="en"] body[data-page="home"] .hero-copy h1,
+  html[lang="en"] body[data-page="home"] .hero-copy .sub{
+    max-width:58%;
+  }
+}
+@media (max-width:374px){
+  html[lang="en"] body[data-page="home"] .hero-copy h1{
+    font-size:22px;
+    max-width:52%;
+  }
+  html[lang="en"] body[data-page="home"] .hero-copy .sub{
+    max-width:52%;
+  }
+}
+
+@media (max-width:1023px){
+  body[data-page="home"] .hero .mascot-stage > .m-note{
+    --fx:0px;
+  }
+  body[data-page="home"] .hero .mascot-stage > .m-note.is-active .m-spot{
+    transform:scale(1.06);
+  }
+}
+@media (min-width:1024px){
+  body[data-page="home"] .hero .mascot-stage > .m-note.is-active .m-spot{
+    transform:scale(1.08);
+  }
+}
+
+.preview-boundary{
+  padding:72px 0 96px;
+}
+.preview-boundary h2{
+  margin-top:12px;
+}
+.preview-boundary p:not(.label){
+  margin-top:16px;
+  max-width:36em;
+}
